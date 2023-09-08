@@ -5,7 +5,7 @@
 class Deck
 {
 public:
-    virtual void operator<<(std::ostream&) = 0;
+    virtual void print(std::ostream &) = 0;
 };
 
 #endif

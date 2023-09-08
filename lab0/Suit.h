@@ -6,7 +6,7 @@ enum class Suit
 	clubs, diamonds, hearts, spades, undefined
 };
 
-std::ostream& operator<<(std::ostream&, const Suit&);
-Suit& operator++(Suit&);
+std::ostream &operator<<(std::ostream&, const Suit&);
+Suit &operator++(Suit&);
 
 #endif

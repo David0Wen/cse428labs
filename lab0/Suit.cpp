@@ -1,6 +1,6 @@
 #include "Suit.h"
 
-std::ostream& operator<<(std::ostream& os, const Suit& target)
+std::ostream &operator<<(std::ostream &os, const Suit &target)
 {
 	switch (target)
 	{
@@ -28,7 +28,7 @@ std::ostream& operator<<(std::ostream& os, const Suit& target)
 }
 
 //prefix
-Suit& operator++(Suit& mySuit)
+Suit &operator++(Suit &mySuit)
 {
 	switch (mySuit)
 	{
