@@ -7,7 +7,7 @@ template <typename T>
 struct Card
 {
 	T myRank;
-    Suit mySuit;
+	Suit mySuit;
 	Card(T, Suit);
 };
 

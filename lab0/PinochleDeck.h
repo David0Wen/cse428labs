@@ -6,7 +6,7 @@
 #include "Deck.h"
 
 enum class PinochleRank{
-     nine, jack, queen, king, ten, ace, undefined
+	nine, jack, queen, king, ten, ace, undefined
 };
 
 std::ostream &operator<<(std::ostream&, const PinochleRank&);
