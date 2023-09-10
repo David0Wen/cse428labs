@@ -10,6 +10,6 @@ Card<T>::Card(T argRank, Suit argSuit)
 template<typename T>
 std::ostream &operator<<(std::ostream &os, const Card<T> &myCard)
 {
-    os << myRank << mySuit;
+    os << myCard.myRank << myCard.mySuit;
     return os;
 }
