@@ -68,53 +68,57 @@ HoldEmRank &operator++(HoldEmRank &myRank)
     switch (myRank)
 	{
 	case HoldEmRank::two:
-		myRank ==HoldEmRank::three;
+		myRank = HoldEmRank::three;
 		break;
 
 	case HoldEmRank::three:
-		myRank ==HoldEmRank::four;
+		myRank = HoldEmRank::four;
 		break;
 
 	case HoldEmRank::four:
-		myRank ==HoldEmRank::five;
+		myRank = HoldEmRank::five;
 		break;
 
 	case HoldEmRank::five:
-		myRank ==HoldEmRank::six;
+		myRank = HoldEmRank::six;
 		break;
 
 	case HoldEmRank::six:
-		myRank ==HoldEmRank::seven;
+		myRank = HoldEmRank::seven;
 		break;
         
 	case HoldEmRank::seven:
-		myRank ==HoldEmRank::eight;
+		myRank = HoldEmRank::eight;
 		break;
 
 	case HoldEmRank::eight:
-		myRank ==HoldEmRank::nine;
+		myRank =HoldEmRank::nine;
 		break;
 
 	case HoldEmRank::nine:
-		myRank ==HoldEmRank::ten;
+		myRank =HoldEmRank::ten;
 		break;
 
 	case HoldEmRank::ten:
-		myRank ==HoldEmRank::jack;
+		myRank =HoldEmRank::jack;
 		break;
 
 	case HoldEmRank::jack:
-		myRank ==HoldEmRank::queen;
+		myRank = HoldEmRank::queen;
 		break;
 
 	case HoldEmRank::queen:
-		myRank ==HoldEmRank::king;
+		myRank = HoldEmRank::king;
 		break;
 
 	case HoldEmRank::king:
-		myRank ==HoldEmRank::undefined;
+		myRank = HoldEmRank::ace;
 		break;
-        
+
+	case HoldEmRank::ace:
+		myRank = HoldEmRank::undefined;
+		break;
+
 	case HoldEmRank::undefined:
 		break;
 	}
@@ -123,7 +127,7 @@ HoldEmRank &operator++(HoldEmRank &myRank)
 
 HoldEmDeck::HoldEmDeck()
 {
-    for (HoldEmRank i = HoldEmRank::nine; i != HoldEmRank::undefined; ++i)
+    for (HoldEmRank i = HoldEmRank::two; i != HoldEmRank::undefined; ++i)
     {
         for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
         {
@@ -140,8 +144,8 @@ void HoldEmDeck::print(std::ostream &os)
 	for(; iter != myDeck.end(); ++iter)
 	{
 		std::cout<<(*iter)<<" ";
-        if((*iter).myRank == HoldEmRank::ace){
-            std::cout<<std::endl;
-        }
+		if ((*iter).mySuit == Suit::spades) {
+			std::cout << std::endl;
+		}
     }
 }
