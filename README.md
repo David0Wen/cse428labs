@@ -1,2 +1,2 @@
 # cse428labs
-CSE 428 Lab code rpo
+CSE 428 Lab code repo

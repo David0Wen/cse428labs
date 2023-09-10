@@ -40,27 +40,27 @@ PinochleRank &operator++(PinochleRank &myRank)
     switch (myRank)
 	{
 	case PinochleRank::nine:
-		myRank ==PinochleRank::jack;
+		myRank = PinochleRank::jack;
 		break;
 
 	case PinochleRank::jack:
-		myRank ==PinochleRank::queen;
+		myRank = PinochleRank::queen;
 		break;
 
 	case PinochleRank::queen:
-		myRank ==PinochleRank::king;
+		myRank = PinochleRank::king;
 		break;
 
 	case PinochleRank::king:
-		myRank ==PinochleRank::ten;
+		myRank = PinochleRank::ten;
 		break;
 
 	case PinochleRank::ten:
-		myRank ==PinochleRank::ace;
+		myRank = PinochleRank::ace;
 		break;
         
 	case PinochleRank::ace:
-		myRank ==PinochleRank::undefined;
+		myRank = PinochleRank::undefined;
 		break;
         
 	case PinochleRank::undefined:
@@ -88,7 +88,7 @@ void PinochleDeck::print(std::ostream &os)
 	for(; iter != myDeck.end(); ++iter)
 	{
 		std::cout<<(*iter)<<" ";
-        if((*iter).myRank == PinochleRank::ace){
+        if((*iter).mySuit == Suit::spades){
             std::cout<<std::endl;
         }
 	}
