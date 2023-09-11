@@ -1,10 +1,19 @@
+/*
+// File: PinochleDeck.h
+// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+// Purpose: Declaration of enum class: PinochleRank, class: PinochleDeck
+*/
+
 #ifndef _PINOCHLEDECK_H
 #define _PINOCHLEDECK_H
 #include <iostream>
 #include <vector>
+// Include struct card as a member of PinochleDeck
 #include "Card_T.h"
+// Include base class deck, inherit the base method print
 #include "Deck.h"
 
+// Declare Pinochle specific card ranks
 enum class PinochleRank{
 	nine, jack, queen, king, ten, ace, undefined
 };
