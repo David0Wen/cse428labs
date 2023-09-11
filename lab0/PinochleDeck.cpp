@@ -88,6 +88,15 @@ PinochleDeck::PinochleDeck()
             myDeck.push_back(myCard);
         }
     }
+	
+    for (PinochleRank i = PinochleRank::nine; i != PinochleRank::undefined; ++i)
+    {
+        for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
+        {
+            Card<PinochleRank> myCard(i, j);
+            myDeck.push_back(myCard);
+        }
+    }
     
 }
 
