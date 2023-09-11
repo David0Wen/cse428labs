@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Suit.h"
 
+// Card strucutre: rank and suit 
 template <typename T>
 struct Card
 {
@@ -11,6 +12,7 @@ struct Card
 	Card(T, Suit);
 };
 
+// make shift operator worked for Card structure
 template <typename T>
 std::ostream& operator<<(std::ostream &, const Card<T> &);
 

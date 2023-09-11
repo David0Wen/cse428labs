@@ -1,5 +1,7 @@
 #include "PinochleDeck.h"
 
+// define operator << to take a variable with 
+// the class of PinochleRank and print it
 std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 {
     switch (myRank)
@@ -35,6 +37,9 @@ std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
     return os;
 }
 
+// prefix increment operator: take a variable with 
+// the class of PinochleRank and return the same variable
+// with higher value
 PinochleRank &operator++(PinochleRank &myRank)
 {
     switch (myRank)
@@ -63,14 +68,18 @@ PinochleRank &operator++(PinochleRank &myRank)
 		myRank = PinochleRank::undefined;
 		break;
         
+	// remain the same
 	case PinochleRank::undefined:
 		break;
 	}
     return myRank;
 }
 
+// push a deck of cards with rank from 9 to ace,
+// suit from clubs to spades
 PinochleDeck::PinochleDeck()
 {
+	// use prefix increment operator to traverse the enumeration types
     for (PinochleRank i = PinochleRank::nine; i != PinochleRank::undefined; ++i)
     {
         for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
@@ -82,6 +91,8 @@ PinochleDeck::PinochleDeck()
     
 }
 
+// overloads the inherited pure virtual method,
+// print every cards in this deck
 void PinochleDeck::print(std::ostream &os)
 {
     std::vector< Card<PinochleRank> >::iterator iter = myDeck.begin();

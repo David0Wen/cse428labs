@@ -1,5 +1,7 @@
 #include "HoldEmDeck.h"
 
+// define operator << to take a variable with 
+// the class of HoldEmRank and print it
 std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
 {
     switch (myRank)
@@ -63,6 +65,9 @@ std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
     return os;
 }
 
+// prefix increment operator: take a variable with 
+// the class of HoldEmRank and return the same variable
+// with higher value
 HoldEmRank &operator++(HoldEmRank &myRank)
 {
     switch (myRank)
@@ -125,6 +130,8 @@ HoldEmRank &operator++(HoldEmRank &myRank)
     return myRank;
 }
 
+// push a deck of cards with rank from 2 to ace,
+// suit from clubs to spades
 HoldEmDeck::HoldEmDeck()
 {
     for (HoldEmRank i = HoldEmRank::two; i != HoldEmRank::undefined; ++i)
@@ -138,6 +145,8 @@ HoldEmDeck::HoldEmDeck()
     
 }
 
+// overloads the inherited pure virtual method,
+// print every cards in this deck
 void HoldEmDeck::print(std::ostream &os)
 {
     std::vector< Card<HoldEmRank> >::iterator iter = myDeck.begin();
