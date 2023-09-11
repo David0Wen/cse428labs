@@ -1,4 +1,7 @@
-Group member: Ruoyao Wen (ruoyao@wustl.edu), Wanzhou Liu (l.wanzhou@wustl.edu), Zherui Zhou (zherui@wustl.edu)
+**Group members:**
+Ruoyao Wen (ruoyao@wustl.edu)
+Wanzhou Liu (l.wanzhou@wustl.edu)
+Zherui Zhou (zherui@wustl.edu)
 
 ---
 
