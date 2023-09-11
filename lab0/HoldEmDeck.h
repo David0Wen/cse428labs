@@ -1,8 +1,15 @@
+/*
+// File: HoldEmDeck.h
+// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+// Purpose: Declaration of enum class: HoldEmRank, class: HoldEmDeck
+*/
 #ifndef _HOLDEMDECK_H
 #define _HOLDEMDECK_H
 #include <iostream>
 #include <vector>
+// include struct card as a member of HoldEmDeck
 #include "Card_T.h"
+// include base class deck, inhert the base method print
 #include "Deck.h"
 
 enum class HoldEmRank{
@@ -17,9 +24,10 @@ HoldEmRank &operator++(HoldEmRank&);
 class HoldEmDeck: public Deck
 {
 private:
-	// save the info for each card
+	// deck vector
 	std::vector< Card<HoldEmRank> > myDeck;
 public:
+	// default constructor
 	HoldEmDeck();
 	void print(std::ostream &);
 };
