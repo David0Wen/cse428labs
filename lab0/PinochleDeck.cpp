@@ -6,8 +6,11 @@
 
 #include "PinochleDeck.h"
 
-// Define the output stream operator for the PinochleRank class
-// Output the rank of the card in its short form
+// implentation operators << for PinochleRank
+// Output the Rank to std::ostream
+// @param std::ostream & the stream you want to output to
+// @param const PinochleRank & the object you want to output
+// @return std::ostream &
 std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 {
     switch (myRank)
@@ -43,8 +46,10 @@ std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
     return os;
 }
 
-// Define prefix increment operator for the PinochleRank class
-// Iterate over the ranks in their natural order
+// implentation operators ++ for PinochleRank
+// iterate the PinochleRank to the next
+// @param PinochleRank & the object you want to increase
+// @return PinochleRank &
 PinochleRank &operator++(PinochleRank &myRank)
 {
     switch (myRank)
