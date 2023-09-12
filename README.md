@@ -1,14 +1,17 @@
-**Group members:**
-Ruoyao Wen (ruoyao@wustl.edu)
-Wanzhou Liu (l.wanzhou@wustl.edu)
-Zherui Zhou (zherui@wustl.edu)
+# Lab 0
+## Group members 
+- Ruoyao Wen (ruoyao@wustl.edu)
+- Wanzhou Liu (l.wanzhou@wustl.edu)
+- Zherui Zhou (zherui@wustl.edu)
 
 ---
 
-**design decisions:**
-In function "print" of PinochleDeck and HoldEmDeck, we use an iteror to traverse the whole deck. When we push cards onto the deck, they are ordered in a circular manner, so when we print the deck, each time we print a card with "spade" suit, we also print an extra "shift" , this makes the output more readable.
+## design decisions
+In function "print" of PinochleDeck and HoldEmDeck, we use an iterator to traverse the whole deck. When we push cards onto the deck, they are ordered in a circular manner, so when printing the deck, each time we print a card with "spade" suit, we also print an extra "Enter" , this makes the output more readable.
 
-**error observations**:
+##  error observations
+
+### compile error
 ``` C++
 ./Card_T.cpp:13:11: error: use of undeclared identifier ‘myRank’
     os << myRank << mySuit;
@@ -66,5 +69,8 @@ void PinochleDeck::print(std::ostream &os)
                                        ^
 8 warnings and 2 errors generated.
 ```
+In Card_T.cpp, when implenmenting the shift operator, we coded the "=" operator as "==" by mistake.
 
-**other:**
+
+### run error
+We don't have run error.
