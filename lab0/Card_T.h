@@ -24,9 +24,9 @@ struct Card
 // Output the card feature to std::ostream
 // @param std::ostream & the stream you want to output to
 // @param const Card<T> the object you want to output
-// @return std::ostream&
+// @return std::ostream &
 template <typename T>
-std::ostream& operator<<(std::ostream &, const Card<T> &);
+std::ostream &operator<<(std::ostream &, const Card<T> &);
 
 #ifdef TEMPLATE_HEADERS_INCLUDE_SOURCE /* test whether guard symbol is defined */
 #include "Card_T.cpp"

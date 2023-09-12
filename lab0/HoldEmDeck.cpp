@@ -1,7 +1,15 @@
+/*
+// File: HoldEmDeck.cpp
+// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+// Purpose: Implemtation of enum class: HoldEmRank, class: HoldEmDeck
+*/
 #include "HoldEmDeck.h"
 
-// define operator << to take a variable with 
-// the class of HoldEmRank and print it
+// implentation operators << for HoldEmRank
+// Output the Rank to std::ostream
+// @param std::ostream & the stream you want to output to
+// @param const HoldEmRank& the object you want to output
+// @return std::ostream &
 std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
 {
     switch (myRank)
@@ -65,9 +73,10 @@ std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
     return os;
 }
 
-// prefix increment operator: take a variable with 
-// the class of HoldEmRank and return the same variable
-// with higher value
+// implentation operators ++ for HoldEmRank
+// iterate the HoldEmRank to the next
+// @param HoldEmRank& the object you want to increase
+// @return HoldEmRank &
 HoldEmRank &operator++(HoldEmRank &myRank)
 {
     switch (myRank)
@@ -130,6 +139,7 @@ HoldEmRank &operator++(HoldEmRank &myRank)
     return myRank;
 }
 
+// default constructor
 // push a deck of cards with rank from 2 to ace,
 // suit from clubs to spades
 HoldEmDeck::HoldEmDeck()
