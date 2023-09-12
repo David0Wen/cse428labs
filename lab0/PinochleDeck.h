@@ -18,8 +18,17 @@ enum class PinochleRank{
 	nine, jack, queen, king, ten, ace, undefined
 };
 
-// define operators << and ++ used for PinochleRank
+// define operators << for PinochleRank
+// Output the Rank to std::ostream
+// @param std::ostream & the stream you want to output to
+// @param const PinochleRank& the object you want to output
+// @return std::ostream &
 std::ostream &operator<<(std::ostream&, const PinochleRank&);
+
+// define operators ++ for PinochleRank
+// iterate the PinochleRank to the next
+// @param PinochleRank& the object you want to increase
+// @return PinochleRank&
 PinochleRank &operator++(PinochleRank&);
 
 // define Pinochle Deck derived from Deck class
