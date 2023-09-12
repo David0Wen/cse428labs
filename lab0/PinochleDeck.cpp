@@ -1,7 +1,13 @@
+/*
+// File: PinochleDeck.cpp
+// Authors: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+// Purpose: Implementation of enum class: PinochleRank, class: PinochleDeck
+*/
+
 #include "PinochleDeck.h"
 
-// define operator << to take a variable with 
-// the class of PinochleRank and print it
+// Define the output stream operator for the PinochleRank class
+// Output the rank of the card in its short form
 std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 {
     switch (myRank)
@@ -37,9 +43,8 @@ std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
     return os;
 }
 
-// prefix increment operator: take a variable with 
-// the class of PinochleRank and return the same variable
-// with higher value
+// Define prefix increment operator for the PinochleRank class
+// Iterate over the ranks in their natural order
 PinochleRank &operator++(PinochleRank &myRank)
 {
     switch (myRank)
@@ -75,11 +80,11 @@ PinochleRank &operator++(PinochleRank &myRank)
     return myRank;
 }
 
-// push a deck of cards with rank from 9 to ace,
-// suit from clubs to spades
+// Default constructor for the PinochleDeck class
+// Initializes the deck with cards from 9 to Ace for each suit, and does this twice since a Pinochle deck contains two copies of each card
 PinochleDeck::PinochleDeck()
 {
-	// use prefix increment operator to traverse the enumeration types
+	// Use prefix increment operator to traverse the enumeration types
     for (PinochleRank i = PinochleRank::nine; i != PinochleRank::undefined; ++i)
     {
         for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
@@ -89,6 +94,7 @@ PinochleDeck::PinochleDeck()
         }
     }
 	
+	// Loop to push the second set of cards to the deck
     for (PinochleRank i = PinochleRank::nine; i != PinochleRank::undefined; ++i)
     {
         for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
@@ -100,8 +106,8 @@ PinochleDeck::PinochleDeck()
     
 }
 
-// overloads the inherited pure virtual method,
-// print every cards in this deck
+// Overloaded print function for the PinochleDeck class
+// Prints each card in the deck, and starts a new line after each suit of spades
 void PinochleDeck::print(std::ostream &os)
 {
     std::vector< Card<PinochleRank> >::iterator iter = myDeck.begin();
