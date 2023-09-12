@@ -6,12 +6,12 @@
 
 ---
 
-## design decisions
+## Design decisions
 In function "print" of PinochleDeck and HoldEmDeck, we use an iterator to traverse the whole deck. When we push cards onto the deck, they are ordered in a circular manner, so when printing the deck, each time we print a card with "spade" suit, we also print an extra "Enter" , this makes the output more readable.
 
-##  error observations
+## Error observations
 
-### compile error
+### Compile error/warning
 ``` C++
 ./Card_T.cpp:13:11: error: use of undeclared identifier ‘myRank’
     os << myRank << mySuit;
@@ -69,11 +69,12 @@ void PinochleDeck::print(std::ostream &os)
                                        ^
 8 warnings and 2 errors generated.
 ```
-In Card_T.cpp, when implenmenting the shift operator, we coded the "=" operator as "==" by mistake.
+#### Problems found:
+- In Card_T.cpp, when implenmenting the shift operator, we coded the "=" operator as "==" by mistake.
+- In PinochleDeck and HoldEmDeck, we forget to use the parameter "std::ostream &os". Instead, we directly output the content to std::cout.
+#### After fix these bugs, the program doesn't trigger errors/warnings anymore
 
-
-
-### run error
+### Run error
 We don't have run error.
 
 ## Output
@@ -115,4 +116,6 @@ JC JD JH JS
 QC QD QH QS
 KC KD KH KS
 AC AD AH AS
+
 ```
+This is the final version of our Lab0.
