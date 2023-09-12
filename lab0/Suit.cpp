@@ -1,7 +1,16 @@
+/*
+// File: Suit.cpp
+// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+// Purpose: Implentation of enum class: Suit
+*/
 #include "Suit.h"
 
 
-// make operator << can take a Suit object and print it first letter
+// shift operator implentation
+// Output the suit feature to std::ostream
+// @param std::ostream & the stream you want to output to
+// @param const Suit& the object you want to output
+// @return std::ostream &
 std::ostream &operator<<(std::ostream &os, const Suit &target)
 {
 	switch (target)
@@ -34,8 +43,10 @@ std::ostream &operator<<(std::ostream &os, const Suit &target)
 	return os;
 }
 
-// prefix increment operator:
-// increce the variable's value (Suit class) to the next one
+// Implenment operators ++ for Suit
+// iterate the Suit to the next
+// @param Suit& the object you want to increase
+// @return Suit &
 Suit &operator++(Suit &mySuit)
 {
 	switch (mySuit)
