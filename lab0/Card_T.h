@@ -16,7 +16,7 @@ struct Card
 {
 	T myRank;
 	Suit mySuit;
-	// vaule onstructor 
+	// Vaule Constructor 
 	Card(T, Suit);
 };
 
