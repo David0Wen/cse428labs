@@ -162,9 +162,9 @@ void HoldEmDeck::print(std::ostream &os)
     std::vector< Card<HoldEmRank> >::iterator iter = myDeck.begin();
 	for(; iter != myDeck.end(); ++iter)
 	{
-		std::cout<<(*iter)<<" ";
+		os << (*iter) << " ";
 		if ((*iter).mySuit == Suit::spades) {
-			std::cout << std::endl;
+			os << std::endl;
 		}
     }
 }

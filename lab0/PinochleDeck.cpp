@@ -113,9 +113,9 @@ void PinochleDeck::print(std::ostream &os)
     std::vector< Card<PinochleRank> >::iterator iter = myDeck.begin();
 	for(; iter != myDeck.end(); ++iter)
 	{
-		std::cout<<(*iter)<<" ";
+		os << (*iter) << " ";
         if((*iter).mySuit == Suit::spades){
-            std::cout<<std::endl;
+            os<<std::endl;
         }
 	}
 }
