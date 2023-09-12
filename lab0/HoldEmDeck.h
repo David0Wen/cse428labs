@@ -13,7 +13,7 @@
 #include "Deck.h"
 
 enum class HoldEmRank{
-    two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace, undefined
+	two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace, undefined
 };
 
 // define operators << for HoldEmRank

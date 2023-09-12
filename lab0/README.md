@@ -72,7 +72,7 @@ void PinochleDeck::print(std::ostream &os)
 #### Problems found:
 - In Card_T.cpp, when implenmenting the shift operator, we coded the "=" operator as "==" by mistake.
 - In PinochleDeck and HoldEmDeck, we forget to use the parameter "std::ostream &os". Instead, we directly output the content to std::cout.
-#### After fix these bugs, the program doesn't trigger errors/warnings anymore
+#### After fix these bugs, the program doesn't trigger errors/warnings anymore.
 
 ### Run error
 We don't have run error.

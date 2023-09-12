@@ -12,7 +12,7 @@
 // @return std::ostream &
 std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
 {
-    switch (myRank)
+	switch (myRank)
 	{
 	case HoldEmRank::two:
 		os << "2";
@@ -33,7 +33,7 @@ std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
 	case HoldEmRank::six:
 		os << "6";
 		break;
-        
+		
 	case HoldEmRank::seven:
 		os << "7";
 		break;
@@ -57,7 +57,7 @@ std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
 	case HoldEmRank::queen:
 		os << "Q";
 		break;
-        
+		
 	case HoldEmRank::king:
 		os << "K";
 		break;
@@ -65,12 +65,12 @@ std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
 	case HoldEmRank::ace:
 		os << "A";
 		break;
-        
+		
 	case HoldEmRank::undefined:
 		os << "?";
 		break;
 	}
-    return os;
+	return os;
 }
 
 // implentation operators ++ for HoldEmRank
@@ -79,7 +79,7 @@ std::ostream &operator<<(std::ostream &os, const HoldEmRank &myRank)
 // @return HoldEmRank &
 HoldEmRank &operator++(HoldEmRank &myRank)
 {
-    switch (myRank)
+	switch (myRank)
 	{
 	case HoldEmRank::two:
 		myRank = HoldEmRank::three;
@@ -100,7 +100,7 @@ HoldEmRank &operator++(HoldEmRank &myRank)
 	case HoldEmRank::six:
 		myRank = HoldEmRank::seven;
 		break;
-        
+		
 	case HoldEmRank::seven:
 		myRank = HoldEmRank::eight;
 		break;
@@ -136,7 +136,7 @@ HoldEmRank &operator++(HoldEmRank &myRank)
 	case HoldEmRank::undefined:
 		break;
 	}
-    return myRank;
+	return myRank;
 }
 
 // default constructor
@@ -144,27 +144,27 @@ HoldEmRank &operator++(HoldEmRank &myRank)
 // suit from clubs to spades
 HoldEmDeck::HoldEmDeck()
 {
-    for (HoldEmRank i = HoldEmRank::two; i != HoldEmRank::undefined; ++i)
-    {
-        for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
-        {
-            Card<HoldEmRank> myCard(i, j);
-            myDeck.push_back(myCard);
-        }
-    }
-    
+	for (HoldEmRank i = HoldEmRank::two; i != HoldEmRank::undefined; ++i)
+	{
+		for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
+		{
+			Card<HoldEmRank> myCard(i, j);
+			myDeck.push_back(myCard);
+		}
+	}
+	
 }
 
 // overloads the inherited pure virtual method,
 // print every cards in this deck
 void HoldEmDeck::print(std::ostream &os)
 {
-    std::vector< Card<HoldEmRank> >::iterator iter = myDeck.begin();
+	std::vector< Card<HoldEmRank> >::iterator iter = myDeck.begin();
 	for(; iter != myDeck.end(); ++iter)
 	{
 		os << (*iter) << " ";
 		if ((*iter).mySuit == Suit::spades) {
 			os << std::endl;
 		}
-    }
+	}
 }

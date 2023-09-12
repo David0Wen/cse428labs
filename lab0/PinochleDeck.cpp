@@ -13,7 +13,7 @@
 // @return std::ostream &
 std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 {
-    switch (myRank)
+	switch (myRank)
 	{
 	case PinochleRank::nine:
 		os << "9";
@@ -34,16 +34,16 @@ std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 	case PinochleRank::ten:
 		os << "10";
 		break;
-        
+		
 	case PinochleRank::ace:
 		os << "A";
 		break;
-        
+		
 	case PinochleRank::undefined:
 		os << "?";
 		break;
 	}
-    return os;
+	return os;
 }
 
 // implentation operators ++ for PinochleRank
@@ -52,7 +52,7 @@ std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 // @return PinochleRank &
 PinochleRank &operator++(PinochleRank &myRank)
 {
-    switch (myRank)
+	switch (myRank)
 	{
 	case PinochleRank::nine:
 		myRank = PinochleRank::jack;
@@ -73,16 +73,16 @@ PinochleRank &operator++(PinochleRank &myRank)
 	case PinochleRank::ten:
 		myRank = PinochleRank::ace;
 		break;
-        
+		
 	case PinochleRank::ace:
 		myRank = PinochleRank::undefined;
 		break;
-        
+		
 	// remain the same
 	case PinochleRank::undefined:
 		break;
 	}
-    return myRank;
+	return myRank;
 }
 
 // Default constructor for the PinochleDeck class
@@ -90,37 +90,37 @@ PinochleRank &operator++(PinochleRank &myRank)
 PinochleDeck::PinochleDeck()
 {
 	// Use prefix increment operator to traverse the enumeration types
-    for (PinochleRank i = PinochleRank::nine; i != PinochleRank::undefined; ++i)
-    {
-        for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
-        {
-            Card<PinochleRank> myCard(i, j);
-            myDeck.push_back(myCard);
-        }
-    }
+	for (PinochleRank i = PinochleRank::nine; i != PinochleRank::undefined; ++i)
+	{
+		for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
+		{
+			Card<PinochleRank> myCard(i, j);
+			myDeck.push_back(myCard);
+		}
+	}
 	
 	// Loop to push the second set of cards to the deck
-    for (PinochleRank i = PinochleRank::nine; i != PinochleRank::undefined; ++i)
-    {
-        for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
-        {
-            Card<PinochleRank> myCard(i, j);
-            myDeck.push_back(myCard);
-        }
-    }
-    
+	for (PinochleRank i = PinochleRank::nine; i != PinochleRank::undefined; ++i)
+	{
+		for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
+		{
+			Card<PinochleRank> myCard(i, j);
+			myDeck.push_back(myCard);
+		}
+	}
+	
 }
 
 // Overloaded print function for the PinochleDeck class
 // Prints each card in the deck, and starts a new line after each suit of spades
 void PinochleDeck::print(std::ostream &os)
 {
-    std::vector< Card<PinochleRank> >::iterator iter = myDeck.begin();
+	std::vector< Card<PinochleRank> >::iterator iter = myDeck.begin();
 	for(; iter != myDeck.end(); ++iter)
 	{
 		os << (*iter) << " ";
-        if((*iter).mySuit == Suit::spades){
-            os<<std::endl;
-        }
+		if((*iter).mySuit == Suit::spades){
+			os<<std::endl;
+		}
 	}
 }

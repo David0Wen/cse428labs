@@ -11,9 +11,9 @@
 class Deck
 {
 public:
-    // virtual method print
-    // @param std::ostream &
-    virtual void print(std::ostream &) = 0;
+	// virtual method print
+	// @param std::ostream &
+	virtual void print(std::ostream &) = 0;
 };
 
 #endif
