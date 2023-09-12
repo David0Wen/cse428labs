@@ -6,7 +6,7 @@ Zherui Zhou (zherui@wustl.edu)
 ---
 
 **design decisions:**
-
+In function "print" of PinochleDeck and HoldEmDeck, we use an iteror to traverse the whole deck. When we push cards onto the deck, they are ordered in a circular manner, so when we print the deck, each time we print a card with "spade" suit, we also print an extra "shift" , this makes the output more readable.
 
 **error observations**:
 ``` C++
