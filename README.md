@@ -1,3 +1,4 @@
+# Lab 0
 ## Group members 
 Ruoyao Wen (ruoyao@wustl.edu)
 Wanzhou Liu (l.wanzhou@wustl.edu)
