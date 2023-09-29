@@ -10,9 +10,17 @@
 const int SUCCESS = 0;
 
 int main(){
-	// define two types of decks
-	PinochleDeck pino_deck;
-	HoldEmDeck hold_deck;
+    // define two types of decks
+    PinochleDeck pino_deck;
+    HoldEmDeck hold_deck;
+
+	try {
+        if (!pino_deck.is_empty()) {
+
+        }
+    } catch (const std::runtime_error& e) {
+        std::cerr << "Caught exception: " << e.what() << std::endl;
+    }
 
 	// print the deck
 	std::cout << "Pinochle Deck:" << std::endl;

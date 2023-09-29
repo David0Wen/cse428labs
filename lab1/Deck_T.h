@@ -10,13 +10,23 @@
 #include <random>
 #include <algorithm>
 
+//template <typename R, typename S>
+//class Deck: public CardSet<R, S>
+//{
+//public:
+//	// method print
+//	// @param std::ostream &
+//	void shuffle();
+//};
+
 template <typename R, typename S>
 class Deck: public CardSet<R, S>
 {
 public:
-	// method print
-	// @param std::ostream &
-	void shuffle();
+    // method print
+    // @param std::ostream &
+    void shuffle();
+    void collect(CardSet<R, S>& cardSet);
 };
 
 #ifdef TEMPLATE_HEADERS_INCLUDE_SOURCE /* test whether guard symbol is defined */
