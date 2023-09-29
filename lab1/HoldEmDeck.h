@@ -10,7 +10,8 @@
 // include struct card as a member of HoldEmDeck
 #include "Card_T.h"
 // include base class deck, inhert the base method print
-#include "Deck.h"
+#include "Deck_T.h"
+#include "Suit.h"
 
 enum class HoldEmRank{
 	two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace, undefined
@@ -30,16 +31,10 @@ std::ostream &operator<<(std::ostream&, const HoldEmRank&);
 HoldEmRank &operator++(HoldEmRank&);
 
 // derived from the abstract base class Deck
-class HoldEmDeck: public Deck
+class HoldEmDeck: public Deck<HoldEmRank, Suit>
 {
-private:
-	// deck vector
-	std::vector< Card<HoldEmRank> > myDeck;
 public:
-	// default constructor
 	HoldEmDeck();
-	// Inherited method: print
-	void print(std::ostream &);
 };
 
 #endif

@@ -11,7 +11,8 @@
 // Include struct card as a member of PinochleDeck
 #include "Card_T.h"
 // Include base class deck, inherit the base method print
-#include "Deck.h"
+#include "Deck_T.h"
+#include "Suit.h"
 
 // Declare Pinochle specific card ranks
 enum class PinochleRank{
@@ -32,16 +33,11 @@ std::ostream &operator<<(std::ostream&, const PinochleRank&);
 PinochleRank &operator++(PinochleRank&);
 
 // define Pinochle Deck derived from Deck class
-class PinochleDeck: public Deck
+class PinochleDeck: public Deck<PinochleRank, Suit>
 {
-private:
-	// save the info for each card
-	std::vector< Card<PinochleRank> > myDeck;
 public:
 	// make a deck of cards
 	PinochleDeck();
-	// print the string corrosponding to the rank
-	void print(std::ostream &);
 };
 
 #endif

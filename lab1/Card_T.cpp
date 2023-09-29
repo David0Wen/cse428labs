@@ -5,8 +5,8 @@
 */
 #include "Card_T.h"
 
-template<typename T>
-Card<T>::Card(T argRank, Suit argSuit) : myRank(argRank), mySuit(argSuit)
+template<typename T, typename S>
+Card<T, S>::Card(T argRank, S argSuit)
 {
 	// initialize the member variables
 	myRank = argRank;
@@ -18,8 +18,8 @@ Card<T>::Card(T argRank, Suit argSuit) : myRank(argRank), mySuit(argSuit)
 // @param std::ostream & the stream you want to output to
 // @param const Card<T> the object you want to output
 // @return std::ostream &
-template<typename T>
-std::ostream &operator<<(std::ostream &os, const Card<T> &myCard)
+template<typename T, typename S>
+std::ostream& operator<<(std::ostream& os, const Card<T, S>& myCard)
 {
 	os << myCard.myRank << myCard.mySuit;
 	return os;

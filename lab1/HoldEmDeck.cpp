@@ -148,23 +148,9 @@ HoldEmDeck::HoldEmDeck()
 	{
 		for (Suit j = Suit::clubs; j != Suit::undefined; ++j)
 		{
-			Card<HoldEmRank> myCard(i, j);
-			myDeck.push_back(myCard);
+			Card<HoldEmRank, Suit> myCard(i, j);
+			myCardSet.push_back(myCard);
 		}
 	}
 	
-}
-
-// overloads the inherited pure virtual method,
-// print every cards in this deck
-void HoldEmDeck::print(std::ostream &os)
-{
-	std::vector< Card<HoldEmRank> >::iterator iter = myDeck.begin();
-	for(; iter != myDeck.end(); ++iter)
-	{
-		os << (*iter) << " ";
-		if ((*iter).mySuit == Suit::spades) {
-			os << std::endl;
-		}
-	}
 }

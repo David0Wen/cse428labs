@@ -11,13 +11,13 @@
 #include "Suit.h"
 
 // Card strucutre: rank and suit 
-template <typename T>
+template <typename T, typename S>
 struct Card
 {
 	T myRank;
 	Suit mySuit;
 	// Vaule Constructor 
-	Card(T, Suit);
+	Card(T, S);
 };
 
 // shift operator declaration
@@ -25,8 +25,8 @@ struct Card
 // @param std::ostream & the stream you want to output to
 // @param const Card<T> the object you want to output
 // @return std::ostream &
-template <typename T>
-std::ostream &operator<<(std::ostream &, const Card<T> &);
+template <typename T, typename S>
+std::ostream& operator<<(std::ostream&, const Card<T, S>&);
 
 #ifdef TEMPLATE_HEADERS_INCLUDE_SOURCE /* test whether guard symbol is defined */
 #include "Card_T.cpp"
