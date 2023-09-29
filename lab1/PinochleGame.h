@@ -14,7 +14,7 @@
 class PinochleGame : public Game {
 protected:
     PinochleDeck deck;
-    std::vector<CardSet<YourEnumRank, YourEnumSuit>> playerHands;  // Replace YourEnumRank and YourEnumSuit with actual enum types
+    std::vector<CardSet<PinochleRank, Suit> > playerHands;
 
     virtual void deal();
 public:
