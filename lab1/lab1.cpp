@@ -38,7 +38,7 @@ void usage(std::ostream& os) {
 	os << "HoldEm needs 2-9 players." << std::endl;
 }
 
-int main(int argc, const char* argv[]){
+int main(int argc, const char *argv[]){
 	if (argc < 2)
 	{
 		usage(std::cout);

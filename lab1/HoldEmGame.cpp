@@ -9,7 +9,7 @@ const int SUCCESS = 0;
 const int playerCards = 2;
 const int boardMax = 5;
 
-HoldEmGame::HoldEmGame(int argc, const char* argv[]) : Game(argc, argv), myState(HoldEmState::preflop)
+HoldEmGame::HoldEmGame(int argc, const char *argv[]) : Game(argc, argv), myState(HoldEmState::preflop)
 {
     // Calculate the number of players based on argc
     int numPlayers = argc - 2; // Subtract 2 for program name and game name
@@ -25,7 +25,7 @@ void HoldEmGame::deal()
         switch (myState)
         {
         case HoldEmState::preflop:
-            for (int i = 0; i < playerCards; i++)
+            for (int i = 0; i < playerCards; ++i)
             {
                 for (auto iter = playerHands.begin(); iter != playerHands.end(); ++iter)
                 {
@@ -35,7 +35,7 @@ void HoldEmGame::deal()
             myState = HoldEmState::flop;
             break;
         case HoldEmState::flop:
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; ++i)
             {
                 myDeck >> commonBoard;
             }

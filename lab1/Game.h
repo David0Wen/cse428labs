@@ -14,7 +14,7 @@ protected:
     std::vector<std::string> playerNames;
 
 public:
-    Game(int argc, const char* argv[]);
+    Game(int argc, const char *argv[]);
 
     virtual int play() = 0;
     bool askEnd(std::istream&, std::ostream&);

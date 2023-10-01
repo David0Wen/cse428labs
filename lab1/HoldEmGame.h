@@ -27,7 +27,7 @@ protected:
 
 	virtual void deal();
 public:
-	HoldEmGame(int argc, const char* argv[]);
+	HoldEmGame(int argc, const char *argv[]);
 
 	void printPlayersCards(std::ostream&, size_t);
 	void roundCollect();

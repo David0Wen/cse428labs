@@ -9,7 +9,7 @@ const int SUCCESS = 0;
 const int rowLength = 6;
 const int packetSize = 3;
 
-PinochleGame::PinochleGame(int argc, const char* argv[]) : Game(argc, argv)
+PinochleGame::PinochleGame(int argc, const char *argv[]) : Game(argc, argv)
 {
     // Calculate the number of players based on argc
     int numPlayers = argc - 2; // Subtract 2 for program name and game name
