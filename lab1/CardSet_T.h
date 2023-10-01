@@ -16,6 +16,8 @@ protected:
 	std::vector< Card<R, S> > myCardSet;
 public:
 	void print(std::ostream&, size_t);
+	bool is_empty();
+	CardSet<R, S>& operator>>(CardSet<R, S>& other);
 };
 
 
