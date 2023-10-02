@@ -1,7 +1,7 @@
-/*
+/**
 // File: HoldEmDeck.cpp
 // Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Implemtation of enum class: HoldEmRank, class: HoldEmDeck
+// Purpose: Implementation of enum class: HoldEmRank, class: HoldEmDeck
 */
 #include "HoldEmDeck.h"
 

@@ -1,14 +1,23 @@
-/*
-// File: HoldEmGame.cpp
-// Author: Ruoyao Wen ruoyao@wustl.edu
+/**
+* File: HoldEmGame.cpp
+* Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+* Purpose: Implementation of HoldEmGame class and functions.
 */
 #include "HoldEmGame.h"
 
 const int SUCCESS = 0;
 
+// Number of cards each player should have
 const int playerCards = 2;
+// Maximum number of cards on the board
 const int boardMax = 5;
 
+/**
+ * @brief Constructor for the HoldEmGame class
+ *
+ * @param argc The number of command-line arguments
+ * @param argv Array containing the command-line arguments
+ */
 HoldEmGame::HoldEmGame(int argc, const char *argv[]) : Game(argc, argv), myState(HoldEmState::preflop)
 {
     // Calculate the number of players based on argc
@@ -18,6 +27,9 @@ HoldEmGame::HoldEmGame(int argc, const char *argv[]) : Game(argc, argv), myState
     playerHands.resize(numPlayers);
 }
 
+/**
+ * @brief Deals cards to players and the board based on the current game state
+ */
 void HoldEmGame::deal()
 {
     try
@@ -25,6 +37,7 @@ void HoldEmGame::deal()
         switch (myState)
         {
         case HoldEmState::preflop:
+            // Deal two cards to each player
             for (int i = 0; i < playerCards; ++i)
             {
                 for (auto iter = playerHands.begin(); iter != playerHands.end(); ++iter)
@@ -32,9 +45,11 @@ void HoldEmGame::deal()
                     myDeck >> *iter;
                 }
             }
+            //Move to next state
             myState = HoldEmState::flop;
             break;
         case HoldEmState::flop:
+            // Deal three community cards to the board
             for (int i = 0; i < 3; ++i)
             {
                 myDeck >> commonBoard;
@@ -42,14 +57,17 @@ void HoldEmGame::deal()
             myState = HoldEmState::turn;
             break;
         case HoldEmState::turn:
+            // Deal one community card to the board
             myDeck >> commonBoard;
             myState = HoldEmState::river;
             break;
         case HoldEmState::river:
+            // Deal one community card to the board
             myDeck >> commonBoard;
             myState = HoldEmState::undefined;
             break;
         default:
+            // Deal with undefined states
             break;
         }
     }
@@ -58,6 +76,12 @@ void HoldEmGame::deal()
     }
 }
 
+/**
+ * @brief Prints the cards held by each player
+ *
+ * @param os The output stream to the player's cards be printed
+ * @param length The number of cards per line when printing
+ */
 void HoldEmGame::printPlayersCards(std::ostream& os, size_t length)
 {
     auto handIter = playerHands.begin();
@@ -72,6 +96,9 @@ void HoldEmGame::printPlayersCards(std::ostream& os, size_t length)
     }
 }
 
+/**
+ * @brief Collects all the cards back to the deck at the end of a round
+ */
 void HoldEmGame::roundCollect()
 {
     for (auto iter = playerHands.begin(); iter != playerHands.end(); ++iter)
@@ -81,6 +108,11 @@ void HoldEmGame::roundCollect()
     myDeck.collect(commonBoard);
 }
 
+/**
+ * @brief Game loop for a Texas Hold'Em game
+ *
+ * @return An integer representing the status of the function
+ */
 int HoldEmGame::play()
 {
     std::cout << "Welcome to Texas Hold'Em!" << std::endl;

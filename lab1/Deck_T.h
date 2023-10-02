@@ -1,4 +1,4 @@
-/*
+/**
 // File: Deck_T.h
 // Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
 // Purpose: Declaration of abstract base class: deck.
@@ -10,6 +10,7 @@
 #include <random>
 #include <algorithm>
 
+// Template class definition for Deck
 template <typename R, typename S>
 class Deck: public CardSet<R, S>
 {

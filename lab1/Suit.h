@@ -1,4 +1,4 @@
-/*
+/**
 // File: Suit.h
 // Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
 // Purpose: Declaration of enum class: Suit

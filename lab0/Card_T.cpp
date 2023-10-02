@@ -6,7 +6,7 @@
 #include "Card_T.h"
 
 template<typename T>
-Card<T>::Card(T argRank, Suit argSuit)
+Card<T>::Card(T argRank, Suit argSuit) : myRank(argRank), mySuit(argSuit)
 {
 	// initialize the member variables
 	myRank = argRank;

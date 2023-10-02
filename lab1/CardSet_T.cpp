@@ -1,12 +1,18 @@
-/*
+/**
 // File: CardSet_T.cpp
 // Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Implentation of template structure: cardset.
+// Purpose: Implementation of template structure: cardset.
 */
 #include "CardSet_T.h"
 #include <iostream>
 
 
+ /**
+  * @brief Prints the CardSet to the given output stream
+  *
+  * @param os Output stream to print the CardSet to
+  * @param linesize Number of cards to print per line
+  */
 template<typename R, typename S>
 void CardSet<R, S>::print(std::ostream& os, size_t linesize)
 {
@@ -20,13 +26,26 @@ void CardSet<R, S>::print(std::ostream& os, size_t linesize)
 			os << std::endl;
 		}
 	}
+    os << std::endl;  // New add to fix bug, always add a newline at the end
 }
 
+/**
+ * @brief Checks if the CardSet is empty
+ *
+ * @return True if empty
+ */
 template<typename R, typename S>
 bool CardSet<R, S>::is_empty() {
 	return myCardSet.empty();
 }
 
+/**
+ * @brief Performs a shift operation between two CardSets
+ *
+ * @param other The CardSet object to which the card will be moved
+ * @return Reference to the calling CardSet object
+ * @throws std::runtime_error if the CardSet is empty
+ */
 template<typename R, typename S>
 CardSet<R, S>& CardSet<R, S>::operator>>(CardSet<R, S>& other) {
 	if (is_empty()) {

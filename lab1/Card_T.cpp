@@ -1,7 +1,7 @@
-/*
+/**
 // File: Card_T.cpp
 // Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Implentation of template structure: card.
+// Purpose: Implementation of template structure: card.
 */
 #include "Card_T.h"
 
