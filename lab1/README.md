@@ -54,7 +54,7 @@ void CardSet<R, S>::print(std::ostream& os, size_t linesize)
 }
 ```
 
-After we fixed these bugs, the program ran correctly.
+After we fixed this bug, the program ran correctly.
 
 ## Output (Exceptions)
 ### Trial 1
