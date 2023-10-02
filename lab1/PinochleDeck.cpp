@@ -1,4 +1,4 @@
-/*
+/**
 // File: PinochleDeck.cpp
 // Authors: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
 // Purpose: Implementation of enum class: PinochleRank, class: PinochleDeck

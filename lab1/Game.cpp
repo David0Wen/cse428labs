@@ -1,18 +1,38 @@
-//
-// Created by Wenzel Luis on 9/28/23.
-//
+/**
+ * File: Game.cpp
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Implementation of the class: Game.
+ */
 
 #include "Game.h"
+#include <iostream>
 
+/**
+ * @brief Constructor for the Game class
+ *
+ * @param argc The number of command-line arguments
+ * @param argv Array to contain the command-line arguments
+ */
 Game::Game(int argc, const char *argv[]) {
-    //选择方案（1）或（2）来确定从哪里开始迭代
-    //方案（1）：从位置2开始，跳过 argv[0]（可执行文件名）和 argv[1]（游戏名）
+    //Choose solution 2: start at position 2, so that argc and argv can be directly transmitted.
     for (int i = 2; i < argc; ++i) {
         playerNames.push_back(std::string(argv[i]));
     }
 
-    //方案（2），则从位置 0 开始迭代
-//    for (int i = 0; i < argc; ++i) {
-//        playerNames.push_back(std::string(argv[i]));
-//    }
+}
+
+/**
+ * @brief Asks the user whether they want to end the game
+ *
+ * @param is Input stream to read the user's response
+ * @param os Output stream to display the question
+ * @return True if the user wants to end
+ */
+bool Game::askEnd(std::istream& is, std::ostream& os)
+{
+    os << "Do you want to end the game? (type yes to end): " << std::endl;
+    std::string response;
+    is >> response;
+
+    return response == "yes";
 }

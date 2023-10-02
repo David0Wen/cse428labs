@@ -1,4 +1,4 @@
-/*
+/**
 // File: Suit.cpp
 // Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
 // Purpose: Implentation of enum class: Suit
