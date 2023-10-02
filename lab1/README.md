@@ -7,18 +7,12 @@
 ---
 
 ## Design decisions
-
+The game architecture is modular, built around an abstract Game class and provides a framework for the card dealing, round collection, and game flow with other derived class. Derived classes like PinochleGame and HoldEmGame specialize this framework, implementing game-specific rules. PinochleGame uses a specialized PinochleDeck, and HoldEmGame has additional states for the flop, turn, and river. Error handling is solved with comprehensive checks and informative messages.
 
 ## Error observations
 
-
 ### Compile error/warning
-
-
-#### Problems found:
-
-
-#### After fix these bugs, the program doesn't trigger errors/warnings anymore.
+We don't have any compile error.
 
 ### Run error
 ``` bash
@@ -41,6 +35,26 @@ JD 7H 5H BOARD (turn):
 JD 7H 5H 2D BOARD (river):
 JD 7H 5H 2D KD
 ```
+To fix the display format, we changed the code as follows:
+``` C++
+template<typename R, typename S>
+void CardSet<R, S>::print(std::ostream& os, size_t linesize)
+{
+    size_t index = 0;
+    typename std::vector< Card<R, S> >::iterator iter = myCardSet.begin();
+    for (; iter != myCardSet.end(); ++iter)
+    {
+        ++index;
+        os << (*iter) << " ";
+        if (index % linesize == 0) {
+            os << std::endl;
+        }
+    }
+    os << std::endl;  // New add to fix bug, always add a newline at the end
+}
+```
+
+After we fixed these bugs, the program ran correctly.
 
 ## Output (Exceptions)
 ### Trial 1
@@ -251,3 +265,4 @@ Thanks for playing Texas Hold'Em!
 $ echo $?
 0
 ```
+This is the final version of our Lab1.
