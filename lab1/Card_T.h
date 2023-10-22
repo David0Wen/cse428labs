@@ -12,20 +12,13 @@
 
 // Card strucutre: rank and suit 
 template <typename T, typename S>
-class Card
+struct Card
 {
-public:
 	T myRank;
 	Suit mySuit;
 	// Vaule Constructor 
 	Card(T, S);
 };
-
-template <typename Suit, typename Rank>
-bool CompareRank(const Card<Suit, Rank>& card1, const Card<Suit, Rank>& card2);
-
-template <typename Suit, typename Rank>
-bool CompareSuit(const Card<Suit, Rank>& card1, const Card<Suit, Rank>& card2);
 
 // shift operator declaration
 // Output the card feature to std::ostream

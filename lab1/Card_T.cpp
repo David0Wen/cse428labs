@@ -13,25 +13,6 @@ Card<T, S>::Card(T argRank, S argSuit)
 	mySuit = argSuit;
 }
 
-template<typename Suit, typename Rank>
-bool CompareRank(const Card<Suit, Rank>& card1, const Card<Suit, Rank>& card2)
-{
-	if (card1.myRank < card2.myRank || (card1.myRank == card2.myRank && card1.mySuit < card2.mySuit )){
-		return true;
-	}
-	else return false;
-}
-
-template<typename Suit, typename Rank>
-bool CompareSuit(const Card<Suit, Rank>& card1, const Card<Suit, Rank>& card2)
-{
-	if (card1.mySuit < card2.mySuit || (card1.mySuit == card2.mySuit && card1.myRank < card1.myRank)) {
-		return true;
-	}
-	else return false;
-}
-
-
 // shift operator implentation
 // Output the card feature to std::ostream
 // @param std::ostream & the stream you want to output to

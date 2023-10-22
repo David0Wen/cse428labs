@@ -24,11 +24,6 @@ public:
 	bool is_empty();
     // Overloading the >> operator to perform two CardSet objects
 	CardSet<R, S>& operator>>(CardSet<R, S>& other);
-
-    // default Constructor
-    CardSet() = default;
-    // Copy Constructor
-    CardSet(const CardSet<R, S>& other);
 };
 
 

@@ -57,10 +57,3 @@ CardSet<R, S>& CardSet<R, S>::operator>>(CardSet<R, S>& other) {
 
 	return *this;
 }
-
-template<typename R, typename S>
-CardSet<R, S>::CardSet(const CardSet<R, S>& other)
-{
-	myCardSet = other.myCardSet;
-}
-
