@@ -97,9 +97,14 @@ void PinochleGame::printPlayersCards(std::ostream& os, size_t length)
         std::vector<PinochleMelds> melds;
         suit_independent_evaluation(*handIter, melds);
 
-        os << "Possible melds:" << std::endl;
-        for (auto& meld : melds) {
-            os << meld << std::endl; // Using the shift operator to print meld label and value
+        if (melds.empty()) {
+        std::cout << "No possible melds!" << std::endl;
+        }
+        else {
+            os << "Possible melds:" << std::endl;
+            for (auto& meld : melds) {
+                os << meld << std::endl; // Using the shift operator to print meld label and value
+            }
         }
         os << std::endl;
 
