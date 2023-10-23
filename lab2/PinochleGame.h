@@ -31,13 +31,13 @@ enum class PinochleMelds {
     insuitdoublerun
 };
 
-std::ostream& operator<<(std::ostream& os, const PinochleMelds& meld);
+std::ostream &operator<<(std::ostream &os, const PinochleMelds &meld);
 
 // Class to represent a game of Pinochle
 class PinochleGame : public Game {
 private:
-    static bool isFourSuits(const std::vector< Card<PinochleRank, Suit> >::iterator&, const std::vector< Card<PinochleRank, Suit> >::iterator&, PinochleRank);
-    void suit_independent_evaluation(const CardSet<PinochleRank, Suit>&, std::vector<PinochleMelds>&);
+    static bool isFourSuits(const std::vector< Card<PinochleRank, Suit> >::iterator &, const std::vector< Card<PinochleRank, Suit> >::iterator &, PinochleRank);
+    void suit_independent_evaluation(const CardSet<PinochleRank, Suit> &, std::vector<PinochleMelds> &);
 protected:
     // A deck of cards designed for Pinochle
     PinochleDeck myDeck;
@@ -53,7 +53,7 @@ public:
     PinochleGame(int argc, const char *argv[]);
 
     // Print the cards of all players
-    void printPlayersCards(std::ostream&, size_t);
+    void printPlayersCards(std::ostream &, size_t);
     // Collect all cards back to the deck
     void roundCollect();
     // Game loop for a Pinochle game

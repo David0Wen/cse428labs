@@ -37,7 +37,7 @@ public:
 	HoldEmGame(int argc, const char *argv[]);
 
     // Print each player's cards to the specified output stream
-	void printPlayersCards(std::ostream&, size_t);
+	void printPlayersCards(std::ostream &, size_t);
     // Collect cards at the end of a round
 	void roundCollect();
 

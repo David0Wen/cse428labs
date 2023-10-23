@@ -21,7 +21,7 @@ CardSet<R, S>::CardSet(const CardSet<R, S>& other)
   * @param linesize Number of cards to print per line
   */
 template<typename R, typename S>
-void CardSet<R, S>::print(std::ostream& os, size_t linesize)
+void CardSet<R, S>::print(std::ostream &os, size_t linesize)
 {
 	size_t index = 0;
 	typename std::vector< Card<R, S> >::iterator iter = myCardSet.begin();
@@ -54,7 +54,7 @@ bool CardSet<R, S>::is_empty() {
  * @throws std::runtime_error if the CardSet is empty
  */
 template<typename R, typename S>
-CardSet<R, S>& CardSet<R, S>::operator>>(CardSet<R, S>& other) {
+CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
 	if (is_empty()) {
 		throw std::runtime_error("CardSet is empty, cannot perform shift operation!");
 	}

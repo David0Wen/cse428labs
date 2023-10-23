@@ -15,7 +15,7 @@ template <typename T, typename S>
 struct Card
 {
 	T myRank;
-	Suit mySuit;
+	S mySuit;
 	// Vaule Constructor 
 	Card(T, S);
 };

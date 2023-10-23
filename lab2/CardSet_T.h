@@ -21,13 +21,13 @@ public:
     // default Constructor
     CardSet() = default;
     // Copy Constructor
-    CardSet(const CardSet<R, S>&);
+    CardSet(const CardSet<R, S> &);
     // Function to print the CardSet
-	void print(std::ostream&, size_t);
+	void print(std::ostream &, size_t);
     // Function to check if the CardSet is empty
 	bool is_empty();
     // Overloading the >> operator to perform two CardSet objects
-	CardSet<R, S>& operator>>(CardSet<R, S>&);
+	CardSet<R, S> &operator>>(CardSet<R, S> &);
 	
     static std::vector< Card<R, S> > CardSet<R, S>::* getSetPtr();
 };

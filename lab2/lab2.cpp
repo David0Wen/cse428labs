@@ -33,7 +33,7 @@ std::shared_ptr<Game> create(int argc, const char *argv[]) {
 }
 
 // Function to display correct usage of the program
-void usage(std::ostream& os) {
+void usage(std::ostream &os) {
 	os << "Usage: lab1 <Game> <Players>" << std::endl;
 	os << "Game should be either Pinochle or HoldEm." << std::endl;
 	os << "Pinochle needs 4 players." << std::endl;
@@ -82,7 +82,7 @@ int main(int argc, const char *argv[]){
 			return INVALIDPTR;
 		}
 	}
-	catch (const std::exception& e)
+	catch (const std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 		return OTHERERROR;

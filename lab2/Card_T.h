@@ -26,13 +26,13 @@ struct Card
 // @param const Card<T> the object you want to output
 // @return std::ostream &
 template <typename T, typename S>
-std::ostream& operator<<(std::ostream&, const Card<T, S>&);
+std::ostream &operator<<(std::ostream &, const Card<T, S> &);
 
 template <typename T, typename S>
-bool lessRank(const Card<T, S>&, const Card<T, S>&);
+bool lessRank(const Card<T, S> &, const Card<T, S> &);
 
 template <typename T, typename S>
-bool lessSuit(const Card<T, S>&, const Card<T, S>&);
+bool lessSuit(const Card<T, S> &, const Card<T, S> &);
 
 #ifdef TEMPLATE_HEADERS_INCLUDE_SOURCE /* test whether guard symbol is defined */
 #include "Card_T.cpp"

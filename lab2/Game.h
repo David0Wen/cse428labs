@@ -23,7 +23,7 @@ public:
     // Pure virtual function for playing the game
     virtual int play() = 0;
     // Prompts the user to and captures the response
-    bool askEnd(std::istream&, std::ostream&);
+    bool askEnd(std::istream &, std::ostream &);
 };
 
 #endif // GAME_H

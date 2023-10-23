@@ -19,16 +19,16 @@ Card<T, S>::Card(T argRank, S argSuit)
 // @param const Card<T> the object you want to output
 // @return std::ostream &
 template<typename T, typename S>
-std::ostream& operator<<(std::ostream& os, const Card<T, S>& myCard)
+std::ostream &operator<<(std::ostream &os, const Card<T, S> &myCard)
 {
 	os << myCard.myRank << myCard.mySuit;
 	return os;
 }
 
 template<typename T, typename S>
-bool lessRank(const Card<T, S>& card1, const Card<T, S>& card2)
+bool lessRank(const Card<T, S> &card1, const Card<T, S> &card2)
 {
-	if (card1.myRank < card2.myRank || (card1.myRank == card2.myRank && card1.mySuit < card2.mySuit )){
+	if (card1.myRank < card2.myRank || (card1.myRank == card2.myRank && card1.mySuit < card2.mySuit)){
 		return true;
 	}
 	
@@ -36,7 +36,7 @@ bool lessRank(const Card<T, S>& card1, const Card<T, S>& card2)
 }
 
 template<typename T, typename S>
-bool lessSuit(const Card<T, S>& card1, const Card<T, S>& card2)
+bool lessSuit(const Card<T, S> &card1, const Card<T, S> &card2)
 {
 	if (card1.mySuit < card2.mySuit || (card1.mySuit == card2.mySuit && card1.myRank < card1.myRank)) {
 		return true;

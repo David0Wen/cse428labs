@@ -22,13 +22,13 @@ enum class HoldEmRank{
 // @param std::ostream & the stream you want to output to
 // @param const HoldEmRank& the object you want to output
 // @return std::ostream &
-std::ostream &operator<<(std::ostream&, const HoldEmRank&);
+std::ostream &operator<<(std::ostream &, const HoldEmRank &);
 
 // define operators ++ for HoldEmRank
 // iterate the HoldEmRank to the next
 // @param HoldEmRank& the object you want to increase
 // @return HoldEmRank &
-HoldEmRank &operator++(HoldEmRank&);
+HoldEmRank &operator++(HoldEmRank &);
 
 // derived from the abstract base class Deck
 class HoldEmDeck: public Deck<HoldEmRank, Suit>

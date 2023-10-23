@@ -23,7 +23,7 @@ void Deck<R, S>::shuffle()
  * @param cardSet The CardSet that collect cards
  */
 template <typename R, typename S>
-void Deck<R, S>::collect(CardSet<R, S>& cardSet)
+void Deck<R, S>::collect(CardSet<R, S> &cardSet)
 {
     try
     {

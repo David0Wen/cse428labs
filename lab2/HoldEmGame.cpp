@@ -71,7 +71,7 @@ void HoldEmGame::deal()
             break;
         }
     }
-    catch (const std::runtime_error& e) {
+    catch (const std::runtime_error &e) {
         std::cerr << "Caught exception: " << e.what() << std::endl;
     }
 }
@@ -82,7 +82,7 @@ void HoldEmGame::deal()
  * @param os The output stream to the player's cards be printed
  * @param length The number of cards per line when printing
  */
-void HoldEmGame::printPlayersCards(std::ostream& os, size_t length)
+void HoldEmGame::printPlayersCards(std::ostream &os, size_t length)
 {
     auto handIter = playerHands.begin();
     auto nameIter = playerNames.begin();

@@ -18,12 +18,12 @@ enum class Suit
 // @param std::ostream & the stream you want to output to
 // @param const Suit& the object you want to output
 // @return std::ostream &
-std::ostream &operator<<(std::ostream&, const Suit&);
+std::ostream &operator<<(std::ostream &, const Suit &);
 
 // define operators ++ for Suit
 // iterate the Suit to the next
 // @param Suit& the object you want to increase
 // @return Suit &
-Suit &operator++(Suit&);
+Suit &operator++(Suit &);
 
 #endif

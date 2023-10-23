@@ -21,7 +21,7 @@ public:
 
 	// method collect
 	// @param CardSet<R, S>&
-	void collect(CardSet<R, S>&);
+	void collect(CardSet<R, S> &);
 };
 
 #ifdef TEMPLATE_HEADERS_INCLUDE_SOURCE /* test whether guard symbol is defined */

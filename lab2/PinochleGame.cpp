@@ -82,7 +82,7 @@ void PinochleGame::deal()
  * @param os Output stream to which the player names and cards are printed
  * @param length Number of cards to print per line
  */
-void PinochleGame::printPlayersCards(std::ostream& os, size_t length)
+void PinochleGame::printPlayersCards(std::ostream &os, size_t length)
 {
     auto handIter = playerHands.begin();
     auto nameIter = playerNames.begin();
@@ -102,7 +102,7 @@ void PinochleGame::printPlayersCards(std::ostream& os, size_t length)
         }
         else {
             os << "Possible melds:" << std::endl;
-            for (auto& meld : melds) {
+            for (auto &meld : melds) {
                 os << meld << std::endl; // Using the shift operator to print meld label and value
             }
         }
@@ -153,7 +153,7 @@ int PinochleGame::play()
     }
 }
 
-std::ostream& operator<<(std::ostream& os, const PinochleMelds& meld)
+std::ostream &operator<<(std::ostream &os, const PinochleMelds &meld)
 {
     os << PinochleGame::MeldNames[static_cast<int>(meld)] << " " << PinochleGame::MeldPoints[static_cast<int>(meld)];
     return os;
@@ -161,16 +161,16 @@ std::ostream& operator<<(std::ostream& os, const PinochleMelds& meld)
 
 bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit>>::iterator &beg, const std::vector<Card<PinochleRank, Suit>>::iterator &end, PinochleRank myRank)
 {
-    bool hasClubs = std::any_of(beg, end, [=](const Card<PinochleRank, Suit>& obj) {
+    bool hasClubs = std::any_of(beg, end, [=](const Card<PinochleRank, Suit> &obj) {
         return obj.myRank == myRank && obj.mySuit == Suit::clubs;
         });
-    bool hasDiamonds = std::any_of(beg, end, [=](const Card<PinochleRank, Suit>& obj) {
+    bool hasDiamonds = std::any_of(beg, end, [=](const Card<PinochleRank, Suit> &obj) {
         return obj.myRank == myRank && obj.mySuit == Suit::diamonds;
         });
-    bool hasHearts = std::any_of(beg, end, [=](const Card<PinochleRank, Suit>& obj) {
+    bool hasHearts = std::any_of(beg, end, [=](const Card<PinochleRank, Suit> &obj) {
         return obj.myRank == myRank && obj.mySuit == Suit::hearts;
         });
-    bool hasSpades = std::any_of(beg, end, [=](const Card<PinochleRank, Suit>& obj) {
+    bool hasSpades = std::any_of(beg, end, [=](const Card<PinochleRank, Suit> &obj) {
         return obj.myRank == myRank && obj.mySuit == Suit::spades;
         });
 
@@ -202,60 +202,60 @@ void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit>
     pinochle for a jack of diamonds and a queen of spades (J♦ Q♠) but not if the hand has doublepinochle
     */
     if (std::count_if(mySet.begin(), mySet.end(), 
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::ace; }) == 8) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::ace; }) == 8) {
         melds.push_back(PinochleMelds::thousandaces);
     }
     else if (std::count_if(mySet.begin(), mySet.end(), 
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::ace; }) >= 4) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::ace; }) >= 4) {
         if (isFourSuits(mySet.begin(), mySet.end(), PinochleRank::ace)) {
             melds.push_back(PinochleMelds::hundredaces);
         }
     }
     if (std::count_if(mySet.begin(), mySet.end(), 
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::king; }) == 8) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::king; }) == 8) {
         melds.push_back(PinochleMelds::eighthundredkings);
     }
     else if (std::count_if(mySet.begin(), mySet.end(), 
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::king; }) >= 4) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::king; }) >= 4) {
         if (isFourSuits(mySet.begin(), mySet.end(), PinochleRank::king)) {
             melds.push_back(PinochleMelds::eightykings);
         }
     }
     if (std::count_if(mySet.begin(), mySet.end(),
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::queen; }) == 8) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::queen; }) == 8) {
         melds.push_back(PinochleMelds::sixhundredqueens);
     }
     else if (std::count_if(mySet.begin(), mySet.end(),
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::queen; }) >= 4) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::queen; }) >= 4) {
         if (isFourSuits(mySet.begin(), mySet.end(), PinochleRank::queen)) {
             melds.push_back(PinochleMelds::sixtyqueens);
         }
     }
     if (std::count_if(mySet.begin(), mySet.end(),
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::jack; }) == 8) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::jack; }) == 8) {
         melds.push_back(PinochleMelds::fourhundredjacks);
     }
     else if (std::count_if(mySet.begin(), mySet.end(),
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::jack; }) >= 4) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::jack; }) >= 4) {
         if (isFourSuits(mySet.begin(), mySet.end(), PinochleRank::jack)) {
             melds.push_back(PinochleMelds::fortyjacks);
         }
     }
     if (std::count_if(mySet.begin(), mySet.end(),
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::jack && obj.mySuit == Suit::diamonds; }) == 2) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::jack && obj.mySuit == Suit::diamonds; }) == 2) {
         if (std::count_if(mySet.begin(), mySet.end(),
-            [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::spades; }) == 2) {
+            [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::spades; }) == 2) {
             melds.push_back(PinochleMelds::doublepinochle);
         }
         else if (std::count_if(mySet.begin(), mySet.end(),
-            [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::spades; }) == 1) {
+            [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::spades; }) == 1) {
             melds.push_back(PinochleMelds::pinochle);
         }
     }
     else if (std::count_if(mySet.begin(), mySet.end(),
-        [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::jack && obj.mySuit == Suit::diamonds; }) == 1) {
+        [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::jack && obj.mySuit == Suit::diamonds; }) == 1) {
         if (std::count_if(mySet.begin(), mySet.end(),
-            [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::spades; }) >= 1) {
+            [](const Card<PinochleRank, Suit> &obj) {return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::spades; }) >= 1) {
             melds.push_back(PinochleMelds::pinochle);
         }
     }

@@ -24,13 +24,13 @@ enum class PinochleRank{
 // @param std::ostream & the stream you want to output to
 // @param const PinochleRank& the object you want to output
 // @return std::ostream &
-std::ostream &operator<<(std::ostream&, const PinochleRank&);
+std::ostream &operator<<(std::ostream &, const PinochleRank &);
 
 // define operators ++ for PinochleRank
 // iterate the PinochleRank to the next
 // @param PinochleRank& the object you want to increase
 // @return PinochleRank&
-PinochleRank &operator++(PinochleRank&);
+PinochleRank &operator++(PinochleRank &);
 
 // define Pinochle Deck derived from Deck class
 class PinochleDeck: public Deck<PinochleRank, Suit>

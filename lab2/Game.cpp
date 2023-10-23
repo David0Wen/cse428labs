@@ -28,7 +28,7 @@ Game::Game(int argc, const char *argv[]) {
  * @param os Output stream to display the question
  * @return True if the user wants to end
  */
-bool Game::askEnd(std::istream& is, std::ostream& os)
+bool Game::askEnd(std::istream &is, std::ostream &os)
 {
     os << "Do you want to end the game? (type yes to end): " << std::endl;
     std::string response;
