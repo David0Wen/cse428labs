@@ -7,13 +7,6 @@
 #include <iostream>
 
 
-// Copy Constructor
-template<typename R, typename S>
-CardSet<R, S>::CardSet(const CardSet<R, S>& other)
-{
-	myCardSet = other.myCardSet;
-}
-
  /**
   * @brief Prints the CardSet to the given output stream
   *

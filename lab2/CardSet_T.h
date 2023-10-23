@@ -20,8 +20,8 @@ protected:
 public:
     // default Constructor
     CardSet() = default;
-    // Copy Constructor
-    CardSet(const CardSet<R, S> &);
+    // Copy Constructor, the default copy constructor in this case is sufficient, since it peforms deep copy towards enum class.
+    CardSet(const CardSet<R, S> &) = default;
     // Function to print the CardSet
 	void print(std::ostream &, size_t);
     // Function to check if the CardSet is empty
