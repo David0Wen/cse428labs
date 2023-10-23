@@ -159,7 +159,25 @@ std::ostream& operator<<(std::ostream& os, const PinochleMelds& meld)
     return os;
 }
 
-void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit>& playerHand, std::vector<PinochleMelds>& melds)
+bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit>>::iterator &beg, const std::vector<Card<PinochleRank, Suit>>::iterator &end, PinochleRank myRank)
+{
+    bool hasClubs = std::any_of(beg, end, [=](const Card<PinochleRank, Suit>& obj) {
+        return obj.myRank == myRank && obj.mySuit == Suit::clubs;
+        });
+    bool hasDiamonds = std::any_of(beg, end, [=](const Card<PinochleRank, Suit>& obj) {
+        return obj.myRank == myRank && obj.mySuit == Suit::diamonds;
+        });
+    bool hasHearts = std::any_of(beg, end, [=](const Card<PinochleRank, Suit>& obj) {
+        return obj.myRank == myRank && obj.mySuit == Suit::hearts;
+        });
+    bool hasSpades = std::any_of(beg, end, [=](const Card<PinochleRank, Suit>& obj) {
+        return obj.myRank == myRank && obj.mySuit == Suit::spades;
+        });
+
+    return hasClubs && hasDiamonds && hasHearts && hasSpades;
+}
+
+void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit> &playerHand, std::vector<PinochleMelds> &melds)
 {
     CardSet<PinochleRank, Suit> handCopy(playerHand);
 
@@ -189,20 +207,7 @@ void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit>
     }
     else if (std::count_if(mySet.begin(), mySet.end(), 
         [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::ace; }) >= 4) {
-        bool hasClubs = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::ace && obj.mySuit == Suit::clubs;
-            });
-        bool hasDiamonds = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::ace && obj.mySuit == Suit::diamonds;
-            });
-        bool hasHearts = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::ace && obj.mySuit == Suit::hearts;
-            });
-        bool hasSpades = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::ace && obj.mySuit == Suit::spades;
-            });
-
-        if (hasClubs && hasDiamonds && hasHearts && hasSpades) {
+        if (isFourSuits(mySet.begin(), mySet.end(), PinochleRank::ace)) {
             melds.push_back(PinochleMelds::hundredaces);
         }
     }
@@ -212,20 +217,7 @@ void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit>
     }
     else if (std::count_if(mySet.begin(), mySet.end(), 
         [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::king; }) >= 4) {
-        bool hasClubs = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::king && obj.mySuit == Suit::clubs;
-            });
-        bool hasDiamonds = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::king && obj.mySuit == Suit::diamonds;
-            });
-        bool hasHearts = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::king && obj.mySuit == Suit::hearts;
-            });
-        bool hasSpades = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::king && obj.mySuit == Suit::spades;
-            });
-
-        if (hasClubs && hasDiamonds && hasHearts && hasSpades) {
+        if (isFourSuits(mySet.begin(), mySet.end(), PinochleRank::king)) {
             melds.push_back(PinochleMelds::eightykings);
         }
     }
@@ -235,20 +227,7 @@ void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit>
     }
     else if (std::count_if(mySet.begin(), mySet.end(),
         [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::queen; }) >= 4) {
-        bool hasClubs = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::clubs;
-            });
-        bool hasDiamonds = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::diamonds;
-            });
-        bool hasHearts = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::hearts;
-            });
-        bool hasSpades = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::queen && obj.mySuit == Suit::spades;
-            });
-
-        if (hasClubs && hasDiamonds && hasHearts && hasSpades) {
+        if (isFourSuits(mySet.begin(), mySet.end(), PinochleRank::queen)) {
             melds.push_back(PinochleMelds::sixtyqueens);
         }
     }
@@ -258,20 +237,7 @@ void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit>
     }
     else if (std::count_if(mySet.begin(), mySet.end(),
         [](const Card<PinochleRank, Suit>& obj) {return obj.myRank == PinochleRank::jack; }) >= 4) {
-        bool hasClubs = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::jack && obj.mySuit == Suit::clubs;
-            });
-        bool hasDiamonds = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::jack && obj.mySuit == Suit::diamonds;
-            });
-        bool hasHearts = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::jack && obj.mySuit == Suit::hearts;
-            });
-        bool hasSpades = std::any_of(mySet.begin(), mySet.end(), [](const Card<PinochleRank, Suit>& obj) {
-            return obj.myRank == PinochleRank::jack && obj.mySuit == Suit::spades;
-            });
-
-        if (hasClubs && hasDiamonds && hasHearts && hasSpades) {
+        if (isFourSuits(mySet.begin(), mySet.end(), PinochleRank::jack)) {
             melds.push_back(PinochleMelds::fortyjacks);
         }
     }
