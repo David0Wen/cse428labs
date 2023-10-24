@@ -59,7 +59,7 @@ CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
 }
 
 template<typename R, typename S>
-std::vector<Card<R, S>> CardSet<R, S>::* CardSet<R, S>::getSetPtr()
+std::vector<Card<R, S> > CardSet<R, S>::* CardSet<R, S>::getSetPtr()
 {
 	return &CardSet<R, S>::myCardSet;
 }
