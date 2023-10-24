@@ -29,7 +29,7 @@ public:
     // Overloading the >> operator to perform two CardSet objects
 	CardSet<R, S> &operator>>(CardSet<R, S> &);
 	
-    static std::vector< Card<R, S> > CardSet<R, S>::* getSetPtr();
+    static std::vector<Card<R, S> > CardSet<R, S>::* getSetPtr();
 };
 
 
