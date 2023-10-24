@@ -16,7 +16,7 @@ class CardSet
 {
 protected:
     // A vector to hold Card objects
-    std::vector< Card<R, S> > myCardSet;
+    std::vector<Card<R, S> > myCardSet;
 public:
     // default Constructor
     CardSet() = default;
