@@ -17,7 +17,7 @@ template<typename R, typename S>
 void CardSet<R, S>::print(std::ostream &os, size_t linesize)
 {
 	size_t index = 0;
-	typename std::vector< Card<R, S> >::iterator iter = myCardSet.begin();
+	typename std::vector<Card<R, S> >::iterator iter = myCardSet.begin();
 	for (; iter != myCardSet.end(); ++iter)
 	{
 		++index;
