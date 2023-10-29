@@ -13,6 +13,7 @@
 #include "PinochleDeck.h"
 #include "CardSet_T.h"
 
+// enum class for possible Pinochle melds
 enum class PinochleMelds {
     dix,
     offsuitmarriage,
@@ -31,12 +32,26 @@ enum class PinochleMelds {
     insuitdoublerun
 };
 
+/**
+* Output the melds feature to std::ostream
+* @param std::ostream & the stream you want to output to
+* @param const PinochleMelds &meld the object you want to output
+* @return std::ostream & the reference of the input stream
+*/
 std::ostream &operator<<(std::ostream &os, const PinochleMelds &meld);
 
 // Class to represent a game of Pinochle
 class PinochleGame : public Game {
 private:
+    /**
+    * @brief Checks if the vector of Cards(between start and end) has four different suit for given rank
+    *
+    * @return True if have four different suit
+    */
     static bool isFourSuits(const std::vector<Card<PinochleRank, Suit> >::iterator &, const std::vector<Card<PinochleRank, Suit> >::iterator &, PinochleRank);
+    /**
+    * @brief Checks if the CardSet has several different possible melds, insert all possible melds into the given vector
+    */
     void suit_independent_evaluation(const CardSet<PinochleRank, Suit> &, std::vector<PinochleMelds> &);
 protected:
     // A deck of cards designed for Pinochle
@@ -47,7 +62,9 @@ protected:
     // Deal cards to players and advances the game state
     virtual void deal();
 public:
+    // Static list, assigning all possible melds(enum) with different names
     static const char* MeldNames[];
+    // Static list, assigning all possible melds(enum) with different points
     static const unsigned int MeldPoints[];
     // Constructor to initialize PinochleGame object
     PinochleGame(int argc, const char *argv[]);

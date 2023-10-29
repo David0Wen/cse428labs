@@ -1,8 +1,8 @@
 /**
-// File: Card_T.h
-// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Declaration of template structure: card, will be used as deck's member variable
-*/
+ * File: Card_T.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Declaration of template structure: card, will be used as deck's member variable
+ */
 
 #ifndef _CARD_T_H
 #define _CARD_T_H
@@ -20,11 +20,12 @@ struct Card
 	Card(T, S);
 };
 
-// shift operator declaration
-// Output the card feature to std::ostream
-// @param std::ostream & the stream you want to output to
-// @param const Card<T> the object you want to output
-// @return std::ostream &
+/** 
+ * @brief operator declaration, Output the card feature to std::ostream
+ * @param std::ostream & the stream you want to output to
+ * @param const Card<T> the object you want to output
+ * @return std::ostream &
+ */
 template <typename T, typename S>
 std::ostream &operator<<(std::ostream &, const Card<T, S> &);
 

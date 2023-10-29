@@ -1,16 +1,17 @@
 /**
-// File: PinochleDeck.cpp
-// Authors: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Implementation of enum class: PinochleRank, class: PinochleDeck
-*/
+ * File: PinochleDeck.cpp
+ * Authors: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Implementation of enum class: PinochleRank, class: PinochleDeck
+ */
 
 #include "PinochleDeck.h"
 
-// implentation operators << for PinochleRank
-// Output the Rank to std::ostream
-// @param std::ostream & the stream you want to output to
-// @param const PinochleRank & the object you want to output
-// @return std::ostream &
+/** 
+ * @brief implentation operators << for PinochleRank, Output the Rank to std::ostream
+ * @param os the stream you want to output to
+ * @param myRank the object you want to output
+ * @return the reference of the input ostream
+ */
 std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 {
 	switch (myRank)
@@ -46,10 +47,11 @@ std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 	return os;
 }
 
-// implentation operators ++ for PinochleRank
-// iterate the PinochleRank to the next
-// @param PinochleRank & the object you want to increase
-// @return PinochleRank &
+/** 
+ * @brief implentation operators ++ for PinochleRank, iterate the PinochleRank to the next
+ * @param myRank the object you want to increase
+ * @return the reference of the PinochleRank after increase
+ */
 PinochleRank &operator++(PinochleRank &myRank)
 {
 	switch (myRank)

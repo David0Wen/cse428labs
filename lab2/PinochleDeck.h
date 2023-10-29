@@ -1,8 +1,8 @@
 /**
-// File: PinochleDeck.h
-// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Declaration of enum class: PinochleRank, class: PinochleDeck
-*/
+ * File: PinochleDeck.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Declaration of enum class: PinochleRank, class: PinochleDeck
+ */
 
 #ifndef _PINOCHLEDECK_H
 #define _PINOCHLEDECK_H
@@ -19,17 +19,19 @@ enum class PinochleRank{
 	nine, jack, queen, king, ten, ace, undefined
 };
 
-// define operators << for PinochleRank
-// Output the Rank to std::ostream
-// @param std::ostream & the stream you want to output to
-// @param const PinochleRank& the object you want to output
-// @return std::ostream &
+/** 
+ * @brief implentation operators << for PinochleRank, Output the Rank to std::ostream
+ * @param os the stream you want to output to
+ * @param myRank the object you want to output
+ * @return the reference of the input ostream
+ */
 std::ostream &operator<<(std::ostream &, const PinochleRank &);
 
-// define operators ++ for PinochleRank
-// iterate the PinochleRank to the next
-// @param PinochleRank& the object you want to increase
-// @return PinochleRank&
+/** 
+ * @brief implentation operators ++ for PinochleRank, iterate the PinochleRank to the next
+ * @param myRank the object you want to increase
+ * @return the reference of the PinochleRank after increase
+ */
 PinochleRank &operator++(PinochleRank &);
 
 // define Pinochle Deck derived from Deck class

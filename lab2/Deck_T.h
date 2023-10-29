@@ -1,8 +1,8 @@
 /**
-// File: Deck_T.h
-// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Declaration of abstract base class: deck.
-*/
+ * File: Deck_T.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Declaration of abstract base class: deck.
+ */
 #ifndef _DECK_T_H
 #define _DECK_T_H
 #include <iostream>
@@ -15,12 +15,16 @@ template <typename R, typename S>
 class Deck: public CardSet<R, S>
 {
 public:
-	// method print
-	// @param std::ostream &
+	/**
+	 * @brief Shuffle the Deck of cards.
+	 */
 	void shuffle();
 
-	// method collect
-	// @param CardSet<R, S>&
+	/**
+	 * @brief Collect cards from another CardSet into this Deck
+	 * 
+	 * @param cardSet The CardSet that collect cards
+	 */
 	void collect(CardSet<R, S> &);
 };
 

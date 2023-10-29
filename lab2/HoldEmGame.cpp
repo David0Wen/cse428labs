@@ -1,8 +1,8 @@
 /**
-* File: HoldEmGame.cpp
-* Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-* Purpose: Implementation of HoldEmGame class and functions.
-*/
+ * File: HoldEmGame.cpp
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Implementation of HoldEmGame class and functions.
+ */
 #include "HoldEmGame.h"
 
 const int SUCCESS = 0;

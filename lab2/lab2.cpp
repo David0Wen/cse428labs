@@ -1,8 +1,8 @@
 /**
-// File: lab1.cpp
-// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: contain the main function, test whether the game goes correctly.
-*/
+ * File: lab1.cpp
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: contain the main function, test whether the game goes correctly.
+ */
 #include <iostream>
 #include "PinochleDeck.h"
 #include "HoldEmDeck.h"

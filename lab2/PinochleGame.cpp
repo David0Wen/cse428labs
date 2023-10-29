@@ -12,12 +12,14 @@ const int rowLength = 6;
 // Operate 3 cards each time
 const int packetSize = 3;
 
+// Static list, assigning all possible melds(enum) with different names
 const char* PinochleGame::MeldNames[] = {
     "dix", "offsuitmarriage", "fortyjacks", "pinochle", "insuitmarriage",
     "sixtyqueens", "eightykings", "hundredaces", "insuitrun", "doublepinochle",
     "fourhundredjacks", "sixhundredqueens", "eighthundredkings", "thousandaces", "insuitdoublerun"
 };
 
+// Static list, assigning all possible melds(enum) with different points
 const unsigned int PinochleGame::MeldPoints[] = {
     10,   // dix
     20,   // offsuitmarriage
@@ -153,12 +155,24 @@ int PinochleGame::play()
     }
 }
 
+/**
+* Output the melds feature to std::ostream
+* @param os the stream you want to output to
+* @param meld the object you want to output
+* @return the reference of the input stream
+*/
 std::ostream &operator<<(std::ostream &os, const PinochleMelds &meld)
 {
     os << PinochleGame::MeldNames[static_cast<int>(meld)] << " " << PinochleGame::MeldPoints[static_cast<int>(meld)];
     return os;
 }
 
+/**
+* @brief Checks if the vector of Cards(between start and end) has four different suit for given rank
+* @param beg The start iterator of the given interval
+* @param end The end iterator of the given interval
+* @return True if have four different suit
+*/
 bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit>>::iterator &beg, const std::vector<Card<PinochleRank, Suit>>::iterator &end, PinochleRank myRank)
 {
     bool hasClubs = std::any_of(beg, end, [=](const Card<PinochleRank, Suit> &obj) {
@@ -177,6 +191,11 @@ bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit>>::iter
     return hasClubs && hasDiamonds && hasHearts && hasSpades;
 }
 
+/**
+* @brief Checks if the CardSet has several different possible melds, insert all possible melds into the given vector
+* @param playerHand The CardSet to eval
+* @param melds the given vector reference to insert all possible melds
+*/
 void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit> &playerHand, std::vector<PinochleMelds> &melds)
 {
     CardSet<PinochleRank, Suit> handCopy(playerHand);

@@ -1,8 +1,8 @@
 /**
-// File: Game.h
-// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Declaration of base class Game.
-*/
+ * File: Game.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Declaration of base class Game.
+ */
 
 #ifndef GAME_H
 #define GAME_H

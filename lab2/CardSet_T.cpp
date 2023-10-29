@@ -1,8 +1,8 @@
 /**
-// File: CardSet_T.cpp
-// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Implementation of template structure: cardset.
-*/
+ * File: CardSet_T.cpp
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Implementation of template structure: cardset.
+ */
 #include "CardSet_T.h"
 #include <iostream>
 

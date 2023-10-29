@@ -1,8 +1,8 @@
 /**
-// File: CardSet_T.h
-// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Declaration of template structure: cardset, will be used as deck's base class
-*/
+ * File: CardSet_T.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Declaration of template structure: cardset, will be used as deck's base class
+ */
 #ifndef _CARDSET_T_H
 #define _CARDSET_T_H
 

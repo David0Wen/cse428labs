@@ -1,8 +1,8 @@
 /**
-* File: HoldEmGame.h
-* Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-* Purpose: Declaration of HoldEmGame class.
-*/
+ * File: HoldEmGame.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Declaration of HoldEmGame class.
+ */
 #ifndef _HOLDEMGAME_H
 #define _HOLDEMGAME_H
 

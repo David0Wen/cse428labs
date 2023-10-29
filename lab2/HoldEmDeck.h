@@ -1,8 +1,8 @@
 /**
-// File: HoldEmDeck.h
-// Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
-// Purpose: Declaration of enum class: HoldEmRank, class: HoldEmDeck
-*/
+ * File: HoldEmDeck.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Declaration of enum class: HoldEmRank, class: HoldEmDeck
+ */
 #ifndef _HOLDEMDECK_H
 #define _HOLDEMDECK_H
 #include <iostream>
@@ -17,17 +17,19 @@ enum class HoldEmRank{
 	two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace, undefined
 };
 
-// define operators << for HoldEmRank
-// Output the Rank to std::ostream
-// @param std::ostream & the stream you want to output to
-// @param const HoldEmRank& the object you want to output
-// @return std::ostream &
+/** 
+ * @brief operators << for HoldEmRank, Output the Rank to std::ostream
+ * @param std::ostream & the stream you want to output to
+ * @param const HoldEmRank& the object you want to output
+ * @return std::ostream &
+ */
 std::ostream &operator<<(std::ostream &, const HoldEmRank &);
 
-// define operators ++ for HoldEmRank
-// iterate the HoldEmRank to the next
-// @param HoldEmRank& the object you want to increase
-// @return HoldEmRank &
+/** 
+ * @brief operators ++ for HoldEmRank, iterate the HoldEmRank to the next
+ * @param HoldEmRank& the object you want to increase
+ * @return HoldEmRank &
+ */
 HoldEmRank &operator++(HoldEmRank &);
 
 // derived from the abstract base class Deck
