@@ -58,12 +58,20 @@ CardSet<R, S>& CardSet<R, S>::operator>>(CardSet<R, S>& other) {
 	return *this;
 }
 
+/**
+ * @brief Controlled violation of encapsulation: get the pointer to the protected vector data memeber
+ * @return The pointer to the object member: "myCardSet" which can be modified
+*/
 template<typename R, typename S>
-const std::vector<Card<R, S>> CardSet<R, S>::CardSet::*getCardSet()
+std::vector<Card<R, S> > CardSet<R, S>::* CardSet<R, S>::getSetPtr()
 {
-	return & myCardSet;
+	return &CardSet<R, S>::myCardSet;
 }
 
+/**
+ * @brief Do deep copy
+ * @param other the object you want to copy
+*/
 template<typename R, typename S>
 CardSet<R, S>::CardSet(const CardSet<R, S>& other)
 {

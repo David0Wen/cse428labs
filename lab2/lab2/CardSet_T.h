@@ -18,7 +18,6 @@ protected:
     // A vector to hold Card objects
     std::vector< Card<R, S> > myCardSet;
 public:
-    static const std::vector< Card<R, S>> CardSet::* getCardSet();
 
     // default Constructor
     CardSet() = default;
@@ -32,6 +31,9 @@ public:
 
     // Overloading the >> operator to perform two CardSet objects
 	CardSet<R, S>& operator>>(CardSet<R, S>& other);
+
+    // Get the pointer to the object's vector data member
+    static std::vector< Card<R, S> > CardSet<R, S>::* getSetPtr();
 };
 
 
