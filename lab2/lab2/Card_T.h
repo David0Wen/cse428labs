@@ -21,11 +21,17 @@ public:
 	Card(T, S);
 };
 
-template <typename Suit, typename Rank>
-bool CompareRank(const Card<Suit, Rank>& card1, const Card<Suit, Rank>& card2);
+/**
+ * Compared the rank of two sets of the card
+*/
+template <typename T, typename S>
+bool lessRank(const Card<T, S>& , const Card<T, S>&);
 
-template <typename Suit, typename Rank>
-bool CompareSuit(const Card<Suit, Rank>& card1, const Card<Suit, Rank>& card2);
+/**
+ * Compared the suit of two sets of the card
+*/
+template <typename T, typename S>
+bool lessSuit(const Card<T, S>& , const Card<T, S>&);
 
 // shift operator declaration
 // Output the card feature to std::ostream
