@@ -10,7 +10,7 @@
 // declare an enumerated type for the different suits
 enum class Suit
 {
-	clubs, diamonds, hearts, spades, undefined
+    clubs, diamonds, hearts, spades, undefined
 };
 
 /**

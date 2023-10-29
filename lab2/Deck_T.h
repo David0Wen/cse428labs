@@ -15,17 +15,17 @@ template <typename R, typename S>
 class Deck: public CardSet<R, S>
 {
 public:
-	/**
-	 * @brief Shuffle the Deck of cards.
-	 */
-	void shuffle();
+    /**
+     * @brief Shuffle the Deck of cards.
+     */
+    void shuffle();
 
-	/**
-	 * @brief Collect cards from another CardSet into this Deck
-	 * 
-	 * @param cardSet The CardSet that collect cards
-	 */
-	void collect(CardSet<R, S> &);
+    /**
+     * @brief Collect cards from another CardSet into this Deck
+     * 
+     * @param cardSet The CardSet that collect cards
+     */
+    void collect(CardSet<R, S> &);
 };
 
 #ifdef TEMPLATE_HEADERS_INCLUDE_SOURCE /* test whether guard symbol is defined */

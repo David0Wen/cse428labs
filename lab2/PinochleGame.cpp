@@ -205,8 +205,8 @@ void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit>
 
     // Sort by rank and then suit (if needed)
     std::sort(mySet.begin(), mySet.end(), lessRank<PinochleRank, Suit>);
-	// vector in decending order
-	std::reverse(mySet.begin(), mySet.end());
+    // vector in decending order
+    std::reverse(mySet.begin(), mySet.end());
 
     /*
     thousandaces for all 8 aces (A♠ A♠ A♥ A♥ A♦ A♦ A♣ A♣)

@@ -23,12 +23,12 @@ public:
     // Copy Constructor, the default copy constructor in this case is sufficient, since it peforms deep copy towards enum class.
     CardSet(const CardSet<R, S> &) = default;
     // Function to print the CardSet
-	void print(std::ostream &, size_t);
+    void print(std::ostream &, size_t);
     // Function to check if the CardSet is empty
-	bool is_empty();
+    bool is_empty();
     // Overloading the >> operator to perform two CardSet objects
-	CardSet<R, S> &operator>>(CardSet<R, S> &);
-	
+    CardSet<R, S> &operator>>(CardSet<R, S> &);
+    // Get the pointer to the object's vector data member
     static std::vector<Card<R, S> > CardSet<R, S>::* getSetPtr();
 };
 

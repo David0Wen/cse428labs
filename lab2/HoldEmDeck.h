@@ -14,7 +14,7 @@
 #include "Suit.h"
 
 enum class HoldEmRank{
-	two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace, undefined
+    two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace, undefined
 };
 
 /** 
@@ -36,7 +36,7 @@ HoldEmRank &operator++(HoldEmRank &);
 class HoldEmDeck: public Deck<HoldEmRank, Suit>
 {
 public:
-	HoldEmDeck();
+    HoldEmDeck();
 };
 
 #endif

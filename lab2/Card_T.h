@@ -14,10 +14,10 @@
 template <typename T, typename S>
 struct Card
 {
-	T myRank;
-	S mySuit;
-	// Vaule Constructor 
-	Card(T, S);
+    T myRank;
+    S mySuit;
+    // Vaule Constructor 
+    Card(T, S);
 };
 
 /** 
@@ -29,9 +29,15 @@ struct Card
 template <typename T, typename S>
 std::ostream &operator<<(std::ostream &, const Card<T, S> &);
 
+/**
+ * Compare the rank of two sets of the card
+ */
 template <typename T, typename S>
 bool lessRank(const Card<T, S> &, const Card<T, S> &);
 
+/**
+ * Compared the suit of two sets of the card
+ */
 template <typename T, typename S>
 bool lessSuit(const Card<T, S> &, const Card<T, S> &);
 

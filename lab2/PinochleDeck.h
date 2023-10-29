@@ -16,7 +16,7 @@
 
 // Declare Pinochle specific card ranks
 enum class PinochleRank{
-	nine, jack, queen, king, ten, ace, undefined
+    nine, jack, queen, king, ten, ace, undefined
 };
 
 /** 
@@ -38,8 +38,8 @@ PinochleRank &operator++(PinochleRank &);
 class PinochleDeck: public Deck<PinochleRank, Suit>
 {
 public:
-	// make a deck of cards
-	PinochleDeck();
+    // make a deck of cards
+    PinochleDeck();
 };
 
 #endif

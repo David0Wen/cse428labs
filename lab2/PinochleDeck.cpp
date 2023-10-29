@@ -14,37 +14,37 @@
  */
 std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
 {
-	switch (myRank)
-	{
-	case PinochleRank::nine:
-		os << "9";
-		break;
+    switch (myRank)
+    {
+    case PinochleRank::nine:
+        os << "9";
+        break;
 
-	case PinochleRank::jack:
-		os << "J";
-		break;
+    case PinochleRank::jack:
+        os << "J";
+        break;
 
-	case PinochleRank::queen:
-		os << "Q";
-		break;
+    case PinochleRank::queen:
+        os << "Q";
+        break;
 
-	case PinochleRank::king:
-		os << "K";
-		break;
+    case PinochleRank::king:
+        os << "K";
+        break;
 
-	case PinochleRank::ten:
-		os << "10";
-		break;
-		
-	case PinochleRank::ace:
-		os << "A";
-		break;
-		
-	case PinochleRank::undefined:
-		os << "?";
-		break;
-	}
-	return os;
+    case PinochleRank::ten:
+        os << "10";
+        break;
+        
+    case PinochleRank::ace:
+        os << "A";
+        break;
+        
+    case PinochleRank::undefined:
+        os << "?";
+        break;
+    }
+    return os;
 }
 
 /** 
@@ -54,37 +54,37 @@ std::ostream &operator<<(std::ostream &os, const PinochleRank &myRank)
  */
 PinochleRank &operator++(PinochleRank &myRank)
 {
-	switch (myRank)
-	{
-	case PinochleRank::nine:
-		myRank = PinochleRank::jack;
-		break;
+    switch (myRank)
+    {
+    case PinochleRank::nine:
+        myRank = PinochleRank::jack;
+        break;
 
-	case PinochleRank::jack:
-		myRank = PinochleRank::queen;
-		break;
+    case PinochleRank::jack:
+        myRank = PinochleRank::queen;
+        break;
 
-	case PinochleRank::queen:
-		myRank = PinochleRank::king;
-		break;
+    case PinochleRank::queen:
+        myRank = PinochleRank::king;
+        break;
 
-	case PinochleRank::king:
-		myRank = PinochleRank::ten;
-		break;
+    case PinochleRank::king:
+        myRank = PinochleRank::ten;
+        break;
 
-	case PinochleRank::ten:
-		myRank = PinochleRank::ace;
-		break;
-		
-	case PinochleRank::ace:
-		myRank = PinochleRank::undefined;
-		break;
-		
-	// remain the same
-	case PinochleRank::undefined:
-		break;
-	}
-	return myRank;
+    case PinochleRank::ten:
+        myRank = PinochleRank::ace;
+        break;
+        
+    case PinochleRank::ace:
+        myRank = PinochleRank::undefined;
+        break;
+        
+    // remain the same
+    case PinochleRank::undefined:
+        break;
+    }
+    return myRank;
 }
 
 // Default constructor for the PinochleDeck class
@@ -97,8 +97,8 @@ PinochleDeck::PinochleDeck()
         {
             Card<PinochleRank, Suit> myCard(i, j);
             myCardSet.push_back(myCard);
-			Card<PinochleRank, Suit> myCard2(i, j);
-			myCardSet.push_back(myCard2);
+            Card<PinochleRank, Suit> myCard2(i, j);
+            myCardSet.push_back(myCard2);
         }
     }
 }
