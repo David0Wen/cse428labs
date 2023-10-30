@@ -19,7 +19,7 @@ enum class HoldEmState
     undefined
 };
 
-// enum class for HoldEmRank
+// enum class for HoldEmHandRank
 enum class HoldEmHandRank{
     xhigh,
     pair,
@@ -79,9 +79,10 @@ public:
         // Constructor
         PlayerState(const CardSet<HoldEmRank, Suit> , const std::string , HoldEmHandRank );
     };
+
 };
 
 // Compare PlayerState non-member
-bool operator<(const HoldEmGame::PlayerState& lhs, const HoldEmGame::PlayerState& rhs);
+bool operator<(const HoldEmGame::PlayerState& lhs, const HoldEmGame::PlayerState& rps);
 
 #endif // _HOLDEMGAME_H
