@@ -19,9 +19,35 @@ enum class HoldEmState
     undefined
 };
 
+// enum class for HoldEmRank
+enum class HoldEmHandRank{
+    xhigh,
+    pair,
+    twopair,
+    threeofakind,
+    straight,
+    flush,
+    fullhouse,
+    fourofakind,
+    straightflush,
+    undefined
+};
+
+/**
+* Output the label feature to std::ostream
+* @param std::ostream & the stream you want to output to
+* @param const HoldEmHandRank &handRank the object you want to output
+* @return std::ostream & the reference of the input stream
+*/
+std::ostream &operator<<(std::ostream & , const HoldEmHandRank & );
+
 //Derived class from Game for Hold'em poker
 class HoldEmGame :public Game
 {
+private:
+    // eval CardSet for that player's hand
+    HoldEmHandRank holdem_hand_evaluation(const CardSet<HoldEmRank, Suit> & );
+
 protected:
     HoldEmState myState;
     HoldEmDeck myDeck;
@@ -43,6 +69,19 @@ public:
 
     // Game loop for a Texas Hold'Em game
     virtual int play();
+
+    // Nested struct to represent a player's state in the game
+    struct PlayerState {
+        CardSet<HoldEmRank, Suit> playerHand;
+        std::string playerName;
+        HoldEmHandRank handRank;
+
+        // Constructor
+        PlayerState(const CardSet<HoldEmRank, Suit> , const std::string , HoldEmHandRank );
+    };
 };
+
+// Compare PlayerState non-member
+bool operator<(const HoldEmGame::PlayerState& lhs, const HoldEmGame::PlayerState& rhs);
 
 #endif // _HOLDEMGAME_H
