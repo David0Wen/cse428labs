@@ -111,7 +111,6 @@ void HoldEmGame::roundCollect()
 }
 
 
-
 /**
  * @brief Game loop for a Texas Hold'Em game
  *
@@ -136,7 +135,7 @@ int HoldEmGame::play()
 
         // 5.1 declare a vector of the nested struct type PlayerState
         std::vector<PlayerState> playerHandInfos;
-        // 5.2 initialize the vector with each player's information
+        // 5.2 initialize the vector with each player's information to playerHandInfos
         for (size_t i = 0; i < playerHands.size(); ++i) {
             PlayerState info(playerHands[i], playerNames[i], HoldEmHandRank::undefined);
             playerHandInfos.push_back(info);
@@ -144,10 +143,12 @@ int HoldEmGame::play()
 
         // Iterate through the vector to perform hand evaluation
         CardSet<HoldEmRank, Suit> combinedHand;
+        std::vector< Card<HoldEmRank, Suit> >* combinedSetPtr = &(combinedHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
         for (auto &playerState : playerHandInfos)
         {
             // Combine the player's hand with the common board
             std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
+
             std::vector< Card<HoldEmRank, Suit> > playerSet = playerState.playerHand.*setPtr;
             std::vector< Card<HoldEmRank, Suit> > boardSet = commonBoard.*setPtr;
 
@@ -156,12 +157,12 @@ int HoldEmGame::play()
 
             // Now playerSet contains the combined hand.
             // create a new CardSet from this to represent
-            std::vector<Card<HoldEmRank, Suit>>* combinedSetPtr = &(combinedHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
             *combinedSetPtr = playerSet;
 //            combinedHand.myCardSet = playerSet;
 
-            // Evaluate the hand using your hand evaluation function
-            HoldEmHandRank rank = holdem_hand_evaluation(combinedHand);
+            // Evaluate the hand using hand evaluation function
+//            HoldEmHandRank rank = holdem_hand_evaluation(combinedHand);
+            HoldEmHandRank rank = holdem_hand_evaluation(playerState.playerHand);
 
             // Update the player's hand rank
             playerState.handRank = rank;
@@ -178,7 +179,7 @@ int HoldEmGame::play()
         {
             std::cout << "Player: " << playerState.playerName << std::endl;
             std::cout << "Hand: ";
-            combinedHand.print(std::cout, playerCards);
+            combinedHand.print(std::cout, combinedSetPtr->size());
             std::cout << "Rank: " << playerState.handRank << std::endl;
         }
 
