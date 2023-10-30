@@ -133,31 +133,35 @@ int HoldEmGame::play()
         // (5) call the deal member function again to deal three cards to the board member variable
         deal();
 
-        // 5.1 declare a vector of the nested struct type PlayerState
+        // (6) print out the string "BOARD (flop):" and then the cards in the board member variable
+        std::cout << "BOARD (flop):" << std::endl;
+        commonBoard.print(std::cout, boardMax);
+
+        // Lab2.1 declare a vector of the nested struct type PlayerState
         std::vector<PlayerState> playerHandInfos;
-        // 5.2 initialize the vector with each player's information to playerHandInfos
+        // Lab2.2 initialize the vector with each player's information to playerHandInfos
         for (size_t i = 0; i < playerHands.size(); ++i) {
             PlayerState info(playerHands[i], playerNames[i], HoldEmHandRank::undefined);
             playerHandInfos.push_back(info);
         }
 
         // Iterate through the vector to perform hand evaluation
-        CardSet<HoldEmRank, Suit> combinedHand;
-        std::vector< Card<HoldEmRank, Suit> >* combinedSetPtr = &(combinedHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-        for (auto &playerState : playerHandInfos)
+        // CardSet<HoldEmRank, Suit> combinedHand;
+        // std::vector< Card<HoldEmRank, Suit> >* combinedSetPtr = &(combinedHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
+        for (auto& playerState : playerHandInfos)
         {
             // Combine the player's hand with the common board
             std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
 
-            std::vector< Card<HoldEmRank, Suit> > playerSet = playerState.playerHand.*setPtr;
-            std::vector< Card<HoldEmRank, Suit> > boardSet = commonBoard.*setPtr;
+            auto playerSet = &(playerState.playerHand.*setPtr);
+            auto boardSet = &(commonBoard.*setPtr);
 
             // Combine the player's hand with the common board
-            playerSet.insert(playerSet.end(), boardSet.begin(), boardSet.end());
+            playerSet->insert(playerSet->end(), boardSet->begin(), boardSet->end());
 
             // Now playerSet contains the combined hand.
             // create a new CardSet from this to represent
-            *combinedSetPtr = playerSet;
+            // *combinedSetPtr = playerSet;
 //            combinedHand.myCardSet = playerSet;
 
             // Evaluate the hand using hand evaluation function
@@ -169,23 +173,21 @@ int HoldEmGame::play()
         }
 
         // Sort the playerStates vector based on hand rank
-        std::sort(playerHandInfos.begin(), playerHandInfos.end(), [](const PlayerState &a, const PlayerState &b)
-        {
-            return a.handRank > b.handRank;
-        });
+        std::sort(playerHandInfos.begin(), playerHandInfos.end(), [](const PlayerState& a, const PlayerState& b)
+            {
+                return a.handRank > b.handRank;
+            });
 
         // Print sorted player details
-        for (auto &playerState : playerHandInfos)
+        for (auto& playerState : playerHandInfos)
         {
             std::cout << "Player: " << playerState.playerName << std::endl;
             std::cout << "Hand: ";
-            combinedHand.print(std::cout, combinedSetPtr->size());
-            std::cout << "Rank: " << playerState.handRank << std::endl;
+            playerState.playerHand.print(std::cout, 5);
+            // combinedHand.print(std::cout, combinedSetPtr->size());
+            std::cout << "Rank: " << playerState.handRank << std::endl << std::endl;
         }
 
-        // (6) print out the string "BOARD (flop):" and then the cards in the board member variable
-        std::cout << "BOARD (flop):" << std::endl;
-        commonBoard.print(std::cout, boardMax);
         // (7) call the deal member function again to deal the fourth card to the board member variable
         deal();
         // (8) print out the string "BOARD (turn):" and then the cards in the board member variable
