@@ -145,9 +145,9 @@ int HoldEmGame::play()
         }
 
         // Iterate through the vector to perform hand evaluation
-        CardSet<HoldEmRank, Suit> combinedHand;
-        std::vector< Card<HoldEmRank, Suit> >* combinedSetPtr = &(combinedHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-        for (auto &playerState : playerHandInfos)
+        // CardSet<HoldEmRank, Suit> combinedHand;
+        // std::vector< Card<HoldEmRank, Suit> >* combinedSetPtr = &(combinedHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
+        for (auto& playerState : playerHandInfos)
         {
             // Combine the player's hand with the common board
 //            std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
@@ -190,7 +190,7 @@ int HoldEmGame::play()
         std::reverse(playerHandInfos.begin(), playerHandInfos.end());
 
         // Print sorted player details
-        for (auto &playerState : playerHandInfos)
+        for (auto& playerState : playerHandInfos)
         {
             std::cout << "Player: " << playerState.playerName << std::endl;
             std::cout << "Hand: ";
