@@ -135,6 +135,7 @@ int HoldEmGame::play()
         // (6) print out the string "BOARD (flop):" and then the cards in the board member variable
         std::cout << "BOARD (flop):" << std::endl;
         commonBoard.print(std::cout, boardMax);
+        std::cout << std::endl << std::endl;
 
         // 6.1 declare a vector of the nested struct type PlayerState
         std::vector<PlayerState> playerHandInfos;
@@ -145,27 +146,14 @@ int HoldEmGame::play()
         }
 
         // Iterate through the vector to perform hand evaluation
-        CardSet<HoldEmRank, Suit> combinedHand;
-        std::vector< Card<HoldEmRank, Suit> >* combinedSetPtr = &(combinedHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
         for (auto &playerState : playerHandInfos)
         {
-            // Combine the player's hand with the common board
-//            std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-//            std::vector< Card<HoldEmRank, Suit> > playerSet = playerState.playerHand.*setPtr;
-//            std::vector< Card<HoldEmRank, Suit> > boardSet = commonBoard.*setPtr;
-
             // Combine the player's hand with the common board
             std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
             std::vector<Card<HoldEmRank, Suit>>* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
 
+            // Combine the player's hand with the common board
             playerSetPtr->insert(playerSetPtr->end(), boardSetPtr->begin(), boardSetPtr->end());
-
-//            // Combine the player's hand with the common board
-//            playerSet.insert(playerSet.end(), boardSet.begin(), boardSet.end());
-
-            // Now playerSet contains the combined hand.
-            // create a new CardSet from this to represent
-            *combinedSetPtr = *playerSetPtr;
 
             // Evaluate the hand using hand evaluation function
             HoldEmHandRank rank = holdem_hand_evaluation(playerState.playerHand);
@@ -190,12 +178,13 @@ int HoldEmGame::play()
         std::reverse(playerHandInfos.begin(), playerHandInfos.end());
 
         // Print sorted player details
+        std::cout << "Ranking of players and cards:" << std::endl;
         for (auto &playerState : playerHandInfos)
         {
             std::cout << "Player: " << playerState.playerName << std::endl;
-            std::cout << "Hand: ";
-            playerState.playerHand.print(std::cout, combinedSetPtr->size());
+            std::cout << "Hand: "; playerState.playerHand.print(std::cout, 5);
             std::cout << "Rank: " << playerState.handRank << std::endl;
+            std::cout << std::endl << std::endl;
         }
 
         // (7) call the deal member function again to deal the fourth card to the board member variable

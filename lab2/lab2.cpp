@@ -34,7 +34,7 @@ std::shared_ptr<Game> create(int argc, const char *argv[]) {
 
 // Function to display correct usage of the program
 void usage(std::ostream &os) {
-    os << "Usage: lab1 <Game> <Players>" << std::endl;
+    os << "Usage: lab2 <Game> <Players>" << std::endl;
     os << "Game should be either Pinochle or HoldEm." << std::endl;
     os << "Pinochle needs 4 players." << std::endl;
     os << "HoldEm needs 2-9 players." << std::endl;
