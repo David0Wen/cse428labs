@@ -282,32 +282,22 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
     }
 
     // return fourofakind if four cards have the same rank
-    bool isFourOfAKind = false;
     for (size_t i = 0; i <= mySet.size() - 4; ++i) {
         if (mySet[i].myRank == mySet[i + 1].myRank &&
             mySet[i].myRank == mySet[i + 2].myRank &&
             mySet[i].myRank == mySet[i + 3].myRank) {
-            isFourOfAKind = true;
-            break;
+            return HoldEmHandRank::fourofakind;
         }
-    }
-    if (isFourOfAKind) {
-        return HoldEmHandRank::fourofakind;
     }
 
     // return fullhouse if three cards have the same rank and the other two cards have the same rank
-    bool isFullHouse = false;
     if ((mySet[0].myRank == mySet[1].myRank && mySet[1].myRank == mySet[2].myRank && mySet[3].myRank == mySet[4].myRank) ||
         (mySet[0].myRank == mySet[1].myRank && mySet[2].myRank == mySet[3].myRank && mySet[3].myRank == mySet[4].myRank)) {
-        isFullHouse = true;
-    }
-    if (isFullHouse) {
         return HoldEmHandRank::fullhouse;
     }
 
     // return flush if all five cards are of the same suit
-    bool isFlush = std::all_of(mySet.begin(), mySet.end(), [&mySet](const auto &card) { return card.mySuit == mySet[0].mySuit; });
-    if (isFlush) {
+    if (std::all_of(mySet.begin(), mySet.end(), [&mySet](const auto &card) { return card.mySuit == mySet[0].mySuit; })) {
         return HoldEmHandRank::flush;
     }
 
@@ -332,39 +322,28 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
     }
 
     // return threeofakind if three cards have the same rank and the other two cards are of different ranks than any other cards in the hand
-    bool isThreeOfAKind = false;
     if ((mySet[0].myRank == mySet[1].myRank && mySet[1].myRank == mySet[2].myRank && mySet[2].myRank != mySet[3].myRank && mySet[3].myRank != mySet[4].myRank) ||
         (mySet[1].myRank == mySet[2].myRank && mySet[2].myRank == mySet[3].myRank && mySet[1].myRank != mySet[0].myRank && mySet[3].myRank != mySet[4].myRank) ||
         (mySet[2].myRank == mySet[3].myRank && mySet[3].myRank == mySet[4].myRank && mySet[2].myRank != mySet[0].myRank && mySet[0].myRank != mySet[1].myRank)) {
-        isThreeOfAKind = true;
-    }
-    if (isThreeOfAKind) {
         return HoldEmHandRank::threeofakind;
     }
 
-    // return twopair if two cards have the same rank and two other cards share a different rank and the fifth card is of yet another rank
-    bool isTwoPair = false;
-    if ((mySet[0].myRank == mySet[1].myRank && mySet[2].myRank == mySet[3].myRank && mySet[1].myRank != mySet[2].myRank && mySet[3].myRank != mySet[4].myRank) ||
-        (mySet[0].myRank == mySet[1].myRank && mySet[3].myRank == mySet[4].myRank && mySet[1].myRank != mySet[2].myRank && mySet[2].myRank != mySet[3].myRank) ||
-        (mySet[1].myRank == mySet[2].myRank && mySet[3].myRank == mySet[4].myRank && mySet[0].myRank != mySet[1].myRank && mySet[2].myRank != mySet[3].myRank)) {
-        isTwoPair = true;
-    }
-    if (isTwoPair) {
-        return HoldEmHandRank::twopair;
-    }
-
     // return pair if only two cards in the hand have the same rank
+    // return twopair if two cards have the same rank and two other cards share a different rank and the fifth card is of yet another rank
     size_t pairCount = 0;
     for (int i = 0; i < 4; ++i) {
         if (mySet[i].myRank == mySet[i + 1].myRank) {
             ++pairCount;
-            break;
+            ++i;
         }
     }
     if (pairCount == 1) {
         return HoldEmHandRank::pair;
     }
-
+    else if (pairCount == 2) {
+        return HoldEmHandRank::twopair;
+    }
+    
     // otherwise it should return xhigh
     return HoldEmHandRank::xhigh;
 }
@@ -372,117 +351,54 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
 // Constructor
 HoldEmGame::PlayerState::PlayerState(const CardSet<HoldEmRank, Suit> handSet, const std::string playName, HoldEmHandRank holdRank) : playerHand(handSet), playerName(playName), handRank(holdRank) {}
 
-// get pair information
-void extractPairInfo(const std::vector< Card<HoldEmRank, Suit> > &hand, HoldEmRank &pairRank, std::vector<HoldEmRank> &nonPairRanks) {
-    const int N = static_cast<int>(HoldEmRank::ace);
-    std::vector<int> rankCount(N + 1, 0);
-
-    // Count the occurrences of each rank
-    for (const auto &card : hand) {
-        if (card.myRank != HoldEmRank::undefined) {
-            rankCount[static_cast<int>(card.myRank)]++;
-        }
-    }
-
-    // Identify the pair and the non-pair cards
-    for (int i = 0; i <= N; ++i) {
-        int count = rankCount[i];
-        if (count == 2) {
-            pairRank = static_cast<HoldEmRank>(i);
-        } else {
-            for (int j = 0; j < count; ++j) {
-                nonPairRanks.push_back(static_cast<HoldEmRank>(i));
+std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector< Card<HoldEmRank, Suit> >& hand, size_t length) {
+    for (size_t index = 0; index <= hand.size() - length; ++index) {
+        bool returnFlag = true;
+        for (size_t i = 1; i < length; i++)
+        {
+            if (hand[index].myRank != hand[index + i].myRank)
+            {
+                returnFlag = false;
             }
         }
-    }
 
-    // Sort the non-pair ranks in descending order for later comparison
-    std::sort(nonPairRanks.begin(), nonPairRanks.end(), std::greater<HoldEmRank>());
-}
+        if (returnFlag)
+        {
+            return std::make_tuple(index, hand[index].myRank);
+        }
 
-// get twopair information
-void extractTwoPairInfo(const std::vector< Card<HoldEmRank, Suit> > &hand, HoldEmRank &higherPair, HoldEmRank &lowerPair, HoldEmRank &fifthCard) {
-    if (hand[0].myRank == hand[1].myRank && hand[2].myRank == hand[3].myRank) {
-        higherPair = hand[2].myRank;
-        lowerPair = hand[0].myRank;
-        fifthCard = hand[4].myRank;
-    } else if (hand[1].myRank == hand[2].myRank && hand[3].myRank == hand[4].myRank) {
-        higherPair = hand[3].myRank;
-        lowerPair = hand[1].myRank;
-        fifthCard = hand[0].myRank;
-    } else {
-        higherPair = hand[1].myRank;
-        lowerPair = hand[3].myRank;
-        fifthCard = hand[4].myRank;
     }
 }
 
-// get rank of threeofakind
-void extractThreeOfAKindRank(const std::vector< Card<HoldEmRank, Suit> > &hand, HoldEmRank &threeOfAKindRank) {
-    // 假设hand已经排序
-    for (size_t i = 0; i <= hand.size() - 3; ++i) {
-        if (hand[i].myRank == hand[i+1].myRank && hand[i+1].myRank == hand[i+2].myRank) {
-            threeOfAKindRank = hand[i].myRank;
-            return;
-        }
+bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<HoldEmRank, Suit>& rightHand, size_t length, HoldEmHandRank next) {
+    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
+    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHand.*setPtr);
+    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHand.*setPtr);
+    HoldEmRank lrank, rrank;
+    size_t lindex, rindex;
+    std::tie(lindex, lrank) = extractMultiFromSet(*myLeftSet, length);
+    std::tie(rindex, rrank) = extractMultiFromSet(*myRightSet, length);
+    if (lrank < rrank) {
+        return true;
+    }
+    else if (lrank > rrank) {
+        return false;
+    }
+    else {
+        myLeftSet->erase(myLeftSet->begin() + lindex, myLeftSet->begin() + lindex + length);
+        myRightSet->erase(myRightSet->begin() + rindex, myRightSet->begin() + rindex + length);
+        return HoldEmGame::PlayerState(leftHand, "", next) < HoldEmGame::PlayerState(rightHand, "", next);
     }
 }
-
-// get fullhouse information
-void extractFullHouseInfo(const std::vector< Card<HoldEmRank, Suit> > &hand, HoldEmRank &threeOfAKindRank, HoldEmRank &pairRank) {
-    const int N = static_cast<int>(HoldEmRank::ace);
-    std::vector<int> rankCount(N + 1, 0);
-
-    // Count the occurrences of each rank
-    for (const auto &card : hand) {
-        if (card.myRank != HoldEmRank::undefined) {
-            rankCount[static_cast<int>(card.myRank)]++;
-        }
-    }
-
-    // Identify the three-of-a-kind and the pair
-    for (int i = 0; i <= N; ++i) {
-        int count = rankCount[i];
-        if (count == 3) {
-            threeOfAKindRank = static_cast<HoldEmRank>(i);
-        } else if (count == 2) {
-            pairRank = static_cast<HoldEmRank>(i);
-        }
-    }
-}
-
-// Extract four of a kind rank
-void extractFourOfAKindRank(const std::vector< Card<HoldEmRank, Suit> > &hand, HoldEmRank &fourOfAKindRank, HoldEmRank &fifthCard) {
-    const int N = static_cast<int>(HoldEmRank::ace);
-    std::vector<int> rankCount(N + 1, 0);
-
-    // Count the occurrences of each rank
-    for (const auto &card : hand) {
-        if (card.myRank != HoldEmRank::undefined) {
-            rankCount[static_cast<int>(card.myRank)]++;
-        }
-    }
-
-    // Identify the four of a kind and the fifth card
-    for (int i = 0; i <= N; ++i) {
-        int count = rankCount[i];
-        if (count == 4) {
-            fourOfAKindRank = static_cast<HoldEmRank>(i);
-        } else if (count == 1) {
-            fifthCard = static_cast<HoldEmRank>(i);
-        }
-    }
-}
-
 
 // Compare PlayerState
-bool operator<(const HoldEmGame::PlayerState &lps, const HoldEmGame::PlayerState &rps) {
+bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState& rps) {
 
     // The cases handset not equal
     if (lps.handRank < rps.handRank) {
         return true;
     }
-    if (lps.handRank > rps.handRank) {
+    else if (lps.handRank > rps.handRank) {
         return false;
     }
 
@@ -493,156 +409,60 @@ bool operator<(const HoldEmGame::PlayerState &lps, const HoldEmGame::PlayerState
     CardSet<HoldEmRank, Suit> rightHandCopy(rps.playerHand);
 
     std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-    std::vector< Card<HoldEmRank, Suit> > myLeftSet = leftHandCopy.*setPtr;
-    std::vector< Card<HoldEmRank, Suit> > myRightSet = rightHandCopy.*setPtr;
+    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHandCopy.*setPtr);
+    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHandCopy.*setPtr);
 
     // Sort by rank and then suit (if needed)
-    std::sort(myLeftSet.begin(), myLeftSet.end(), lessRank<HoldEmRank, Suit>);
-    std::sort(myRightSet.begin(), myRightSet.end(), lessRank<HoldEmRank, Suit>);
+    std::sort(myLeftSet->begin(), myLeftSet->end(), lessRank<HoldEmRank, Suit>);
+    std::sort(myRightSet->begin(), myRightSet->end(), lessRank<HoldEmRank, Suit>);
     // vector in descending order
-    std::reverse(myLeftSet.begin(), myLeftSet.end());
-    std::reverse(myRightSet.begin(), myRightSet.end());
+    std::reverse(myLeftSet->begin(), myLeftSet->end());
+    std::reverse(myRightSet->begin(), myRightSet->end());
 
-    // If both are pair
-    if (lps.handRank == HoldEmHandRank::pair) {
-        HoldEmRank leftPairRank, rightPairRank;
-        std::vector<HoldEmRank> leftNonPairRanks, rightNonPairRanks;
-
-        // Extract pair and non-pair information from both hands
-        extractPairInfo(myLeftSet, leftPairRank, leftNonPairRanks);
-        extractPairInfo(myRightSet, rightPairRank, rightNonPairRanks);
-
-        // Compare pair ranks
-        if (leftPairRank < rightPairRank) return true;
-        if (leftPairRank > rightPairRank) return false;
-
-        // Compare non-pair ranks
-        for (size_t i = 0; i < leftNonPairRanks.size(); ++i) {
-            if (leftNonPairRanks[i] < rightNonPairRanks[i]) return true;
-            if (leftNonPairRanks[i] > rightNonPairRanks[i]) return false;
-        }
-
-        // If reach this point, the hands are equal
-        return false;
-    }
-
-    // If both are twopair
-    if (lps.handRank == HoldEmHandRank::twopair) {
-        HoldEmRank leftHigherPair, leftLowerPair, leftFifthCard;
-        HoldEmRank rightHigherPair, rightLowerPair, rightFifthCard;
-
-        // Extract two pairs and a single from the left
-        extractTwoPairInfo(myLeftSet, leftHigherPair, leftLowerPair, leftFifthCard);
-
-        // Extract two pairs and a single from the right
-        extractTwoPairInfo(myRightSet, rightHigherPair, rightLowerPair, rightFifthCard);
-
-        // Compare two pair
-        if (leftHigherPair < rightHigherPair) return true;
-        if (leftHigherPair > rightHigherPair) return false;
-
-        if (leftLowerPair < rightLowerPair) return true;
-        if (leftLowerPair > rightLowerPair) return false;
-
-        if (leftFifthCard < rightFifthCard) return true;
-        if (leftFifthCard > rightFifthCard) return false;
-
-        return false;
-    }
-
-    // If both are threeofakind
-    if (lps.handRank == HoldEmHandRank::threeofakind) {
-        HoldEmRank leftThreeOfAKindRank, rightThreeOfAKindRank;
-
-        // Extract lefthand's three's rank
-        extractThreeOfAKindRank(myLeftSet, leftThreeOfAKindRank);
-
-        // Extract tighthand's three's rank
-        extractThreeOfAKindRank(myRightSet, rightThreeOfAKindRank);
-
-        if (leftThreeOfAKindRank < rightThreeOfAKindRank) {
-            return true;
-        }
-        return false;
-    }
-
-    // If both are straight
-    if (lps.handRank == HoldEmHandRank::straight) {
-        HoldEmRank leftHighestCard = myLeftSet[0].myRank;
-        HoldEmRank rightHighestCard = myRightSet[0].myRank;
-
-        if (leftHighestCard < rightHighestCard) {
-            return true;
-        }
-        return false;
-    }
-
-    // If both are flush or xhigh
-    if (lps.handRank == HoldEmHandRank::flush || lps.handRank == HoldEmHandRank::xhigh) {
-        for (size_t i = 0; i < myLeftSet.size(); ++i) {
-            HoldEmRank leftRank = myLeftSet[i].myRank;
-            HoldEmRank rightRank = myRightSet[i].myRank;
-
-            if (leftRank < rightRank) {
+    switch (lps.handRank)
+    {
+    case HoldEmHandRank::xhigh:
+    case HoldEmHandRank::flush: 
+    {
+        for (size_t i = 0; i < myLeftSet->size(); i++)
+        {
+            if ((*myLeftSet)[i].myRank < (*myRightSet)[i].myRank) {
                 return true;
             }
-            if (leftRank > rightRank) {
+            else if ((*myLeftSet)[i].myRank > (*myRightSet)[i].myRank) {
                 return false;
             }
         }
-        // If reach this point, the hands are equal
         return false;
     }
-
-    // If both are fullhouse
-    if (lps.handRank == HoldEmHandRank::fullhouse) {
-        HoldEmRank leftThreeOfAKindRank, leftPairRank;
-        HoldEmRank rightThreeOfAKindRank, rightPairRank;
-
-        // Extract fullhouse information for both hands
-        extractFullHouseInfo(myLeftSet, leftThreeOfAKindRank, leftPairRank);
-        extractFullHouseInfo(myRightSet, rightThreeOfAKindRank, rightPairRank);
-
-        // Compare three-of-a-kind ranks
-        if (leftThreeOfAKindRank < rightThreeOfAKindRank) return true;
-        if (leftThreeOfAKindRank > rightThreeOfAKindRank) return false;
-
-        // Compare pair ranks
-        if (leftPairRank < rightPairRank) return true;
-        if (leftPairRank > rightPairRank) return false;
-
-        return false;  // equal
-    }
-
-    // If both are fourofakind
-    if (lps.handRank == HoldEmHandRank::fourofakind) {
-        HoldEmRank leftFourOfAKindRank, leftFifthCard;
-        HoldEmRank rightFourOfAKindRank, rightFifthCard;
-
-        // Extract four of a kind information for both hands
-        extractFourOfAKindRank(myLeftSet, leftFourOfAKindRank, leftFifthCard);
-        extractFourOfAKindRank(myRightSet, rightFourOfAKindRank, rightFifthCard);
-
-        // Compare four of a kind ranks
-        if (leftFourOfAKindRank < rightFourOfAKindRank) return true;
-        if (leftFourOfAKindRank > rightFourOfAKindRank) return false;
-
-        // Compare fifth card if four of a kind ranks are equal
-        if (leftFifthCard < rightFifthCard) return true;
-
-        return false;  // If reach this point, the hands are equal
-    }
-
-    // If both are straightflush
-    if (lps.handRank == HoldEmHandRank::straightflush) {
-        HoldEmRank leftHighestCard = myLeftSet[0].myRank;
-        HoldEmRank rightHighestCard = myRightSet[0].myRank;
-
-        if (leftHighestCard < rightHighestCard) {
+        break;
+    case HoldEmHandRank::pair:
+        return HoldEmGame::compareMultiSet(leftHandCopy, rightHandCopy, 2, HoldEmHandRank::xhigh);
+        break;
+    case HoldEmHandRank::twopair:
+        return HoldEmGame::compareMultiSet(leftHandCopy, rightHandCopy, 2, HoldEmHandRank::pair);
+        break;
+    case HoldEmHandRank::threeofakind:
+        return HoldEmGame::compareMultiSet(leftHandCopy, rightHandCopy, 3, HoldEmHandRank::xhigh);
+        break;
+    case HoldEmHandRank::fullhouse:
+        return HoldEmGame::compareMultiSet(leftHandCopy, rightHandCopy, 3, HoldEmHandRank::pair);
+        break;
+    case HoldEmHandRank::fourofakind:
+        return HoldEmGame::compareMultiSet(leftHandCopy, rightHandCopy, 4, HoldEmHandRank::xhigh);
+        break;
+    case HoldEmHandRank::straight:
+    case HoldEmHandRank::straightflush:
+    {
+        if ((*myLeftSet)[0].myRank < (*myRightSet)[0].myRank) {
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
+        break;
     }
-
-    return false;
+    default:
+        break;
+    }
 }

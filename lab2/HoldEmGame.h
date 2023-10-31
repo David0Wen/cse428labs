@@ -46,7 +46,9 @@ class HoldEmGame :public Game
 {
 private:
     // eval CardSet for that player's hand
-    HoldEmHandRank holdem_hand_evaluation(const CardSet<HoldEmRank, Suit> & );
+    HoldEmHandRank holdem_hand_evaluation(const CardSet<HoldEmRank, Suit> &);
+    static bool compareMultiSet(CardSet<HoldEmRank, Suit>& leftHand, CardSet<HoldEmRank, Suit>&, size_t, HoldEmHandRank);
+    static std::tuple<size_t, HoldEmRank> extractMultiFromSet(const std::vector< Card<HoldEmRank, Suit> >&, size_t);
 
 protected:
     HoldEmState myState;
@@ -77,12 +79,13 @@ public:
         HoldEmHandRank handRank;
 
         // Constructor
-        PlayerState(const CardSet<HoldEmRank, Suit> , const std::string , HoldEmHandRank );
+        PlayerState(const CardSet<HoldEmRank, Suit> , const std::string , HoldEmHandRank);
     };
 
+    friend bool operator<(const HoldEmGame::PlayerState&, const HoldEmGame::PlayerState&);
 };
 
 // Compare PlayerState non-member
-bool operator<(const HoldEmGame::PlayerState& lhs, const HoldEmGame::PlayerState& rps);
+bool operator<(const HoldEmGame::PlayerState&, const HoldEmGame::PlayerState&);
 
 #endif // _HOLDEMGAME_H
