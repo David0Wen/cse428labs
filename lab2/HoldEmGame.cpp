@@ -351,8 +351,9 @@ std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector
         {
             return std::make_tuple(index, hand[index].myRank);
         }
-
     }
+    // never reach, just to complete the logic.
+    return std::make_tuple(0, hand[0].myRank);
 }
 
 /**
@@ -466,4 +467,5 @@ bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState
     default:
         break;
     }
+    return false;
 }
