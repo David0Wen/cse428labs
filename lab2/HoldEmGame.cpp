@@ -9,6 +9,8 @@ const int SUCCESS = 0;
 
 // Number of cards each player should have
 const int playerCards = 2;
+// Number of cards dealed when flop
+const int flopCards = 3;
 // Maximum number of cards on the board
 const int boardMax = 5;
 
@@ -52,7 +54,7 @@ void HoldEmGame::deal()
             break;
         case HoldEmState::flop:
             // Deal three community cards to the board
-            for (int i = 0; i < 3; ++i)
+            for (int i = 0; i < flopCards; ++i)
             {
                 myDeck >> commonBoard;
             }
@@ -260,7 +262,7 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
 
 
     // return undefined if there are fewer or more than five cards in the hand
-    if (mySet.size() != 5) {
+    if (mySet.size() != boardMax) {
         return HoldEmHandRank::undefined;
     }
 
@@ -275,14 +277,14 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
         }
     }
     // Specific Situation
-    bool isLowAce = mySet[0].myRank == HoldEmRank::five && mySet[4].myRank == HoldEmRank::ace;
+    bool isLowAce = mySet[0].myRank == HoldEmRank::five && mySet[boardMax - 1].myRank == HoldEmRank::ace;
     bool isHighAce = mySet[0].myRank == HoldEmRank::ace && mySet[1].myRank == HoldEmRank::king;
     if (isSameSuit && (isConsecutive || isLowAce || isHighAce)) {
         return HoldEmHandRank::straightflush;
     }
 
     // return fourofakind if four cards have the same rank
-    for (size_t i = 0; i <= mySet.size() - 4; ++i) {
+    for (size_t i = 0; i <= mySet.size() - boardMax + 1; ++i) {
         if (mySet[i].myRank == mySet[i + 1].myRank &&
             mySet[i].myRank == mySet[i + 2].myRank &&
             mySet[i].myRank == mySet[i + 3].myRank) {
@@ -291,8 +293,8 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
     }
 
     // return fullhouse if three cards have the same rank and the other two cards have the same rank
-    if ((mySet[0].myRank == mySet[1].myRank && mySet[1].myRank == mySet[2].myRank && mySet[3].myRank == mySet[4].myRank) ||
-        (mySet[0].myRank == mySet[1].myRank && mySet[2].myRank == mySet[3].myRank && mySet[3].myRank == mySet[4].myRank)) {
+    if ((mySet[0].myRank == mySet[1].myRank && mySet[1].myRank == mySet[2].myRank && mySet[boardMax - 2].myRank == mySet[boardMax - 1].myRank) ||
+        (mySet[0].myRank == mySet[1].myRank && mySet[2].myRank == mySet[3].myRank && mySet[boardMax - 2].myRank == mySet[boardMax - 1].myRank)) {
         return HoldEmHandRank::fullhouse;
     }
 
@@ -303,7 +305,7 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
 
     // return straight if the ranks of the cards are consecutive (with the special rule that A 2 3 4 5 and 10 J Q K A are the lowest and highest valid straights respectively, but any hand with cards ranked K A 2 is not considered a straight)
     bool isStraight = true;
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < boardMax - 1; ++i) {
         if (static_cast<int>(mySet[i].myRank) - static_cast<int>(mySet[i + 1].myRank) != 1) {
             isStraight = false;
             break;
@@ -331,7 +333,7 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
     // return pair if only two cards in the hand have the same rank
     // return twopair if two cards have the same rank and two other cards share a different rank and the fifth card is of yet another rank
     size_t pairCount = 0;
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < boardMax - 1; ++i) {
         if (mySet[i].myRank == mySet[i + 1].myRank) {
             ++pairCount;
             ++i;
