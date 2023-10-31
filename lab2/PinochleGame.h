@@ -53,6 +53,7 @@ private:
     * @brief Checks if the CardSet has several different possible melds, insert all possible melds into the given vector
     */
     void suit_independent_evaluation(const CardSet<PinochleRank, Suit> &, std::vector<PinochleMelds> &);
+
 protected:
     // A deck of cards designed for Pinochle
     PinochleDeck myDeck;
@@ -61,6 +62,7 @@ protected:
 
     // Deal cards to players and advances the game state
     virtual void deal();
+
 public:
     // Static list, assigning all possible melds(enum) with different names
     static const char* MeldNames[];
