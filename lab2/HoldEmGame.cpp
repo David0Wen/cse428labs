@@ -215,6 +215,7 @@ int HoldEmGame::play()
     }
 }
 
+// Overload output stream operators for HoldEmHandRank
 std::ostream &operator<<(std::ostream &os, const HoldEmHandRank &handRank){
     os << HoldEmGame::RankNames[static_cast<int>(handRank)];
     return os;
@@ -327,6 +328,13 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
 // Constructor
 HoldEmGame::PlayerState::PlayerState(CardSet<HoldEmRank, Suit> handSet, size_t playName, HoldEmHandRank holdRank) : playerHand(handSet), playerNameIndex(playName), handRank(holdRank) {}
 
+/**
+ * @brief Extracts a card combination of a given length from a hand
+ *
+ * @param hand The hand from which to extract the combination
+ * @param length The length of the card combination to be checked
+ * @return A tuple containing the starting index of the combination in the hand and the rank of the cards
+ */
 std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector< Card<HoldEmRank, Suit> >& hand, size_t length) {
     for (size_t index = 0; index <= hand.size() - length; ++index) {
         bool returnFlag = true;
@@ -346,6 +354,15 @@ std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector
     }
 }
 
+/**
+ * @brief Compares two hands based on certain poker rules to find which one is superior
+ *
+ * @param leftHand The hand of the first player
+ * @param rightHand The hand of the second player
+ * @param length The length of the card combination to be checked (e.g., 2 for a pair)
+ * @param next The next hand rank to be used for comparison in case of a tie
+ * @return Returns true if the left hand is superior, false otherwise
+ */
 bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<HoldEmRank, Suit>& rightHand, size_t length, HoldEmHandRank next) {
     std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
     std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHand.*setPtr);
@@ -367,7 +384,13 @@ bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<Ho
     }
 }
 
-// Compare PlayerState
+/**
+ * @brief Overloads the '<' operator to compare two PlayerState objects in HoldEmGame
+ *
+ * @param lps The PlayerState object on the left
+ * @param rps The PlayerState object on the right
+ * @return true if the left-hand side PlayerState is considered "less than" the right
+ */
 bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState& rps) {
 
     // The cases handset not equal
@@ -395,6 +418,7 @@ bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState
     std::reverse(myLeftSet->begin(), myLeftSet->end());
     std::reverse(myRightSet->begin(), myRightSet->end());
 
+    // compare the two hands based on HoldEmHandRank
     switch (lps.handRank)
     {
     case HoldEmHandRank::xhigh:
