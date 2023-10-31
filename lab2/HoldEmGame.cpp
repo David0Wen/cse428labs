@@ -4,6 +4,7 @@
  * Purpose: Implementation of HoldEmGame class and functions.
  */
 #include "HoldEmGame.h"
+#include <tuple>
 
 const int SUCCESS = 0;
 
