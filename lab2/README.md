@@ -10,8 +10,21 @@
 
 ## Design decisions
 ### 8
-We didn't add our own copy constructor because the copy approach the default copy constructor used is deep copy. So the default constructor already satisfied the requirement.
+We didn't add our own copy constructor because the default copy constructor used in this case is deep copy. So the default constructor already satisfied the requirement.
 
+### 10
+To assign names to each melds, we create a static member string array to assign corresponding name to each enum numbers. Same method to assign points.
+
+### 13
+To ensure melds found in a previous hand should not be carried over into the next one - the vector must be empty before each call to the evaluation function, we define the melds vector as a local variable, so that when entering each loop, the melds vector will be re-initialized.
+
+### 14
+Same method as 10, we created a static member string array.
+
+### 16
+To store name of each player in our nested class, we decide to simply store the name index as an unsigned int, which should be the cooresponding name's index in the name array, solving the reference conflict.
+
+To compare the HandRank of Texas Hold'em, we apply a recursive manner, i.e., for two pairs, we firstly compare the first pair. If the first pair's rank is same, we simply delete the pair and reduce it to the pair case.
 
 ## Error observations
 
