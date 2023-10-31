@@ -61,6 +61,8 @@ protected:
     // Deals cards to the players and the board depending on the current state
     virtual void deal();
 public:
+    // Static list, assigning all possible HandRank(enum) with different names
+    static const char* RankNames[];
     // Constructor for the HoldEmGame class
     HoldEmGame(int argc, const char *argv[]);
 

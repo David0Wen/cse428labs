@@ -15,6 +15,11 @@ const int flopCards = 3;
 const int boardMax = 5;
 
 
+// Static list, assigning all possible melds(enum) with different names
+const char* HoldEmGame::RankNames[] = {
+    "High Card", "Pair", "Two Pair", "Three of a Kind", "Straight",
+    "Flush", "Full House", "Four of a Kind", "Straight Flush", "Undefined"
+};
 
 /**
  * @brief Constructor for the HoldEmGame class
@@ -211,38 +216,7 @@ int HoldEmGame::play()
 }
 
 std::ostream &operator<<(std::ostream &os, const HoldEmHandRank &handRank){
-    switch (handRank) {
-        case HoldEmHandRank::xhigh:
-            os << "High Card";
-            break;
-        case HoldEmHandRank::pair:
-            os << "Pair";
-            break;
-        case HoldEmHandRank::twopair:
-            os << "Two Pair";
-            break;
-        case HoldEmHandRank::threeofakind:
-            os << "Three of a Kind";
-            break;
-        case HoldEmHandRank::straight:
-            os << "Straight";
-            break;
-        case HoldEmHandRank::flush:
-            os << "Flush";
-            break;
-        case HoldEmHandRank::fullhouse:
-            os << "Full House";
-            break;
-        case HoldEmHandRank::fourofakind:
-            os << "Four of a Kind";
-            break;
-        case HoldEmHandRank::straightflush:
-            os << "Straight Flush";
-            break;
-        case HoldEmHandRank::undefined:
-            os << "Undefined";
-            break;
-    }
+    os << HoldEmGame::RankNames[static_cast<int>(handRank)];
     return os;
 }
 
