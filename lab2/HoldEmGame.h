@@ -75,11 +75,11 @@ public:
     // Nested struct to represent a player's state in the game
     struct PlayerState {
         CardSet<HoldEmRank, Suit> playerHand;
-        std::string playerName;
+        size_t playerNameIndex;
         HoldEmHandRank handRank;
 
         // Constructor
-        PlayerState(const CardSet<HoldEmRank, Suit> , const std::string , HoldEmHandRank);
+        PlayerState(CardSet<HoldEmRank, Suit>, size_t, HoldEmHandRank);
     };
 
     friend bool operator<(const HoldEmGame::PlayerState&, const HoldEmGame::PlayerState&);

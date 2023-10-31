@@ -141,7 +141,7 @@ int HoldEmGame::play()
         std::vector<PlayerState> playerHandInfos;
         // 6.2 initialize the vector with each player's information to playerHandInfos
         for (size_t i = 0; i < playerHands.size(); ++i) {
-            PlayerState info(playerHands[i], playerNames[i], HoldEmHandRank::undefined);
+            PlayerState info(playerHands[i], i, HoldEmHandRank::undefined);
             playerHandInfos.push_back(info);
         }
 
@@ -181,7 +181,7 @@ int HoldEmGame::play()
         std::cout << "Ranking of players and cards:" << std::endl;
         for (auto &playerState : playerHandInfos)
         {
-            std::cout << "Player: " << playerState.playerName << std::endl;
+            std::cout << "Player: " << playerNames[playerState.playerNameIndex] << std::endl;
             std::cout << "Hand: "; playerState.playerHand.print(std::cout, 5);
             std::cout << "Rank: " << playerState.handRank << std::endl;
             std::cout << std::endl << std::endl;
@@ -349,7 +349,7 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
 }
 
 // Constructor
-HoldEmGame::PlayerState::PlayerState(const CardSet<HoldEmRank, Suit> handSet, const std::string playName, HoldEmHandRank holdRank) : playerHand(handSet), playerName(playName), handRank(holdRank) {}
+HoldEmGame::PlayerState::PlayerState(CardSet<HoldEmRank, Suit> handSet, size_t playName, HoldEmHandRank holdRank) : playerHand(handSet), playerNameIndex(playName), handRank(holdRank) {}
 
 std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector< Card<HoldEmRank, Suit> >& hand, size_t length) {
     for (size_t index = 0; index <= hand.size() - length; ++index) {
@@ -387,7 +387,7 @@ bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<Ho
     else {
         myLeftSet->erase(myLeftSet->begin() + lindex, myLeftSet->begin() + lindex + length);
         myRightSet->erase(myRightSet->begin() + rindex, myRightSet->begin() + rindex + length);
-        return HoldEmGame::PlayerState(leftHand, "", next) < HoldEmGame::PlayerState(rightHand, "", next);
+        return HoldEmGame::PlayerState(leftHand, 0, next) < HoldEmGame::PlayerState(rightHand, 0, next);
     }
 }
 
