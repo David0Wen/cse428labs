@@ -19,7 +19,7 @@ class CardSet
 
 protected:
     // A vector to hold Card objects
-    std::vector<Card<R, S> > myCardSet;
+        std::vector<Card<R, S> > myCardSet;
 
 public:
     // default Constructor
@@ -58,7 +58,7 @@ public:
     void collect(CardSet<R, S> &);
 
     // Collect cards that match certain criteria
-    void collect_if(CardSet<R, S> &, std::function<bool(Card<R, S>&)>);
+    void collect_if(CardSet<R, S> &, std::function<bool(Card<R, S>&)> );
 
     // Request specific Card form another CardSet
     bool request(CardSet<R, S> &, const R &);
