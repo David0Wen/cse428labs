@@ -13,12 +13,18 @@
 
 template <typename S = Suit, typename R = HoldEmRank, typename D = HoldEmDeck>
 class GoFishGame{
-static_assert(std::is_base_of<CardSet<S, R>, D>::value,
+static_assert(std::is_base_of<CardSet<S, R, D>::value,
                 "Deck must be derived from CardSet<Suit, Rank>");
 public:
+    // default constructor
     GoFishGame(int numPlayers, const char* playerNames[]);
     virtual ~GoFishGame();
     virtual play();
+    /** 
+     * @brief  checks if there is a 4-of-a-kind in that player's hand 
+     * @param playerNum the index of the palyer
+     * @return a boolean value to indicate whether or not 4 cards of the same rank were found in it
+     */
     bool collect_books(int playerNum);
 
 protected:
@@ -26,15 +32,24 @@ protected:
     D deck;
     std::vector<CardSet> hands;
     std::vector<CardSet> books;
-    virtual deal();
+    virtual deal();    
+
+    /** 
+     * @brief  implements how each player will take their turn
+     * @param playerNum the index of the palyer
+     * @return a boolean value to indicate whether it still remains that player's turn
+     */
     bool turn(int playerNum);
 };
+// template specialization for HoldEmDeck
 template<>
 GoFishGame<Suit, HoldEmRank,HoldEmDeck>::GoFishGame(int numPlayers, const char* palyerNames[]);
 
+// template specialization for PinochleDeck
 template<>
 GoFishGame<Suit, PinochleRank,PinochleDeck>::GoFishGame(int numPlayers, const char* palyerNames[]);
 
+// template specialization for UnoDeck
 template<>
 GoFishGame<Color, UnoRank, UnoDeck>::GoFishGame(int numPlayers, const char* palyerNames[]);
 
