@@ -156,14 +156,18 @@ int HoldEmGame::play()
         // Iterate through the vector to perform hand evaluation
         for (auto &playerState : playerHandInfos)
         {
-            // Combine the player's hand with the common board
-            std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-            std::vector<Card<HoldEmRank, Suit>>* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
+//            // Combine the player's hand with the common board
+//            std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
+//            std::vector<Card<HoldEmRank, Suit>>* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
+//
+//            // Combine the player's hand with the common board
+//            playerSetPtr->insert(playerSetPtr->end(), boardSetPtr->begin(), boardSetPtr->end());
 
             // Combine the player's hand with the common board
-            playerSetPtr->insert(playerSetPtr->end(), boardSetPtr->begin(), boardSetPtr->end());
+            playerState.playerHand.addCards(commonBoard);
 
             // Evaluate the hand using hand evaluation function
+//            HoldEmHandRank rank = holdem_hand_evaluation(playerState.playerHand);
             HoldEmHandRank rank = holdem_hand_evaluation(playerState.playerHand);
 
             // Update the player's hand rank
@@ -171,11 +175,18 @@ int HoldEmGame::play()
         }
 
         // Sort the Card in each playerHand
-        for (auto &playerState : playerHandInfos) {
-            std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
+//        for (auto &playerState : playerHandInfos) {
+//            std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
+//
+//            std::sort(playerSetPtr->begin(), playerSetPtr->end(), lessRank<HoldEmRank, Suit>);
+//            std::reverse(playerSetPtr->begin(), playerSetPtr->end());
+//        }
 
-            std::sort(playerSetPtr->begin(), playerSetPtr->end(), lessRank<HoldEmRank, Suit>);
-            std::reverse(playerSetPtr->begin(), playerSetPtr->end());
+        // Sort the Card in each playerHand
+        for (auto &playerState : playerHandInfos) {
+//            std::sort(playerState.playerHand.begin(), playerState.playerHand.end(), lessRank<HoldEmRank, Suit>);
+            playerState.playerHand.sort();
+            std::reverse(playerState.playerHand.begin(), playerState.playerHand.end());
         }
 
         // Sort the playerStates vector based on hand rank
@@ -227,12 +238,16 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
 
     // Create a deep copy of player's handset
     CardSet<HoldEmRank, Suit> handCopy(playerHand);
+    // Sort by rank and then suit (if needed)
+    handCopy.sort();
 
-    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-    std::vector< Card<HoldEmRank, Suit> > mySet = handCopy.*setPtr;
+//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
+//    std::vector< Card<HoldEmRank, Suit> > mySet = handCopy.*setPtr;
+
+    std::vector<Card<HoldEmRank, Suit>> mySet(handCopy.begin(), handCopy.end());
 
     // Sort by rank and then suit (if needed)
-    std::sort(mySet.begin(), mySet.end(), lessRank<HoldEmRank, Suit>);
+//    std::sort(mySet.begin(), mySet.end(), lessRank<HoldEmRank, Suit>);
     // vector in descending order
     std::reverse(mySet.begin(), mySet.end());
 
@@ -366,13 +381,16 @@ std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector
  * @return Returns true if the left hand is superior, false otherwise
  */
 bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<HoldEmRank, Suit>& rightHand, size_t length, HoldEmHandRank next) {
-    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHand.*setPtr);
-    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHand.*setPtr);
+//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
+//    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHand.*setPtr);
+//    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHand.*setPtr);
+    std::vector<Card<HoldEmRank, Suit> > myLeftSet(leftHand.begin(), leftHand.end());
+    std::vector<Card<HoldEmRank, Suit> > myRightSet(rightHand.begin(), rightHand.end());
+
     HoldEmRank lrank, rrank;
     size_t lindex, rindex;
-    std::tie(lindex, lrank) = extractMultiFromSet(*myLeftSet, length);
-    std::tie(rindex, rrank) = extractMultiFromSet(*myRightSet, length);
+    std::tie(lindex, lrank) = extractMultiFromSet(myLeftSet, length);
+    std::tie(rindex, rrank) = extractMultiFromSet(myRightSet, length);
     if (lrank < rrank) {
         return true;
     }
@@ -380,8 +398,8 @@ bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<Ho
         return false;
     }
     else {
-        myLeftSet->erase(myLeftSet->begin() + lindex, myLeftSet->begin() + lindex + length);
-        myRightSet->erase(myRightSet->begin() + rindex, myRightSet->begin() + rindex + length);
+        myLeftSet.erase(myLeftSet.begin() + lindex, myLeftSet.begin() + lindex + length);
+        myRightSet.erase(myRightSet.begin() + rindex, myRightSet.begin() + rindex + length);
         return HoldEmGame::PlayerState(leftHand, 0, next) < HoldEmGame::PlayerState(rightHand, 0, next);
     }
 }
@@ -409,16 +427,18 @@ bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState
     CardSet<HoldEmRank, Suit> leftHandCopy(lps.playerHand);
     CardSet<HoldEmRank, Suit> rightHandCopy(rps.playerHand);
 
-    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHandCopy.*setPtr);
-    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHandCopy.*setPtr);
+//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
+//    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHandCopy.*setPtr);
+//    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHandCopy.*setPtr);
+    std::vector<Card<HoldEmRank, Suit> > myLeftSet(leftHandCopy.begin(), leftHandCopy.end());
+    std::vector<Card<HoldEmRank, Suit> > myRightSet(rightHandCopy.begin(), rightHandCopy.end());
 
     // Sort by rank and then suit (if needed)
-    std::sort(myLeftSet->begin(), myLeftSet->end(), lessRank<HoldEmRank, Suit>);
-    std::sort(myRightSet->begin(), myRightSet->end(), lessRank<HoldEmRank, Suit>);
+    std::sort(myLeftSet.begin(), myLeftSet.end(), lessRank<HoldEmRank, Suit>);
+    std::sort(myRightSet.begin(), myRightSet.end(), lessRank<HoldEmRank, Suit>);
     // vector in descending order
-    std::reverse(myLeftSet->begin(), myLeftSet->end());
-    std::reverse(myRightSet->begin(), myRightSet->end());
+    std::reverse(myLeftSet.begin(), myLeftSet.end());
+    std::reverse(myRightSet.begin(), myRightSet.end());
 
     // compare the two hands based on HoldEmHandRank
     switch (lps.handRank)
@@ -426,12 +446,12 @@ bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState
     case HoldEmHandRank::xhigh:
     case HoldEmHandRank::flush: 
     {
-        for (size_t i = 0; i < myLeftSet->size(); i++)
+        for (size_t i = 0; i < myLeftSet.size(); i++)
         {
-            if ((*myLeftSet)[i].myRank < (*myRightSet)[i].myRank) {
+            if ((myLeftSet)[i].myRank < (myRightSet)[i].myRank) {
                 return true;
             }
-            else if ((*myLeftSet)[i].myRank > (*myRightSet)[i].myRank) {
+            else if ((myLeftSet)[i].myRank > (myRightSet)[i].myRank) {
                 return false;
             }
         }
@@ -456,7 +476,7 @@ bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState
     case HoldEmHandRank::straight:
     case HoldEmHandRank::straightflush:
     {
-        if ((*myLeftSet)[0].myRank < (*myRightSet)[0].myRank) {
+        if ((myLeftSet)[0].myRank < (myRightSet)[0].myRank) {
             return true;
         }
         else {

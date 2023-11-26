@@ -201,12 +201,15 @@ bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit>>::iter
 void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit> &playerHand, std::vector<PinochleMelds> &melds)
 {
     CardSet<PinochleRank, Suit> handCopy(playerHand);
-
-    std::vector< Card<PinochleRank, Suit> > CardSet<PinochleRank, Suit>::* setPtr = CardSet<PinochleRank, Suit>::getSetPtr();
-    std::vector< Card<PinochleRank, Suit> > mySet = handCopy.*setPtr;
-
     // Sort by rank and then suit (if needed)
-    std::sort(mySet.begin(), mySet.end(), lessRank<PinochleRank, Suit>);
+    handCopy.sort();
+
+//    std::vector< Card<PinochleRank, Suit> > CardSet<PinochleRank, Suit>::* setPtr = CardSet<PinochleRank, Suit>::getSetPtr();
+//    std::vector< Card<PinochleRank, Suit> > mySet = handCopy.*setPtr;
+    std::vector< Card<PinochleRank, Suit> > mySet(handCopy.begin(), handCopy.end());
+
+//    // Sort by rank and then suit (if needed)
+//    std::sort(mySet.begin(), mySet.end(), lessRank<PinochleRank, Suit>);
     // vector in decending order
     std::reverse(mySet.begin(), mySet.end());
 

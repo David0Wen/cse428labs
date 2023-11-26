@@ -8,7 +8,9 @@
 
 // Include the Card_T which contains the Card struct
 #include "Card_T.h"
+#include <algorithm>
 #include <vector>
+#include <functional>
 
 // Template class definition for CardSet
 template <typename R, typename S>
@@ -17,13 +19,14 @@ class CardSet
 
 protected:
     // A vector to hold Card objects
-    std::vector<Card<R, S> > myCardSet;
+        std::vector<Card<R, S> > myCardSet;
 
 public:
     // default Constructor
     CardSet() = default;
     // Copy Constructor, the default copy constructor in this case is sufficient, since it peforms deep copy towards enum class.
     CardSet(const CardSet<R, S> &) = default;
+
     // Function to print the CardSet
     void print(std::ostream &, size_t);
     // Function to check if the CardSet is empty
@@ -31,8 +34,34 @@ public:
     // Overloading the >> operator to perform two CardSet objects
     CardSet<R, S> &operator>>(CardSet<R, S> &);
 
-    // Get the pointer to the object's vector data member
-    static std::vector<Card<R, S> > CardSet<R, S>::* getSetPtr();
+//    // Get the pointer to the object's vector data member
+//    static std::vector<Card<R, S> > CardSet<R, S>::* getSetPtr();
+    // return an iterator to the start of myCardSet
+    typename std::vector<Card<R, S>>::iterator begin();
+    // return an iterator to the end of myCardSet
+    typename std::vector<Card<R, S>>::iterator end();
+    // use std::sort for the CardSet
+    void sort();
+    // Add cards from another CardSet
+    void addCards(CardSet<R, S> &);
+
+    // type specifiers for Card
+    typedef Card<R, S> card_type;
+    // type specifiers for Suit
+    typedef S suit_type;
+    // type specifiers for Rank
+    typedef R rank_type;
+    // type specifier for the iterator
+    typedef typename std::vector<Card<R, S>>::iterator iter;
+
+    // Move cards from another CardSet into this Deck
+    void collect(CardSet<R, S> &);
+
+    // Collect cards that match certain criteria
+    void collect_if(CardSet<R, S> &, std::function<bool(Card<R, S>&)> );
+
+    // Request specific Card form another CardSet
+    bool request(CardSet<R, S> &, const R &);
 
 };
 

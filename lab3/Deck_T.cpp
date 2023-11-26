@@ -17,23 +17,23 @@ void Deck<R, S>::shuffle()
     std::shuffle(CardSet<R, S>::myCardSet.begin(), CardSet<R, S>::myCardSet.end(), numGenerator);
 }
 
-/**
- * @brief Collect cards from another CardSet into this Deck
- *
- * @param cardSet The CardSet that collect cards
- */
-template <typename R, typename S>
-void Deck<R, S>::collect(CardSet<R, S> &cardSet)
-{
-    try
-    {
-        while (!cardSet.is_empty())
-        {
-            cardSet >> *this;
-        }
-    }
-    catch (const std::runtime_error& e)
-    {
-        std::cerr << "Caught exception: " << e.what() << std::endl;
-    }
-}
+///**
+// * @brief Collect cards from another CardSet into this Deck
+// *
+// * @param cardSet The CardSet that collect cards
+// */
+//template <typename R, typename S>
+//void Deck<R, S>::collect(CardSet<R, S> &cardSet)
+//{
+//    try
+//    {
+//        while (!cardSet.is_empty())
+//        {
+//            cardSet >> *this;
+//        }
+//    }
+//    catch (const std::runtime_error& e)
+//    {
+//        std::cerr << "Caught exception: " << e.what() << std::endl;
+//    }
+//}

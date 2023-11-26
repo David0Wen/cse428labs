@@ -58,12 +58,99 @@ CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
     return *this;
 }
 
+///**
+// * @brief Controlled violation of encapsulation: get the pointer to the protected vector data memeber
+// *
+// * @return The pointer to the object member: "myCardSet" which can be modified
+// */
+//template<typename R, typename S>
+//std::vector<Card<R, S> > CardSet<R, S>::* CardSet<R, S>::getSetPtr()
+//{
+//    return &CardSet<R, S>::myCardSet;
+//}
+
 /**
- * @brief Controlled violation of encapsulation: get the pointer to the protected vector data memeber
- * @return The pointer to the object member: "myCardSet" which can be modified
+ * @brief Return an iterator to the start of myCardSet
+ * @return The start of myCardSet
  */
 template<typename R, typename S>
-std::vector<Card<R, S> > CardSet<R, S>::* CardSet<R, S>::getSetPtr()
-{
-    return &CardSet<R, S>::myCardSet;
+typename std::vector<Card<R, S> >::iterator CardSet<R, S>::begin() {
+    return myCardSet.begin();
+}
+
+/**
+ * @brief Return an iterator to the end of myCardSet
+ * @return The end of myCardSet
+ */
+template<typename R, typename S>
+typename std::vector<Card<R, S> >::iterator CardSet<R, S>::end() {
+    return myCardSet.end();
+}
+
+/**
+ * @brief Use std::sort for the CardSet
+*/
+template<typename R, typename S>
+void CardSet<R, S>::sort() {
+    std::sort(begin(), end(), lessRank<R, S>);
+}
+
+/**
+ * @brief Add cards from another CardSet
+ *
+ * @param other another CardSet to add
+ */
+template<typename R, typename S>
+void CardSet<R, S>::addCards(CardSet<R, S> &other) {
+    myCardSet.insert(myCardSet.end(), other.begin(), other.end());
+}
+
+/**
+ * @brief Move cards from another CardSet into this Deck
+ *
+ * @param other another CardSet
+ */
+template<typename R, typename S>
+void CardSet<R, S>::collect(CardSet<R, S> &other) {
+    std::move(other.begin(), other.end(), std::back_inserter(myCardSet));
+    other.myCardSet.clear();
+}
+
+/**
+ * @brief Collect cards that match certain criteria
+ *
+ * @param deck A CardSet to be collected and estimated
+ * @param predicate to determine whether a Card should be collected
+ */
+template<typename R, typename S>
+void CardSet<R, S>::collect_if(CardSet<R, S> &deck, std::function<bool(Card<R, S>&)> predicate) {
+    std::vector<Card<R, S>> temp;
+    std::copy_if(deck.begin(), deck.end(), std::back_inserter(temp), predicate);
+
+    myCardSet.insert(myCardSet.end(), temp.begin(), temp.end());
+
+    auto newEnd = std::remove_if(deck.begin(), deck.end(), predicate);
+    deck.myCardSet.erase(newEnd, deck.end());
+}
+
+/**
+ * @brief Request specific Card form another CardSet
+ *
+ * @param other The requested CardSet
+ * @param rank the certain rank for the request
+ * @return true if found and moved the card; false if not
+ */
+template<typename R, typename S>
+bool CardSet<R, S>::request(CardSet<R, S> &other, const R &rank) {
+    auto it = std::find_if(other.begin(), other.end(), [&rank](const Card<R, S>& card) {
+        return card.myRank == rank;
+    });
+
+    if (it != other.end()) {
+        myCardSet.push_back(std::move(*it));
+        other.myCardSet.erase(it);
+        return true;
+    }
+
+    return false;
 }
