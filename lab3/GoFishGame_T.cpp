@@ -131,10 +131,18 @@ bool GoFishGame<S, R, D>::turn(int playerNum)
     bool validInput = false;
     while (!validInput) {
         std::cout << "Enter card rank number to ask for: ";
-        std::cin >> requestedRank;
+        while (!(std::cin >> requestedRank)) {
+            std::cout << "Integer required! Please enter again:";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
 
         std::cout << "Enter player ID to ask from: ";
-        std::cin >> targetPlayer;
+        while (!(std::cin >> targetPlayer)) {
+            std::cout << "Integer required! Please enter again:";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
 
         // Do sanity check
         bool validRank = false;
