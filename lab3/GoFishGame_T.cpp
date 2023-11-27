@@ -181,7 +181,7 @@ bool GoFishGame<S, R, D>::turn(int playerNum)
             std::cout << "Collection Failed! Draw a card from the deck." << std::endl;
             myDeck >> playerHands[playerNum - 1];
             std::cout << std::endl;
-            return (*(playerHands[playerNum - 1].end() - 1)).myRank == static_cast<R>(requestedRank);
+            return (*(--playerHands[playerNum - 1].end())).myRank == static_cast<R>(requestedRank);
         }
         else
         {
