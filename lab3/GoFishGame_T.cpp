@@ -1,9 +1,16 @@
 #include "GoFishGame_T.h"
 
+template <typename S, typename R, typename D>
+const std::vector<std::string> GoFishGame<S, R, D>::rankInstructions = {
+    "For HoldEm Deck, rank is 2, 3, 4, 5, 6, 7, 8, 9,\n10, J, Q, K, A; corresponding rank number is 0-12.",
+    "For Pinochle Deck, rank is 9, J, Q, K,\n10, A; corresponding rank number is 0-5.",
+    "For Uno Deck, rank is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, Skip, Reverse,\nDrawTwo, DrawFour, Wild, Blank; corresponding rank number is 0-15."
+};
 
 // template specialization for HoldEmDeck
 template<>
 GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char* argv[]) : Game(argc - 1, argv) {
+    deckID = 0;
     numPlayers = playerNames.size();
     myDeck = HoldEmDeck();
     playerHands.resize(numPlayers);
@@ -22,6 +29,7 @@ GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char* argv[
 // template specialization for PinochleDeck
 template<>
 GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char* argv[]) : Game(argc - 1, argv) {
+    deckID = 1;
     numPlayers = playerNames.size();
     myDeck = PinochleDeck();
     playerHands.resize(numPlayers);
@@ -40,6 +48,7 @@ GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char* a
 // template specialization for UnoDeck
 template<>
 GoFishGame<Color, UnoRank, UnoDeck>::GoFishGame(int argc, const char* argv[]) : Game(argc - 1, argv) {
+    deckID = 2;
     numPlayers = playerNames.size();
     myDeck = UnoDeck();
     playerHands.resize(numPlayers);
@@ -88,30 +97,35 @@ bool GoFishGame<S, R, D>::collect_books(int playerNum) {
 template <typename S, typename R, typename D>
 bool GoFishGame<S, R, D>::turn(int playerNum)
 {
-    std::cout << "Player " << playerNames[playerNum - 1] << "'s turn. ID: " << playerNum << std::endl;
-    std::cout << "Current hand: " << std::endl;
-    for (auto iter = playerHands[playerNum - 1].begin(); iter != playerHands[playerNum - 1].end(); ++iter) {
-        std::cout << *iter << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Current book: " << std::endl;
-    if (playerBooksNum[playerNum - 1] == 0) {
-        std::cout << "No book collected."  << std::endl;
-    }
-    else {
-        R curRank = (*(playerBooks[playerNum - 1].begin())).myRank;
-        for (auto iter = playerBooks[playerNum - 1].begin(); iter != playerBooks[playerNum - 1].end(); ++iter) {
-            if (curRank != (*iter).myRank)
-            {
-                std::cout << std::endl;
-                curRank = (*iter).myRank;
-            }
+    for (int i = 0; i < playerNames.size(); i++)
+    {
+        std::cout << "Player " << playerNames[i] << ", ID: " << i + 1 << std::endl;
+        std::cout << "Current hand: " << std::endl;
+        for (auto iter = playerHands[i].begin(); iter != playerHands[i].end(); ++iter) {
             std::cout << *iter << " ";
         }
-        std::cout << std::endl;
-    }
+        std::cout << std::endl << std::endl;
 
+        std::cout << "Current book: " << std::endl;
+        if (playerBooksNum[i] == 0) {
+            std::cout << "No book collected." << std::endl << std::endl;
+        }
+        else {
+            R curRank = (*(playerBooks[i].begin())).myRank;
+            for (auto iter = playerBooks[i].begin(); iter != playerBooks[i].end(); ++iter) {
+                if (curRank != (*iter).myRank)
+                {
+                    std::cout << std::endl;
+                    curRank = (*iter).myRank;
+                }
+                std::cout << *iter << " ";
+            }
+            std::cout << std::endl << std::endl;
+        }
+    }
+    std::cout << std::endl << "Player " << playerNames[playerNum - 1] << "'s turn. ID: " << playerNum << std::endl;
+
+    std::cout << std::endl << rankInstructions[deckID] << std::endl << std::endl;
     int targetPlayer;
     int requestedRank;
     bool validInput = false;
@@ -142,9 +156,6 @@ bool GoFishGame<S, R, D>::turn(int playerNum)
         if (targetPlayer < 1 || targetPlayer > numPlayers || targetPlayer == playerNum) {
             std::cout << "Invalid Player ID!" << std::endl;
             validInput = false;
-        }
-        else {
-            validInput = true;
         }
     }
 

@@ -38,6 +38,8 @@ protected:
     std::vector<CardSet<R, S>> playerBooks;
     std::vector<int> playerBooksNum;
     std::vector<int> outPlayers;
+    static const std::vector<std::string> rankInstructions;
+    int deckID;
 
     /** 
      * @brief  implements how each player will take their turn
