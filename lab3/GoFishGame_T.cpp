@@ -21,7 +21,7 @@ GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char* argv[
 
 // template specialization for PinochleDeck
 template<>
-GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char* argv[]) : Game(argc, argv) {
+GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char* argv[]) : Game(argc - 1, argv) {
     numPlayers = playerNames.size();
     myDeck = PinochleDeck();
     playerHands.resize(numPlayers);
