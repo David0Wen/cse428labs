@@ -125,12 +125,12 @@ void CardSet<R, S>::collect(CardSet<R, S> &other) {
 template<typename R, typename S>
 void CardSet<R, S>::collect_if(CardSet<R, S> &deck, std::function<bool(Card<R, S>&)> predicate) {
     std::vector<Card<R, S>> temp;
-    std::copy_if(deck.cards.begin(), deck.cards.end(), std::back_inserter(temp), predicate);
+    std::copy_if(deck.begin(), deck.end(), std::back_inserter(temp), predicate);
 
     myCardSet.insert(myCardSet.end(), temp.begin(), temp.end());
 
-    auto newEnd = std::remove_if(deck.cards.begin(), deck.cards.end(), predicate);
-    deck.cards.erase(newEnd, deck.cards.end());
+    auto newEnd = std::remove_if(deck.begin(), deck.end(), predicate);
+    deck.myCardSet.erase(newEnd, deck.end());
 }
 
 /**
@@ -143,12 +143,12 @@ void CardSet<R, S>::collect_if(CardSet<R, S> &deck, std::function<bool(Card<R, S
 template<typename R, typename S>
 bool CardSet<R, S>::request(CardSet<R, S> &other, const R &rank) {
     auto it = std::find_if(other.begin(), other.end(), [&rank](const Card<R, S>& card) {
-        return card.rank() == rank;
+        return card.myRank == rank;
     });
 
     if (it != other.end()) {
         myCardSet.push_back(std::move(*it));
-        other.cards.erase(it);
+        other.myCardSet.erase(it);
         return true;
     }
 
