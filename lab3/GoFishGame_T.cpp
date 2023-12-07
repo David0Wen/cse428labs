@@ -194,6 +194,9 @@ bool GoFishGame<S, R, D>::turn(int playerNum)
     }
 }
 
+/** 
+ * @brief deal cards at the beginning of GoFish
+ */
 template<typename S, typename R, typename D>
 void GoFishGame<S, R, D>::deal() {
     myDeck.shuffle();
@@ -208,6 +211,10 @@ void GoFishGame<S, R, D>::deal() {
     }
 }
 
+/** 
+ * @brief start GoFish Game
+ * @return int represent execution status
+ */
 template<typename S, typename R, typename D>
 int GoFishGame<S, R, D>::play() {
     deal(); // Deal cards to players
