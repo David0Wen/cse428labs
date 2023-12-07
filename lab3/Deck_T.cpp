@@ -22,8 +22,8 @@ void Deck<R, S>::shuffle()
 // *
 // * @param cardSet The CardSet that collect cards
 // */
-//template <typename R, typename S>
-//void Deck<R, S>::collect(CardSet<R, S> &cardSet)
+//template <typename R, typename suit_type>
+//void Deck<R, suit_type>::collect(CardSet<R, suit_type> &cardSet)
 //{
 //    try
 //    {
