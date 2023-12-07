@@ -75,7 +75,7 @@ void PinochleGame::deal()
             }
         }
     }
-    catch (const std::runtime_error& e) {
+    catch (const std::runtime_error &e) {
         std::cerr << "Caught exception: " << e.what() << std::endl;
     }
 }

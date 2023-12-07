@@ -9,7 +9,7 @@ const std::vector<std::string> GoFishGame<S, R, D>::rankInstructions = {
 
 // template specialization for HoldEmDeck
 template<>
-GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char* argv[]) : Game(argc - 1, argv) {
+GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char *argv[]) : Game(argc - 1, argv) {
     deckID = 0;
     numPlayers = playerNames.size();
     myDeck = HoldEmDeck();
@@ -18,7 +18,7 @@ GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char* argv[
     playerBooksNum.resize(numPlayers);
     for (auto currentRank = HoldEmRank::two; currentRank < HoldEmRank::undefined; ++currentRank) {
         int count = std::count_if(myDeck.begin(), myDeck.end(),
-            [currentRank](const auto& card) { return card.myRank == currentRank; });
+            [currentRank](const auto &card) { return card.myRank == currentRank; });
 
         if (count < 4) {
             throw std::invalid_argument("Invalid deck: Must have at least 4 cards of each rank.");
@@ -28,7 +28,7 @@ GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char* argv[
 
 // template specialization for PinochleDeck
 template<>
-GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char* argv[]) : Game(argc - 1, argv) {
+GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char *argv[]) : Game(argc - 1, argv) {
     deckID = 1;
     numPlayers = playerNames.size();
     myDeck = PinochleDeck();
@@ -37,7 +37,7 @@ GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char* a
     playerBooksNum.resize(numPlayers);
     for (auto currentRank = PinochleRank::nine; currentRank < PinochleRank::undefined; ++currentRank) {
         int count = std::count_if(myDeck.begin(), myDeck.end(),
-            [currentRank](const auto& card) { return card.myRank == currentRank; });
+            [currentRank](const auto &card) { return card.myRank == currentRank; });
 
         if (count < 4) {
             throw std::invalid_argument("Invalid deck: Must have at least 4 cards of each rank.");
@@ -47,7 +47,7 @@ GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char* a
 
 // template specialization for UnoDeck
 template<>
-GoFishGame<Color, UnoRank, UnoDeck>::GoFishGame(int argc, const char* argv[]) : Game(argc - 1, argv) {
+GoFishGame<Color, UnoRank, UnoDeck>::GoFishGame(int argc, const char *argv[]) : Game(argc - 1, argv) {
     deckID = 2;
     numPlayers = playerNames.size();
     myDeck = UnoDeck();
@@ -56,7 +56,7 @@ GoFishGame<Color, UnoRank, UnoDeck>::GoFishGame(int argc, const char* argv[]) : 
     playerBooksNum.resize(numPlayers);
     for (auto currentRank = UnoRank::zero; currentRank < UnoRank::undefined; ++currentRank) {
         int count = std::count_if(myDeck.begin(), myDeck.end(),
-            [currentRank](const auto& card) { return card.myRank == currentRank; });
+            [currentRank](const auto &card) { return card.myRank == currentRank; });
 
         if (count < 4) {
             throw std::invalid_argument("Invalid deck: Must have at least 4 cards of each rank.");
@@ -71,7 +71,7 @@ GoFishGame<Color, UnoRank, UnoDeck>::GoFishGame(int argc, const char* argv[]) : 
  */
 template<typename S, typename R, typename D>
 bool GoFishGame<S, R, D>::collect_books(int playerNum) {
-    auto& hand = playerHands[playerNum - 1];
+    auto &hand = playerHands[playerNum - 1];
     // Start from 0 (cast to R) and iterate until the rank before 'undefined'
     for (R rank = static_cast<R>(0); rank < R::undefined; ++rank) {
         size_t count = std::count_if(hand.begin(), hand.end(), [rank](const typename CardSet<R, S>::card_type &card) {
@@ -80,7 +80,7 @@ bool GoFishGame<S, R, D>::collect_books(int playerNum) {
 
         if (count == 4) {
             // Collect all cards of this rank
-            auto predicate = [rank](const typename CardSet<R, S>::card_type& card) { return card.myRank == rank; };
+            auto predicate = [rank](const typename CardSet<R, S>::card_type &card) { return card.myRank == rank; };
             playerBooks[playerNum - 1].collect_if(hand, predicate);
             playerBooksNum[playerNum - 1] += 1;
             return true;
@@ -200,7 +200,7 @@ void GoFishGame<S, R, D>::deal() {
     int cardsPerPlayer = (numPlayers > 2) ? 5 : 7;
 
     for (int i = 0; i < cardsPerPlayer; ++i) {
-        for (auto& hand : playerHands) {
+        for (auto &hand : playerHands) {
             if (!myDeck.is_empty()) {
                 myDeck >> hand;
             }

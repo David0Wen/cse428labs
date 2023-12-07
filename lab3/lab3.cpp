@@ -23,7 +23,7 @@ const int INVALIDPTR = 4;
 const int OTHERERROR = 5;
 
 
-const char** create_new_argv(const char* argv[], int& argc) {
+const char** create_new_argv(const char* argv[], int &argc) {
     // Allocate new_argv with one less argument
     int new_argc = argc - 1; // Update the new_argc
     const char** new_argv = new const char* [new_argc + 1]; // +1 for the null terminator
@@ -71,7 +71,7 @@ std::shared_ptr<Game> create(int argc, const char* argv[]) {
             delete[] new_argv;
             new_argv = nullptr;
         }
-        catch (const std::exception& e)
+        catch (const std::exception &e)
         {
             if (new_argv != nullptr)
             {
@@ -85,7 +85,7 @@ std::shared_ptr<Game> create(int argc, const char* argv[]) {
 }
 
 // Function to display correct usage of the program
-void usage(std::ostream& os) {
+void usage(std::ostream &os) {
     os << "Usage: lab3 <Game> [<Deck>] <Players>" << std::endl;
     os << "Game should be either Pinochle, HoldEm, or GoFish." << std::endl;
     os << "Pinochle needs 4 players." << std::endl;
@@ -142,7 +142,7 @@ int main(int argc, const char* argv[]) {
             return INVALIDPTR;
         }
     }
-    catch (const std::exception& e)
+    catch (const std::exception &e)
     {
         std::cerr << e.what() << std::endl;
         return OTHERERROR;

@@ -28,15 +28,15 @@ std::ostream &operator<<(std::ostream &os, const Card<T, S> &myCard)
 
 /**
  * @brief Compare the rank of two sets of card
- * @param card1 the first card set
- * @param card2 the second card set
+ * @param leftCard the first card set
+ * @param rightCard the second card set
  * @return true if the first card's rank is less than the second card's rank,
  * or if they are of the same rank if the first card's suit is less than the second card's suit;
  */
 template<typename T, typename S>
-bool lessRank(const Card<T, S> &card1, const Card<T, S> &card2)
+bool lessRank(const Card<T, S> &leftCard, const Card<T, S> &rightCard)
 {
-    if (card1.myRank < card2.myRank || (card1.myRank == card2.myRank && card1.mySuit < card2.mySuit)){
+    if (leftCard.myRank < rightCard.myRank || (leftCard.myRank == rightCard.myRank && leftCard.mySuit < rightCard.mySuit)){
         return true;
     }
     
@@ -45,15 +45,15 @@ bool lessRank(const Card<T, S> &card1, const Card<T, S> &card2)
 
 /**
  * @brief Compare the suit of two sets of card
- * @param card1 the first card set
- * @param card2 the second card set
+ * @param leftCard the first card set
+ * @param rightCard the second card set
  * @return true if the first card's suit is less than the second card's suit,
  * or if they are of the same rank if the first card's rank is less than the second card's rank;
  */
 template<typename T, typename S>
-bool lessSuit(const Card<T, S> &card1, const Card<T, S> &card2)
+bool lessSuit(const Card<T, S> &leftCard, const Card<T, S> &rightCard)
 {
-    if (card1.mySuit < card2.mySuit || (card1.mySuit == card2.mySuit && card1.myRank < card1.myRank)) {
+    if (leftCard.mySuit < rightCard.mySuit || (leftCard.mySuit == rightCard.mySuit && leftCard.myRank < leftCard.myRank)) {
         return true;
     }
     

@@ -21,7 +21,7 @@ class GoFishGame : public Game
     static_assert(std::is_base_of<CardSet<R, S>, D>::value, "DeckType must be derived from CardSet<RankType, SuitType>");
 public:
     // default constructor
-    GoFishGame(int argc, const char* argv[]);
+    GoFishGame(int argc, const char *argv[]);
     virtual ~GoFishGame() = default;
     virtual int play();
     /** 

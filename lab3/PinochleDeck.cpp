@@ -97,8 +97,8 @@ PinochleDeck::PinochleDeck()
         {
             Card<PinochleRank, Suit> myCard(i, j);
             myCardSet.push_back(myCard);
-            Card<PinochleRank, Suit> myCard2(i, j);
-            myCardSet.push_back(myCard2);
+//            Card<PinochleRank, Suit> myCard2(i, j);
+            myCardSet.push_back(myCard);
         }
     }
 }
