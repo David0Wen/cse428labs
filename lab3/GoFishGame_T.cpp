@@ -97,7 +97,7 @@ bool GoFishGame<S, R, D>::collect_books(int playerNum) {
 template <typename S, typename R, typename D>
 bool GoFishGame<S, R, D>::turn(int playerNum)
 {
-    for (int i = 0; i < playerNames.size(); i++)
+    for (size_t i = 0; i < playerNames.size(); i++)
     {
         std::cout << "Player " << playerNames[i] << ", ID: " << i + 1 << std::endl;
         std::cout << "Current hand: " << std::endl;
