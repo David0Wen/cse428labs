@@ -156,18 +156,11 @@ int HoldEmGame::play()
         // Iterate through the vector to perform hand evaluation
         for (auto &playerState : playerHandInfos)
         {
-//            // Combine the player's hand with the common board
-//            std::vector<Card<HoldEmRank, Suit> >* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-//            std::vector<Card<HoldEmRank, Suit> >* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
-//
-//            // Combine the player's hand with the common board
-//            playerSetPtr->insert(playerSetPtr->end(), boardSetPtr->begin(), boardSetPtr->end());
 
             // Combine the player's hand with the common board
             playerState.playerHand.addCards(commonBoard);
 
             // Evaluate the hand using hand evaluation function
-//            HoldEmHandRank rank = holdem_hand_evaluation(playerState.playerHand);
             HoldEmHandRank rank = holdem_hand_evaluation(playerState.playerHand);
 
             // Update the player's hand rank
@@ -175,16 +168,7 @@ int HoldEmGame::play()
         }
 
         // Sort the Card in each playerHand
-//        for (auto &playerState : playerHandInfos) {
-//            std::vector<Card<HoldEmRank, Suit> >* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-//
-//            std::sort(playerSetPtr->begin(), playerSetPtr->end(), lessRank<HoldEmRank, Suit>);
-//            std::reverse(playerSetPtr->begin(), playerSetPtr->end());
-//        }
-
-        // Sort the Card in each playerHand
         for (auto &playerState : playerHandInfos) {
-//            std::sort(playerState.playerHand.begin(), playerState.playerHand.end(), lessRank<HoldEmRank, Suit>);
             playerState.playerHand.sort();
             std::reverse(playerState.playerHand.begin(), playerState.playerHand.end());
         }
@@ -241,16 +225,10 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
     // Sort by rank and then suit (if needed)
     handCopy.sort();
 
-//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-//    std::vector< Card<HoldEmRank, Suit> > mySet = handCopy.*setPtr;
-
     std::vector<Card<HoldEmRank, Suit> > mySet(handCopy.begin(), handCopy.end());
 
-    // Sort by rank and then suit (if needed)
-//    std::sort(mySet.begin(), mySet.end(), lessRank<HoldEmRank, Suit>);
     // vector in descending order
     std::reverse(mySet.begin(), mySet.end());
-
 
     // return undefined if there are fewer or more than five cards in the hand
     if (mySet.size() != boardMax) {
@@ -381,9 +359,6 @@ std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector
  * @return Returns true if the left hand is superior, false otherwise
  */
 bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<HoldEmRank, Suit> &rightHand, size_t length, HoldEmHandRank next) {
-//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-//    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHand.*setPtr);
-//    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHand.*setPtr);
     std::vector<Card<HoldEmRank, Suit> > myLeftSet(leftHand.begin(), leftHand.end());
     std::vector<Card<HoldEmRank, Suit> > myRightSet(rightHand.begin(), rightHand.end());
 
@@ -427,9 +402,6 @@ bool operator<(const HoldEmGame::PlayerState &lps, const HoldEmGame::PlayerState
     CardSet<HoldEmRank, Suit> leftHandCopy(lps.playerHand);
     CardSet<HoldEmRank, Suit> rightHandCopy(rps.playerHand);
 
-//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-//    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHandCopy.*setPtr);
-//    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHandCopy.*setPtr);
     std::vector<Card<HoldEmRank, Suit> > myLeftSet(leftHandCopy.begin(), leftHandCopy.end());
     std::vector<Card<HoldEmRank, Suit> > myRightSet(rightHandCopy.begin(), rightHandCopy.end());
 

@@ -44,8 +44,6 @@ public:
     // Overloading the >> operator to perform two CardSet objects
     CardSet<rank_type, suit_type> &operator>>(CardSet<rank_type, suit_type> &);
 
-//    // Get the pointer to the object's vector data member
-//    static std::vector<card_type > CardSet<R, S>::* getSetPtr();
     // return an iterator to the start of myCardSet
     card_iter begin();
     // return an iterator to the end of myCardSet
