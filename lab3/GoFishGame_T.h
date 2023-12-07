@@ -1,7 +1,7 @@
 /**
  * File: GoFishGame_T.h
  * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
- * Purpose: Declaration of types related to an Uno deck
+ * Purpose: Declaration of GoFishGame
  */
 #pragma once
 
