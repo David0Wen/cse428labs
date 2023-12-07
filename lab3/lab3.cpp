@@ -55,15 +55,15 @@ std::shared_ptr<Game> create(int argc, const char* argv[]) {
             new_argv = create_new_argv(argv, argc);
             if (strcmp(argv[2], "HoldEm") == 0)
             {
-                myGamePtr = std::make_shared<GoFishGame<Suit, HoldEmRank, HoldEmDeck>>(argc, new_argv);
+                myGamePtr = std::make_shared<GoFishGame<Suit, HoldEmRank, HoldEmDeck> >(argc, new_argv);
             }
             else if (strcmp(argv[2], "Pinochle") == 0)
             {
-                myGamePtr = std::make_shared<GoFishGame<Suit, PinochleRank, PinochleDeck>>(argc, new_argv);
+                myGamePtr = std::make_shared<GoFishGame<Suit, PinochleRank, PinochleDeck> >(argc, new_argv);
             }
             else if (strcmp(argv[2], "Uno") == 0)
             {
-                myGamePtr = std::make_shared<GoFishGame<Color, UnoRank, UnoDeck>>(argc, new_argv);
+                myGamePtr = std::make_shared<GoFishGame<Color, UnoRank, UnoDeck> >(argc, new_argv);
             }
             else {
                 throw std::invalid_argument("Must provide valid Deck for GoFish: HoldEm, Pinochle or Uno");

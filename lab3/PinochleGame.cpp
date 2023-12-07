@@ -175,7 +175,7 @@ std::ostream &operator<<(std::ostream &os, const PinochleMelds &meld)
 * @param end The end iterator of the given interval
 * @return True if have four different suit
 */
-bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit>>::iterator &beg, const std::vector<Card<PinochleRank, Suit>>::iterator &end, PinochleRank myRank)
+bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit> >::iterator &beg, const std::vector<Card<PinochleRank, Suit> >::iterator &end, PinochleRank myRank)
 {
     bool hasClubs = std::any_of(beg, end, [=](const Card<PinochleRank, Suit> &obj) {
         return obj.myRank == myRank && obj.mySuit == Suit::clubs;

@@ -157,8 +157,8 @@ int HoldEmGame::play()
         for (auto &playerState : playerHandInfos)
         {
 //            // Combine the player's hand with the common board
-//            std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-//            std::vector<Card<HoldEmRank, Suit>>* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
+//            std::vector<Card<HoldEmRank, Suit> >* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
+//            std::vector<Card<HoldEmRank, Suit> >* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
 //
 //            // Combine the player's hand with the common board
 //            playerSetPtr->insert(playerSetPtr->end(), boardSetPtr->begin(), boardSetPtr->end());
@@ -176,7 +176,7 @@ int HoldEmGame::play()
 
         // Sort the Card in each playerHand
 //        for (auto &playerState : playerHandInfos) {
-//            std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
+//            std::vector<Card<HoldEmRank, Suit> >* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
 //
 //            std::sort(playerSetPtr->begin(), playerSetPtr->end(), lessRank<HoldEmRank, Suit>);
 //            std::reverse(playerSetPtr->begin(), playerSetPtr->end());
@@ -244,7 +244,7 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
 //    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
 //    std::vector< Card<HoldEmRank, Suit> > mySet = handCopy.*setPtr;
 
-    std::vector<Card<HoldEmRank, Suit>> mySet(handCopy.begin(), handCopy.end());
+    std::vector<Card<HoldEmRank, Suit> > mySet(handCopy.begin(), handCopy.end());
 
     // Sort by rank and then suit (if needed)
 //    std::sort(mySet.begin(), mySet.end(), lessRank<HoldEmRank, Suit>);

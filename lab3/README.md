@@ -47,8 +47,8 @@ playerSet.insert(playerSet.end(), boardSet.begin(), boardSet.end());
 The combination did't work at first. Then we found that the variable was defined and only modified in the for loop scope. So we change to use pointer to change the value in the real playerState's cardSet.
 
 ``` C++
-std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-std::vector<Card<HoldEmRank, Suit>>* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
+std::vector<Card<HoldEmRank, Suit> >* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
+std::vector<Card<HoldEmRank, Suit> >* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
 
 playerSetPtr->insert(playerSetPtr->end(), boardSetPtr->begin(), boardSetPtr->end());
 ```
