@@ -23,7 +23,13 @@ public:
     // default constructor
     GoFishGame(int argc, const char *argv[]);
     virtual ~GoFishGame() = default;
+
+    /** 
+     * @brief start GoFish Game
+     * @return int represent execution status
+     */
     virtual int play();
+    
     /** 
      * @brief  checks if there is a 4-of-a-kind in that player's hand 
      * @param playerNum the index of the palyer
@@ -32,13 +38,19 @@ public:
     bool collect_books(int playerNum);
 
 protected:
+    // Total player #
     int numPlayers;
+    // The deck used in GoFish
     D myDeck;
+    // Different hand cards and books collected for each player in input order
     std::vector<CardSet<R, S> > playerHands;
     std::vector<CardSet<R, S> > playerBooks;
     std::vector<int> playerBooksNum;
+    // Players id who has lost the game
     std::vector<int> outPlayers;
+    // For different deck of cards, there will be different instruction prompts to input rank
     static const std::vector<std::string> rankInstructions;
+    // Which deck the game is using, serve as the index for rankInstructions
     int deckID;
 
     /** 
@@ -48,6 +60,9 @@ protected:
      */
     bool turn(int playerNum);
 
+    /** 
+     * @brief deal cards at the beginning of GoFish
+     */
     virtual void deal();
 };
 
