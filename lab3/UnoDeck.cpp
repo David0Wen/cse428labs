@@ -6,7 +6,7 @@
  * @param rank the object you want to output
  * @return the reference of the input ostream
  */
-std::ostream& operator<<(std::ostream& os, const UnoRank& rank) {
+std::ostream &operator<<(std::ostream &os, const UnoRank &rank) {
     switch (rank) {
         // Handle each UnoRank case, converting it to a string
         case UnoRank::zero: os << "0"; break;
@@ -35,7 +35,7 @@ std::ostream& operator<<(std::ostream& os, const UnoRank& rank) {
  * @param rank the object you want to increase
  * @return the reference of the UnoRank after increase
  */
-UnoRank& operator++(UnoRank& rank) {
+UnoRank &operator++(UnoRank &rank) {
     if (rank == UnoRank::undefined) {
         // If already undefined, remain unchanged
         return rank;
@@ -51,7 +51,7 @@ UnoRank& operator++(UnoRank& rank) {
  * @param color the object you want to output
  * @return the reference of the input ostream
  */
-std::ostream& operator<<(std::ostream& os, const Color& color) {
+std::ostream &operator<<(std::ostream &os, const Color &color) {
     switch (color) {
         case Color::red: os << "Red"; break;
         case Color::blue: os << "Blue"; break;
@@ -68,7 +68,7 @@ std::ostream& operator<<(std::ostream& os, const Color& color) {
  * @param color the object you want to increase
  * @return the reference of the color after increase
  */
-Color& operator++(Color& color) {
+Color &operator++(Color &color) {
     if (color == Color::undefined) {
         // If already undefined, remain unchanged
         return color;

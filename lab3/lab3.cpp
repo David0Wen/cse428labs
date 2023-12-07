@@ -23,10 +23,10 @@ const int INVALIDPTR = 4;
 const int OTHERERROR = 5;
 
 
-const char** create_new_argv(const char* argv[], int& argc) {
+const char** create_new_argv(const char *argv[], int &argc) {
     // Allocate new_argv with one less argument
     int new_argc = argc - 1; // Update the new_argc
-    const char** new_argv = new const char* [new_argc + 1]; // +1 for the null terminator
+    const char** new_argv = new const char *[new_argc + 1]; // +1 for the null terminator
 
     // opy the arguments except the third one
     for (int i = 0, j = 0; i < argc; i++) {
@@ -55,15 +55,15 @@ std::shared_ptr<Game> create(int argc, const char* argv[]) {
             new_argv = create_new_argv(argv, argc);
             if (strcmp(argv[2], "HoldEm") == 0)
             {
-                myGamePtr = std::make_shared<GoFishGame<Suit, HoldEmRank, HoldEmDeck>>(argc, new_argv);
+                myGamePtr = std::make_shared<GoFishGame<Suit, HoldEmRank, HoldEmDeck> >(argc, new_argv);
             }
             else if (strcmp(argv[2], "Pinochle") == 0)
             {
-                myGamePtr = std::make_shared<GoFishGame<Suit, PinochleRank, PinochleDeck>>(argc, new_argv);
+                myGamePtr = std::make_shared<GoFishGame<Suit, PinochleRank, PinochleDeck> >(argc, new_argv);
             }
             else if (strcmp(argv[2], "Uno") == 0)
             {
-                myGamePtr = std::make_shared<GoFishGame<Color, UnoRank, UnoDeck>>(argc, new_argv);
+                myGamePtr = std::make_shared<GoFishGame<Color, UnoRank, UnoDeck> >(argc, new_argv);
             }
             else {
                 throw std::invalid_argument("Must provide valid Deck for GoFish: HoldEm, Pinochle or Uno");
@@ -71,7 +71,7 @@ std::shared_ptr<Game> create(int argc, const char* argv[]) {
             delete[] new_argv;
             new_argv = nullptr;
         }
-        catch (const std::exception& e)
+        catch (const std::exception &e)
         {
             if (new_argv != nullptr)
             {
@@ -85,7 +85,7 @@ std::shared_ptr<Game> create(int argc, const char* argv[]) {
 }
 
 // Function to display correct usage of the program
-void usage(std::ostream& os) {
+void usage(std::ostream &os) {
     os << "Usage: lab3 <Game> [<Deck>] <Players>" << std::endl;
     os << "Game should be either Pinochle, HoldEm, or GoFish." << std::endl;
     os << "Pinochle needs 4 players." << std::endl;
@@ -142,7 +142,7 @@ int main(int argc, const char* argv[]) {
             return INVALIDPTR;
         }
     }
-    catch (const std::exception& e)
+    catch (const std::exception &e)
     {
         std::cerr << e.what() << std::endl;
         return OTHERERROR;

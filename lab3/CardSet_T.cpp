@@ -58,17 +58,6 @@ CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
     return *this;
 }
 
-///**
-// * @brief Controlled violation of encapsulation: get the pointer to the protected vector data memeber
-// *
-// * @return The pointer to the object member: "myCardSet" which can be modified
-// */
-//template<typename R, typename S>
-//std::vector<card_type > CardSet<R, S>::* CardSet<R, S>::getSetPtr()
-//{
-//    return &CardSet<R, S>::myCardSet;
-//}
-
 /**
  * @brief Return an iterator to the start of myCardSet
  * @return The start of myCardSet

@@ -17,7 +17,7 @@ const int boardMax = 5;
 
 
 // Static list, assigning all possible melds(enum) with different names
-const char* HoldEmGame::RankNames[] = {
+const char *HoldEmGame::RankNames[] = {
     "High Card", "Pair", "Two Pair", "Three of a Kind", "Straight",
     "Flush", "Full House", "Four of a Kind", "Straight Flush", "Undefined"
 };
@@ -156,18 +156,11 @@ int HoldEmGame::play()
         // Iterate through the vector to perform hand evaluation
         for (auto &playerState : playerHandInfos)
         {
-//            // Combine the player's hand with the common board
-//            std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-//            std::vector<Card<HoldEmRank, Suit>>* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
-//
-//            // Combine the player's hand with the common board
-//            playerSetPtr->insert(playerSetPtr->end(), boardSetPtr->begin(), boardSetPtr->end());
 
             // Combine the player's hand with the common board
             playerState.playerHand.addCards(commonBoard);
 
             // Evaluate the hand using hand evaluation function
-//            HoldEmHandRank rank = holdem_hand_evaluation(playerState.playerHand);
             HoldEmHandRank rank = holdem_hand_evaluation(playerState.playerHand);
 
             // Update the player's hand rank
@@ -175,16 +168,7 @@ int HoldEmGame::play()
         }
 
         // Sort the Card in each playerHand
-//        for (auto &playerState : playerHandInfos) {
-//            std::vector<Card<HoldEmRank, Suit>>* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-//
-//            std::sort(playerSetPtr->begin(), playerSetPtr->end(), lessRank<HoldEmRank, Suit>);
-//            std::reverse(playerSetPtr->begin(), playerSetPtr->end());
-//        }
-
-        // Sort the Card in each playerHand
         for (auto &playerState : playerHandInfos) {
-//            std::sort(playerState.playerHand.begin(), playerState.playerHand.end(), lessRank<HoldEmRank, Suit>);
             playerState.playerHand.sort();
             std::reverse(playerState.playerHand.begin(), playerState.playerHand.end());
         }
@@ -241,16 +225,10 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
     // Sort by rank and then suit (if needed)
     handCopy.sort();
 
-//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-//    std::vector< Card<HoldEmRank, Suit> > mySet = handCopy.*setPtr;
+    std::vector<Card<HoldEmRank, Suit> > mySet(handCopy.begin(), handCopy.end());
 
-    std::vector<Card<HoldEmRank, Suit>> mySet(handCopy.begin(), handCopy.end());
-
-    // Sort by rank and then suit (if needed)
-//    std::sort(mySet.begin(), mySet.end(), lessRank<HoldEmRank, Suit>);
     // vector in descending order
     std::reverse(mySet.begin(), mySet.end());
-
 
     // return undefined if there are fewer or more than five cards in the hand
     if (mySet.size() != boardMax) {
@@ -259,7 +237,7 @@ HoldEmHandRank HoldEmGame::holdem_hand_evaluation(const CardSet<HoldEmRank, Suit
 
     // return straightflush if all five cards are of the same suit and their ranks are consecutive (with the special rule that A 2 3 4 5 of the same suit and 10 J Q K A of the same suit are the lowest and highest valid straight flushes respectively, but that any hand with cards ranked K A 2 is not considered a straight flush)
     bool isSameSuit = std::all_of(mySet.begin(), mySet.end(),
-                                  [&mySet](const Card<HoldEmRank, Suit>& card) {return card.mySuit == mySet[0].mySuit;});
+                                  [&mySet](const Card<HoldEmRank, Suit> &card) {return card.mySuit == mySet[0].mySuit;});
     bool isConsecutive = true;
     for (size_t i = 1; i < mySet.size(); ++i) {
         if (static_cast<int>(mySet[i].myRank) - static_cast<int>(mySet[i - 1].myRank) != -1) {
@@ -351,7 +329,7 @@ HoldEmGame::PlayerState::PlayerState(CardSet<HoldEmRank, Suit> handSet, size_t p
  * @param length The length of the card combination to be checked
  * @return A tuple containing the starting index of the combination in the hand and the rank of the cards
  */
-std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector< Card<HoldEmRank, Suit> >& hand, size_t length) {
+std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector< Card<HoldEmRank, Suit> > &hand, size_t length) {
     for (size_t index = 0; index <= hand.size() - length; ++index) {
         bool returnFlag = true;
         for (size_t i = 1; i < length; i++)
@@ -380,10 +358,7 @@ std::tuple<size_t, HoldEmRank> HoldEmGame::extractMultiFromSet(const std::vector
  * @param next The next hand rank to be used for comparison in case of a tie
  * @return Returns true if the left hand is superior, false otherwise
  */
-bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<HoldEmRank, Suit>& rightHand, size_t length, HoldEmHandRank next) {
-//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-//    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHand.*setPtr);
-//    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHand.*setPtr);
+bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<HoldEmRank, Suit> &rightHand, size_t length, HoldEmHandRank next) {
     std::vector<Card<HoldEmRank, Suit> > myLeftSet(leftHand.begin(), leftHand.end());
     std::vector<Card<HoldEmRank, Suit> > myRightSet(rightHand.begin(), rightHand.end());
 
@@ -411,7 +386,7 @@ bool HoldEmGame::compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<Ho
  * @param rps The PlayerState object on the right
  * @return true if the left-hand side PlayerState is considered "less than" the right
  */
-bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState& rps) {
+bool operator<(const HoldEmGame::PlayerState &lps, const HoldEmGame::PlayerState &rps) {
 
     // The cases handset not equal
     if (lps.handRank < rps.handRank) {
@@ -427,9 +402,6 @@ bool operator<(const HoldEmGame::PlayerState& lps, const HoldEmGame::PlayerState
     CardSet<HoldEmRank, Suit> leftHandCopy(lps.playerHand);
     CardSet<HoldEmRank, Suit> rightHandCopy(rps.playerHand);
 
-//    std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-//    std::vector< Card<HoldEmRank, Suit> >* myLeftSet = &(leftHandCopy.*setPtr);
-//    std::vector< Card<HoldEmRank, Suit> >* myRightSet = &(rightHandCopy.*setPtr);
     std::vector<Card<HoldEmRank, Suit> > myLeftSet(leftHandCopy.begin(), leftHandCopy.end());
     std::vector<Card<HoldEmRank, Suit> > myRightSet(rightHandCopy.begin(), rightHandCopy.end());
 

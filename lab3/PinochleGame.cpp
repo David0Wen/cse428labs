@@ -15,7 +15,7 @@ const int packetSize = 3;
 const int allSuitsNum = 8;
 
 // Static list, assigning all possible melds(enum) with different names
-const char* PinochleGame::MeldNames[] = {
+const char *PinochleGame::MeldNames[] = {
     "dix", "offsuitmarriage", "fortyjacks", "pinochle", "insuitmarriage",
     "sixtyqueens", "eightykings", "hundredaces", "insuitrun", "doublepinochle",
     "fourhundredjacks", "sixhundredqueens", "eighthundredkings", "thousandaces", "insuitdoublerun"
@@ -75,7 +75,7 @@ void PinochleGame::deal()
             }
         }
     }
-    catch (const std::runtime_error& e) {
+    catch (const std::runtime_error &e) {
         std::cerr << "Caught exception: " << e.what() << std::endl;
     }
 }
@@ -175,7 +175,7 @@ std::ostream &operator<<(std::ostream &os, const PinochleMelds &meld)
 * @param end The end iterator of the given interval
 * @return True if have four different suit
 */
-bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit>>::iterator &beg, const std::vector<Card<PinochleRank, Suit>>::iterator &end, PinochleRank myRank)
+bool PinochleGame::isFourSuits(const std::vector<Card<PinochleRank, Suit> >::iterator &beg, const std::vector<Card<PinochleRank, Suit> >::iterator &end, PinochleRank myRank)
 {
     bool hasClubs = std::any_of(beg, end, [=](const Card<PinochleRank, Suit> &obj) {
         return obj.myRank == myRank && obj.mySuit == Suit::clubs;
@@ -204,12 +204,8 @@ void PinochleGame::suit_independent_evaluation(const CardSet<PinochleRank, Suit>
     // Sort by rank and then suit (if needed)
     handCopy.sort();
 
-//    std::vector< Card<PinochleRank, Suit> > CardSet<PinochleRank, Suit>::* setPtr = CardSet<PinochleRank, Suit>::getSetPtr();
-//    std::vector< Card<PinochleRank, Suit> > mySet = handCopy.*setPtr;
     std::vector< Card<PinochleRank, Suit> > mySet(handCopy.begin(), handCopy.end());
 
-//    // Sort by rank and then suit (if needed)
-//    std::sort(mySet.begin(), mySet.end(), lessRank<PinochleRank, Suit>);
     // vector in decending order
     std::reverse(mySet.begin(), mySet.end());
 

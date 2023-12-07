@@ -29,13 +29,13 @@ enum class UnoRank{
 };
 
 // Output the UnoRank to ostream
-std::ostream& operator<<(std::ostream& os, const UnoRank& rank);
+std::ostream &operator<<(std::ostream &os, const UnoRank &rank);
 /** 
  * @brief implentation operators ++ for UnoRank, iterate the UnoRank to the next
  * @param rank the object you want to increase
  * @return the reference of the UnoRank after increase
  */
-UnoRank& operator++(UnoRank& rank);
+UnoRank &operator++(UnoRank &rank);
 
 /** 
  * @brief implentation operators << for Color, Output the Color to std::ostream
@@ -43,14 +43,14 @@ UnoRank& operator++(UnoRank& rank);
  * @param color the object you want to output
  * @return the reference of the input ostream
  */
-std::ostream& operator<<(std::ostream& os, const Color& color);
+std::ostream &operator<<(std::ostream &os, const Color &color);
 
 /** 
  * @brief implentation operators ++ for Color, iterate the Color to the next
  * @param color the object you want to increase
  * @return the reference of the color after increase
  */
-Color& operator++(Color& color);
+Color &operator++(Color &color);
 
 // define Uno Deck derived from Deck class
 class UnoDeck : public Deck<UnoRank, Color>
