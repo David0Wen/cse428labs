@@ -74,13 +74,13 @@ bool GoFishGame<S, R, D>::collect_books(int playerNum) {
     auto& hand = playerHands[playerNum - 1];
     // Start from 0 (cast to R) and iterate until the rank before 'undefined'
     for (R rank = static_cast<R>(0); rank < R::undefined; ++rank) {
-        size_t count = std::count_if(hand.begin(), hand.end(), [rank](const Card<R, S>& card) {
+        size_t count = std::count_if(hand.begin(), hand.end(), [rank](const typename CardSet<R, S>::card_type &card) {
             return card.myRank == rank;
             });
 
         if (count == 4) {
             // Collect all cards of this rank
-            auto predicate = [rank](const Card<R, S>& card) { return card.myRank == rank; };
+            auto predicate = [rank](const typename CardSet<R, S>::card_type& card) { return card.myRank == rank; };
             playerBooks[playerNum - 1].collect_if(hand, predicate);
             playerBooksNum[playerNum - 1] += 1;
             return true;

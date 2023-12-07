@@ -19,9 +19,19 @@ class CardSet
 
 protected:
     // A vector to hold Card objects
-        std::vector<Card<R, S> > myCardSet;
+    std::vector<Card<R, S> > myCardSet;
 
 public:
+
+    // type specifiers for Card
+    typedef Card<R, S> card_type;
+    // type specifiers for Suit
+    typedef S suit_type;
+    // type specifiers for Rank
+    typedef R rank_type;
+    // type specifier for the iterator
+    typedef typename std::vector<Card<R, S> >::iterator card_iter;
+
     // default Constructor
     CardSet() = default;
     // Copy Constructor, the default copy constructor in this case is sufficient, since it peforms deep copy towards enum class.
@@ -35,30 +45,21 @@ public:
     CardSet<R, S> &operator>>(CardSet<R, S> &);
 
 //    // Get the pointer to the object's vector data member
-//    static std::vector<Card<R, S> > CardSet<R, S>::* getSetPtr();
+//    static std::vector<card_type > CardSet<R, S>::* getSetPtr();
     // return an iterator to the start of myCardSet
-    typename std::vector<Card<R, S>>::iterator begin();
+    card_iter begin();
     // return an iterator to the end of myCardSet
-    typename std::vector<Card<R, S>>::iterator end();
+    card_iter end();
     // use std::sort for the CardSet
     void sort();
     // Add cards from another CardSet
     void addCards(CardSet<R, S> &);
 
-    // type specifiers for Card
-    typedef Card<R, S> card_type;
-    // type specifiers for Suit
-    typedef S suit_type;
-    // type specifiers for Rank
-    typedef R rank_type;
-    // type specifier for the iterator
-    typedef typename std::vector<Card<R, S>>::iterator iter;
-
     // Move cards from another CardSet into this Deck
     void collect(CardSet<R, S> &);
 
     // Collect cards that match certain criteria
-    void collect_if(CardSet<R, S> &, std::function<bool(Card<R, S>&)> );
+    void collect_if(CardSet<R, S> &, std::function<bool(card_type&)> );
 
     // Request specific Card form another CardSet
     bool request(CardSet<R, S> &, const R &);

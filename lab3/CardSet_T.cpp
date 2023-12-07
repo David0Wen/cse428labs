@@ -17,7 +17,7 @@ template<typename R, typename S>
 void CardSet<R, S>::print(std::ostream &os, size_t linesize)
 {
     size_t index = 0;
-    typename std::vector<Card<R, S> >::iterator iter = myCardSet.begin();
+    card_iter iter = myCardSet.begin();
     for (; iter != myCardSet.end(); ++iter)
     {
         ++index;
@@ -64,7 +64,7 @@ CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
 // * @return The pointer to the object member: "myCardSet" which can be modified
 // */
 //template<typename R, typename S>
-//std::vector<Card<R, S> > CardSet<R, S>::* CardSet<R, S>::getSetPtr()
+//std::vector<card_type > CardSet<R, S>::* CardSet<R, S>::getSetPtr()
 //{
 //    return &CardSet<R, S>::myCardSet;
 //}
@@ -74,7 +74,7 @@ CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
  * @return The start of myCardSet
  */
 template<typename R, typename S>
-typename std::vector<Card<R, S> >::iterator CardSet<R, S>::begin() {
+typename CardSet<R, S>::card_iter CardSet<R, S>::begin() {
     return myCardSet.begin();
 }
 
@@ -83,7 +83,7 @@ typename std::vector<Card<R, S> >::iterator CardSet<R, S>::begin() {
  * @return The end of myCardSet
  */
 template<typename R, typename S>
-typename std::vector<Card<R, S> >::iterator CardSet<R, S>::end() {
+typename CardSet<R, S>::card_iter CardSet<R, S>::end() {
     return myCardSet.end();
 }
 
@@ -123,8 +123,8 @@ void CardSet<R, S>::collect(CardSet<R, S> &other) {
  * @param predicate to determine whether a Card should be collected
  */
 template<typename R, typename S>
-void CardSet<R, S>::collect_if(CardSet<R, S> &deck, std::function<bool(Card<R, S>&)> predicate) {
-    std::vector<Card<R, S>> temp;
+void CardSet<R, S>::collect_if(CardSet<R, S> &deck, std::function<bool(card_type&)> predicate) {
+    std::vector<card_type> temp;
     std::copy_if(deck.begin(), deck.end(), std::back_inserter(temp), predicate);
 
     myCardSet.insert(myCardSet.end(), temp.begin(), temp.end());
@@ -142,7 +142,7 @@ void CardSet<R, S>::collect_if(CardSet<R, S> &deck, std::function<bool(Card<R, S
  */
 template<typename R, typename S>
 bool CardSet<R, S>::request(CardSet<R, S> &other, const R &rank) {
-    auto it = std::find_if(other.begin(), other.end(), [&rank](const Card<R, S>& card) {
+    auto it = std::find_if(other.begin(), other.end(), [&rank](const card_type &card) {
         return card.myRank == rank;
     });
 
