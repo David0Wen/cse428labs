@@ -17,7 +17,7 @@ const int boardMax = 5;
 
 
 // Static list, assigning all possible melds(enum) with different names
-const char* HoldEmGame::RankNames[] = {
+const char *HoldEmGame::RankNames[] = {
     "High Card", "Pair", "Two Pair", "Three of a Kind", "Straight",
     "Flush", "Full House", "Four of a Kind", "Straight Flush", "Undefined"
 };

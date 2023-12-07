@@ -23,10 +23,10 @@ const int INVALIDPTR = 4;
 const int OTHERERROR = 5;
 
 
-const char** create_new_argv(const char* argv[], int &argc) {
+const char** create_new_argv(const char *argv[], int &argc) {
     // Allocate new_argv with one less argument
     int new_argc = argc - 1; // Update the new_argc
-    const char** new_argv = new const char* [new_argc + 1]; // +1 for the null terminator
+    const char** new_argv = new const char *[new_argc + 1]; // +1 for the null terminator
 
     // opy the arguments except the third one
     for (int i = 0, j = 0; i < argc; i++) {

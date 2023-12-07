@@ -15,7 +15,7 @@ const int packetSize = 3;
 const int allSuitsNum = 8;
 
 // Static list, assigning all possible melds(enum) with different names
-const char* PinochleGame::MeldNames[] = {
+const char *PinochleGame::MeldNames[] = {
     "dix", "offsuitmarriage", "fortyjacks", "pinochle", "insuitmarriage",
     "sixtyqueens", "eightykings", "hundredaces", "insuitrun", "doublepinochle",
     "fourhundredjacks", "sixhundredqueens", "eighthundredkings", "thousandaces", "insuitdoublerun"
