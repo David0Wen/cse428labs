@@ -1,3 +1,8 @@
+/**
+ * File: UnoDeck.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Implementation of types related to Uno deck
+ */
 #include "UnoDeck.h"
 
 /** 

@@ -1,3 +1,8 @@
+/**
+ * File: GoFishGame_T.cpp
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Implementation of GoFishGame
+ */
 #include "GoFishGame_T.h"
 
 template <typename S, typename R, typename D>
