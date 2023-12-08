@@ -83,6 +83,9 @@ Color &operator++(Color &color) {
     return color;
 }
 
+const int NUM_NORMAL_CARDS_PER_COLOR = 2;
+const int NUM_SPECIAL_CARDS = 4;
+
 // Default constructor for the UnoDeck class
 // Initializes the deck with 112 cards
 // 1. One red, one blue, one green, and one yellow card of rank zero;
@@ -100,7 +103,7 @@ UnoDeck::UnoDeck()
     {
         for (Color j = Color::red; j != Color::black; ++j)
         {
-            for (int cnt = 0; cnt < 2; ++cnt)
+            for (int cnt = 0; cnt < NUM_NORMAL_CARDS_PER_COLOR; ++cnt)
             {
                 Card<UnoRank, Color> myCard(i, j);
                 myCardSet.push_back(myCard);
@@ -110,7 +113,7 @@ UnoDeck::UnoDeck()
 
     for (UnoRank i = UnoRank::drawfour; i != UnoRank::undefined; ++i)
     {
-        for (int cnt = 0; cnt < 4; ++cnt)
+        for (int cnt = 0; cnt < NUM_SPECIAL_CARDS; ++cnt)
         {
             Card<UnoRank, Color> myCard(i, Color::black);
             myCardSet.push_back(myCard);

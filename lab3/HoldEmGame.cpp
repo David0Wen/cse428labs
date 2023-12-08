@@ -14,6 +14,8 @@ const int playerCards = 2;
 const int flopCards = 3;
 // Maximum number of cards on the board
 const int boardMax = 5;
+// Number of card to print in state
+const int NUM_CARDS_STATE = 5;
 
 
 // Static list, assigning all possible melds(enum) with different names
@@ -185,7 +187,7 @@ int HoldEmGame::play()
         for (auto &playerState : playerHandInfos)
         {
             std::cout << "Player: " << playerNames[playerState.playerNameIndex] << std::endl;
-            std::cout << "Hand: "; playerState.playerHand.print(std::cout, 5);
+            std::cout << "Hand: "; playerState.playerHand.print(std::cout, NUM_CARDS_STATE);
             std::cout << "Rank: " << playerState.handRank << std::endl;
             std::cout << std::endl << std::endl;
         }
