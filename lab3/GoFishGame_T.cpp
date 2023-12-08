@@ -12,6 +12,8 @@ const std::vector<std::string> GoFishGame<S, R, D>::rankInstructions = {
     "For Uno Deck, rank is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, Skip, Reverse,\nDrawTwo, DrawFour, Wild, Blank; corresponding rank number is 0-15."
 };
 
+static const int NUM_CARDS = 4;
+
 // template specialization for HoldEmDeck
 template<>
 GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char *argv[]) : Game(argc - 1, argv) {
@@ -25,8 +27,8 @@ GoFishGame<Suit, HoldEmRank, HoldEmDeck>::GoFishGame(int argc, const char *argv[
         int count = std::count_if(myDeck.begin(), myDeck.end(),
             [currentRank](const auto &card) { return card.myRank == currentRank; });
 
-        if (count < 4) {
-            throw std::invalid_argument("Invalid deck: Must have at least 4 cards of each rank.");
+        if (count < NUM_CARDS) {
+            throw std::invalid_argument("Invalid deck: Must have at least " + std::to_string(NUM_CARDS) + " cards of each rank.");
         }
     }
 }
@@ -44,8 +46,8 @@ GoFishGame<Suit, PinochleRank, PinochleDeck>::GoFishGame(int argc, const char *a
         int count = std::count_if(myDeck.begin(), myDeck.end(),
             [currentRank](const auto &card) { return card.myRank == currentRank; });
 
-        if (count < 4) {
-            throw std::invalid_argument("Invalid deck: Must have at least 4 cards of each rank.");
+        if (count < NUM_CARDS) {
+            throw std::invalid_argument("Invalid deck: Must have at least " + std::to_string(NUM_CARDS) + " cards of each rank.");
         }
     }
 }
@@ -63,8 +65,8 @@ GoFishGame<Color, UnoRank, UnoDeck>::GoFishGame(int argc, const char *argv[]) : 
         int count = std::count_if(myDeck.begin(), myDeck.end(),
             [currentRank](const auto &card) { return card.myRank == currentRank; });
 
-        if (count < 4) {
-            throw std::invalid_argument("Invalid deck: Must have at least 4 cards of each rank.");
+        if (count < NUM_CARDS) {
+            throw std::invalid_argument("Invalid deck: Must have at least " + std::to_string(NUM_CARDS) + " cards of each rank.");
         }
     }
 }
@@ -83,7 +85,7 @@ bool GoFishGame<S, R, D>::collect_books(int playerNum) {
             return card.myRank == rank;
             });
 
-        if (count == 4) {
+        if (count == NUM_CARDS) {
             // Collect all cards of this rank
             auto predicate = [rank](const typename CardSet<R, S>::card_type &card) { return card.myRank == rank; };
             playerBooks[playerNum - 1].collect_if(hand, predicate);
@@ -199,13 +201,17 @@ bool GoFishGame<S, R, D>::turn(int playerNum)
     }
 }
 
+static const int NUM_PLAYERS = 2;
+static const int NUM_CARDS_SMALL_GAME = 7;
+static const int NUM_CARDS_LARGE_GAME = 5;
+
 /** 
  * @brief deal cards at the beginning of GoFish
  */
 template<typename S, typename R, typename D>
 void GoFishGame<S, R, D>::deal() {
     myDeck.shuffle();
-    int cardsPerPlayer = (numPlayers > 2) ? 5 : 7;
+    int cardsPerPlayer = (numPlayers > NUM_PLAYERS) ? NUM_CARDS_LARGE_GAME : NUM_CARDS_SMALL_GAME;
 
     for (int i = 0; i < cardsPerPlayer; ++i) {
         for (auto &hand : playerHands) {
