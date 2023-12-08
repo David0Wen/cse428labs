@@ -22,6 +22,12 @@ const int INVALIDGAMENAME = 3;
 const int INVALIDPTR = 4;
 const int OTHERERROR = 5;
 
+const int PINOCHLE_ARGNUM = 6;
+const int HOLDEM_ARGNUM_MAX = 11;
+const int HOLDEM_ARGNUM_MIN = 4;
+const int GOFISH_ARGNUM_MAX = 8;
+const int GOFISH_ARGNUM_MIN = 5;
+
 
 const char** create_new_argv(const char *argv[], int &argc) {
     // Allocate new_argv with one less argument
@@ -102,21 +108,21 @@ int main(int argc, const char* argv[]) {
     }
     // Check for Pinochle game-specific conditions
     else if (strcmp(argv[1], "Pinochle") == 0) {
-        if (argc != 6) {
+        if (argc != PINOCHLE_ARGNUM) {
             usage(std::cout);
             return INVALIDPLAYERNUM;
         }
     }
     // Check for HoldEm game-specific conditions
     else if (strcmp(argv[1], "HoldEm") == 0) {
-        if (argc < 4 || argc > 11) {
+        if (argc < HOLDEM_ARGNUM_MIN || argc > HOLDEM_ARGNUM_MAX) {
             usage(std::cout);
             return INVALIDPLAYERNUM;
         }
     }
     // Check for GoFish game-specific conditions
     else if (strcmp(argv[1], "GoFish") == 0) {
-        if (argc < 5 || argc > 8) {
+        if (argc < GOFISH_ARGNUM_MIN || argc > GOFISH_ARGNUM_MAX) {
             usage(std::cout);
             return INVALIDPLAYERNUM;
         }
