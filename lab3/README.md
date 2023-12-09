@@ -10,50 +10,90 @@
 
 ## Design decisions
 ### 8
-We didn't add our own copy constructor because the default copy constructor used in this case is deep copy. So the default constructor already satisfied the requirement.
 
-### 10
-To assign names to each melds, we create a static member string array to assign corresponding name to each enum numbers. Same method to assign points.
-
-### 13
-To ensure melds found in a previous hand should not be carried over into the next one - the vector must be empty before each call to the evaluation function, we define the melds vector as a local variable, so that when entering each loop, the melds vector will be re-initialized.
-
-### 14
-Same method as 10, we created a static member string array.
-
-### 16
-To store name of each player in our nested class, we decide to simply store the name index as an unsigned int, which should be the cooresponding name's index in the name array, solving the reference conflict.
-
-To compare the HandRank of Texas Hold'em, we apply a recursive manner, i.e., for two pairs, we firstly compare the first pair. If the first pair's rank is same, we simply delete the pair and reduce it to the pair case.
 
 ## Error observations
 
 ### Compile error/warning
 
-We don't have any compile error.
+#### 1
+``` C++
+In file included from GoFishGame_T.h:53,
+                 from lab3.cpp:15:
+GoFishGame_T.cpp: In instantiation of ‘void GoFishGame<S, R, D>::deal() [with S = Color; R = UnoRank; D = UnoDeck]’:
+GoFishGame_T.h:49:18:   required from here
+GoFishGame_T.cpp:179:24: error: no match for ‘operator>>’ (operand types are ‘UnoDeck’ and ‘CardSet<UnoRank, Color>*’)
+                 myDeck >> &hand;
+                 ~~~~~~~^~~~~~~~
+In file included from CardSet_T.h:70,
+                 from Deck_T.h:9,
+                 from PinochleDeck.h:14,
+                 from lab3.cpp:7:
+CardSet_T.cpp:50:16: note: candidate: ‘CardSet<R, S>& CardSet<R, S>::operator>>(CardSet<R, S>&) [with R = UnoRank; S = Color]’
+ CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
+                ^~~~~~~~~~~~~
+CardSet_T.cpp:50:16: note:   no known conversion for argument 1 from ‘CardSet<UnoRank, Color>*’ to ‘CardSet<UnoRank, Color>&’
+In file included from GoFishGame_T.h:53,
+                 from lab3.cpp:15:
+GoFishGame_T.cpp: In instantiation of ‘void GoFishGame<S, R, D>::deal() [with S = Suit; R = PinochleRank; D = PinochleDeck]’:
+GoFishGame_T.h:49:18:   required from here
+GoFishGame_T.cpp:179:24: error: no match for ‘operator>>’ (operand types are ‘PinochleDeck’ and ‘CardSet<PinochleRank, Suit>*’)
+                 myDeck >> &hand;
+                 ~~~~~~~^~~~~~~~
+In file included from CardSet_T.h:70,
+                 from Deck_T.h:9,
+                 from PinochleDeck.h:14,
+                 from lab3.cpp:7:
+CardSet_T.cpp:50:16: note: candidate: ‘CardSet<R, S>& CardSet<R, S>::operator>>(CardSet<R, S>&) [with R = PinochleRank; S = Suit]’
+ CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
+                ^~~~~~~~~~~~~
+CardSet_T.cpp:50:16: note:   no known conversion for argument 1 from ‘CardSet<PinochleRank, Suit>*’ to ‘CardSet<PinochleRank, Suit>&’
+In file included from GoFishGame_T.h:53,
+                 from lab3.cpp:15:
+GoFishGame_T.cpp: In instantiation of ‘void GoFishGame<S, R, D>::deal() [with S = Suit; R = HoldEmRank; D = HoldEmDeck]’:
+GoFishGame_T.h:49:18:   required from here
+GoFishGame_T.cpp:179:24: error: no match for ‘operator>>’ (operand types are ‘HoldEmDeck’ and ‘CardSet<HoldEmRank, Suit>*’)
+                 myDeck >> &hand;
+                 ~~~~~~~^~~~~~~~
+In file included from CardSet_T.h:70,
+                 from Deck_T.h:9,
+                 from PinochleDeck.h:14,
+                 from lab3.cpp:7:
+CardSet_T.cpp:50:16: note: candidate: ‘CardSet<R, S>& CardSet<R, S>::operator>>(CardSet<R, S>&) [with R = HoldEmRank; S = Suit]’
+ CardSet<R, S> &CardSet<R, S>::operator>>(CardSet<R, S> &other) {
+                ^~~~~~~~~~~~~
+CardSet_T.cpp:50:16: note:   no known conversion for argument 1 from ‘CardSet<HoldEmRank, Suit>*’ to ‘CardSet<HoldEmRank, Suit>&’
+make: *** [lab3] Error 1
+```
+#### Solution
+Modify ```myDeck >> &hand;``` to ```myDeck >> hand;```
+
+#### 2
+``` C++
+In file included from GoFishGame_T.h:55,
+                 from lab3.cpp:15:
+GoFishGame_T.cpp: In instantiation of ‘bool GoFishGame<S, R, D>::turn(int) [with S = Color; R = UnoRank; D = UnoDeck]’:
+GoFishGame_T.cpp:227:20:   required from ‘int GoFishGame<S, R, D>::play() [with S = Color; R = UnoRank; D = UnoDeck]’
+GoFishGame_T.h:26:17:   required from here
+GoFishGame_T.cpp:100:23: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+     for (int i = 0; i < playerNames.size(); i++)
+                     ~~^~~~~~~~~~~~~~~~~~~~
+GoFishGame_T.cpp: In instantiation of ‘bool GoFishGame<S, R, D>::turn(int) [with S = Suit; R = PinochleRank; D = PinochleDeck]’:
+GoFishGame_T.cpp:227:20:   required from ‘int GoFishGame<S, R, D>::play() [with S = Suit; R = PinochleRank; D = PinochleDeck]’
+GoFishGame_T.h:26:17:   required from here
+GoFishGame_T.cpp:100:23: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+GoFishGame_T.cpp: In instantiation of ‘bool GoFishGame<S, R, D>::turn(int) [with S = Suit; R = HoldEmRank; D = HoldEmDeck]’:
+GoFishGame_T.cpp:227:20:   required from ‘int GoFishGame<S, R, D>::play() [with S = Suit; R = HoldEmRank; D = HoldEmDeck]’
+GoFishGame_T.h:26:17:   required from here
+GoFishGame_T.cpp:100:23: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+```
+
+#### Solution
+Modify ```for (int i = 0; i < playerNames.size(); i++)``` to ```for (size_t i = 0; i < playerNames.size(); i++)```
 
 ### Run error
 
-``` C++
-// Combine the player's hand with the common board
-            std::vector< Card<HoldEmRank, Suit> > CardSet<HoldEmRank, Suit>::* setPtr = CardSet<HoldEmRank, Suit>::getSetPtr();
-            std::vector< Card<HoldEmRank, Suit> > playerSet = playerState.playerHand.*setPtr;
-            std::vector< Card<HoldEmRank, Suit> > boardSet = commonBoard.*setPtr;
-
-// Combine the player's hand with the common board
-playerSet.insert(playerSet.end(), boardSet.begin(), boardSet.end());
-```
-
-The combination did't work at first. Then we found that the variable was defined and only modified in the for loop scope. So we change to use pointer to change the value in the real playerState's cardSet.
-
-``` C++
-std::vector<Card<HoldEmRank, Suit> >* playerSetPtr = &(playerState.playerHand.*CardSet<HoldEmRank, Suit>::getSetPtr());
-std::vector<Card<HoldEmRank, Suit> >* boardSetPtr = &(commonBoard.*CardSet<HoldEmRank, Suit>::getSetPtr());
-
-playerSetPtr->insert(playerSetPtr->end(), boardSetPtr->begin(), boardSetPtr->end());
-```
-
-The run error has been solved.
+We don't have any run errors.
 
 ## Output (Exceptions)
 
