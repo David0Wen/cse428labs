@@ -9,8 +9,23 @@
 ---
 
 ## Design decisions
-### 8
 
+### Different prompts according to different deck selection
+GoFish can use three different kind of decks, and using different deck will cause some difference when player input the rank.
+
+We construct a static string vector data member, so that different deck(assigned with different ID) will have different prompt.
+
+### User input during GoFish game
+We want to let user to input integer as rank ID and player ID. If user input non-integer value, a prompt should be shown and the cin should be cleared, ready to receive new input.
+
+We use following code fragment to realize mentioned function:
+``` C++
+while (!(std::cin >> requestedRank)) {
+    std::cout << "Integer required! Please enter again:";
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+```
 
 ## Error observations
 
