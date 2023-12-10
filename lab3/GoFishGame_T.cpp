@@ -160,7 +160,7 @@ bool GoFishGame<S, R, D>::turn(int playerNum)
                 break;
             }
         }
-        if (!validRank) {
+        if (!validRank && !playerHands[playerNum - 1].is_empty()) {
             std::cout << "Invalid Rank Number!" << std::endl;
             validInput = false;
         }
@@ -168,14 +168,18 @@ bool GoFishGame<S, R, D>::turn(int playerNum)
             validInput = true;
         }
 
-        if (targetPlayer < 1 || targetPlayer > numPlayers || targetPlayer == playerNum) {
+        if (targetPlayer < 1 || targetPlayer > numPlayers || targetPlayer == playerNum || std::find(outPlayers.begin(), outPlayers.end(), targetPlayer) != outPlayers.end()) {
             std::cout << "Invalid Player ID!" << std::endl;
             validInput = false;
         }
     }
 
     // Request logic
-    bool gotCard = playerHands[playerNum - 1].request(playerHands[targetPlayer - 1], static_cast<R>(requestedRank));
+    bool gotCard = false;
+    if (!playerHands[playerNum - 1].is_empty())
+    {
+        gotCard = playerHands[playerNum - 1].request(playerHands[targetPlayer - 1], static_cast<R>(requestedRank));
+    }
     if (gotCard) {
         std::cout << "Successfully Collected!" << std::endl;
         while (collect_books(playerNum)) { /* Collect any possible books */ }
@@ -185,14 +189,20 @@ bool GoFishGame<S, R, D>::turn(int playerNum)
     else {
         // Go fish: Draw a card from the deck
         if (!myDeck.is_empty()) {
-            std::cout << "Collection Failed! Draw a card from the deck." << std::endl;
+            std::cout << "Go Fish! Draw a card from the deck." << std::endl;
             myDeck >> playerHands[playerNum - 1];
             std::cout << std::endl;
+            int curBookNum = playerBooksNum[playerNum - 1];
+            while (collect_books(playerNum)) { /* Collect any possible books */ }
+            if (playerBooksNum[playerNum - 1] != curBookNum)
+            {
+                return true;
+            }
             return (*(--playerHands[playerNum - 1].end())).myRank == static_cast<R>(requestedRank);
         }
         else
         {
-            std::cout << "Collection Failed and deck is empty! You're out." << std::endl;
+            std::cout << "Go Fish and deck is empty! You're out." << std::endl;
             outPlayers.push_back(playerNum);
             myDeck.collect(playerHands[playerNum - 1]);
             std::cout << std::endl;
@@ -242,14 +252,18 @@ int GoFishGame<S, R, D>::play() {
             {
                 continue;
             }
+            if (numPlayers - outPlayers.size() < 2)
+            {
+                break;
+            }
             while (turn(i)) { /* Turn for a player until they fail */ }
         }
         std::cout << "End of Round " << ++roundNumber << std::endl;
         for (int i = 1; i <= numPlayers; ++i) {
             std::cout << "Player " << playerNames[i - 1] << ", ID: " << i << std::endl;
             std::cout << "Number of books collected: " << playerBooksNum[i - 1] << std::endl;
-
         }
+        std::cout << std::endl;
         bool handsEmpty = true;
         for (int i = 1; i <= numPlayers; ++i) {
             if (!playerHands[i - 1].is_empty())
