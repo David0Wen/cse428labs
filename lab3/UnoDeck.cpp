@@ -1,3 +1,8 @@
+/**
+ * File: UnoDeck.h
+ * Author: Ruoyao Wen ruoyao@wustl.edu, Wanzhou Liu l.wanzhou@wustl.edu, Zherui Zhou zherui@wustl.edu
+ * Purpose: Implementation of types related to Uno deck
+ */
 #include "UnoDeck.h"
 
 /** 
@@ -6,7 +11,7 @@
  * @param rank the object you want to output
  * @return the reference of the input ostream
  */
-std::ostream& operator<<(std::ostream& os, const UnoRank& rank) {
+std::ostream &operator<<(std::ostream &os, const UnoRank &rank) {
     switch (rank) {
         // Handle each UnoRank case, converting it to a string
         case UnoRank::zero: os << "0"; break;
@@ -35,7 +40,7 @@ std::ostream& operator<<(std::ostream& os, const UnoRank& rank) {
  * @param rank the object you want to increase
  * @return the reference of the UnoRank after increase
  */
-UnoRank& operator++(UnoRank& rank) {
+UnoRank &operator++(UnoRank &rank) {
     if (rank == UnoRank::undefined) {
         // If already undefined, remain unchanged
         return rank;
@@ -51,7 +56,7 @@ UnoRank& operator++(UnoRank& rank) {
  * @param color the object you want to output
  * @return the reference of the input ostream
  */
-std::ostream& operator<<(std::ostream& os, const Color& color) {
+std::ostream &operator<<(std::ostream &os, const Color &color) {
     switch (color) {
         case Color::red: os << "Red"; break;
         case Color::blue: os << "Blue"; break;
@@ -68,7 +73,7 @@ std::ostream& operator<<(std::ostream& os, const Color& color) {
  * @param color the object you want to increase
  * @return the reference of the color after increase
  */
-Color& operator++(Color& color) {
+Color &operator++(Color &color) {
     if (color == Color::undefined) {
         // If already undefined, remain unchanged
         return color;
@@ -77,6 +82,9 @@ Color& operator++(Color& color) {
     color = static_cast<Color>(static_cast<int>(color) + 1);
     return color;
 }
+
+const int NUM_NORMAL_CARDS_PER_COLOR = 2;
+const int NUM_SPECIAL_CARDS = 4;
 
 // Default constructor for the UnoDeck class
 // Initializes the deck with 112 cards
@@ -95,7 +103,7 @@ UnoDeck::UnoDeck()
     {
         for (Color j = Color::red; j != Color::black; ++j)
         {
-            for (int cnt = 0; cnt < 2; ++cnt)
+            for (int cnt = 0; cnt < NUM_NORMAL_CARDS_PER_COLOR; ++cnt)
             {
                 Card<UnoRank, Color> myCard(i, j);
                 myCardSet.push_back(myCard);
@@ -105,7 +113,7 @@ UnoDeck::UnoDeck()
 
     for (UnoRank i = UnoRank::drawfour; i != UnoRank::undefined; ++i)
     {
-        for (int cnt = 0; cnt < 4; ++cnt)
+        for (int cnt = 0; cnt < NUM_SPECIAL_CARDS; ++cnt)
         {
             Card<UnoRank, Color> myCard(i, Color::black);
             myCardSet.push_back(myCard);

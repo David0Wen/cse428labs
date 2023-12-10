@@ -47,7 +47,7 @@ class HoldEmGame :public Game
 private:
     // eval CardSet for that player's hand
     HoldEmHandRank holdem_hand_evaluation(const CardSet<HoldEmRank, Suit> &);
-    static bool compareMultiSet(CardSet<HoldEmRank, Suit>& leftHand, CardSet<HoldEmRank, Suit>&, size_t, HoldEmHandRank);
+    static bool compareMultiSet(CardSet<HoldEmRank, Suit> &leftHand, CardSet<HoldEmRank, Suit>&, size_t, HoldEmHandRank);
     static std::tuple<size_t, HoldEmRank> extractMultiFromSet(const std::vector< Card<HoldEmRank, Suit> >&, size_t);
 
 protected:
@@ -62,7 +62,7 @@ protected:
     virtual void deal();
 public:
     // Static list, assigning all possible HandRank(enum) with different names
-    static const char* RankNames[];
+    static const char *RankNames[];
     // Constructor for the HoldEmGame class
     HoldEmGame(int argc, const char *argv[]);
 

@@ -2,10 +2,10 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="Remote Host (cb44d9c9-4af7-476f-ba3f-056eddb8253c)">
+      <paths name="Remote Host (d1c05ddf-5611-445a-aae9-b72868830155)">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="cse428_fall23/labs/lab3" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

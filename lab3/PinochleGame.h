@@ -65,7 +65,7 @@ protected:
 
 public:
     // Static list, assigning all possible melds(enum) with different names
-    static const char* MeldNames[];
+    static const char *MeldNames[];
     // Static list, assigning all possible melds(enum) with different points
     static const unsigned int MeldPoints[];
     // Constructor to initialize PinochleGame object
