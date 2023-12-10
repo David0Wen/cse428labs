@@ -17,4 +17,4 @@
 - Finished on Oct. 30, 2023
 
 ## Lab3
-- Just Started
+- Finished on Dec. 10, 2023
