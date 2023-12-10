@@ -27,6 +27,13 @@ while (!(std::cin >> requestedRank)) {
 }
 ```
 
+### ```collect_books```
+Since 4-of-a-kind has ambiguity when a rank has more than 4 cards in a deck (such as Pinochie deck, for each rank there is 8 cards: 2 cards for each suit), we simply consider four card in one rank as 4-of-a-kind regradless of its suits. This is suitable for "4-of-a-kind" literal meaning and doesn't affect GoFish playing.
+
+### ```turn```
+- If a player has no cards in its hand and the deck is not empty, no matter what rank it request, one card will be drawed from the deck to its hand.
+- If a player collect a book after drawing a card from the deck, the method will return ```true``` (This player can play a new turn).
+
 ## Error observations
 
 ### Compile error/warning
@@ -115,38 +122,3095 @@ We don't have any run errors.
 ### Trial 1
 
 ``` bash
-
+$ ./lab3 GoFish
+Usage: lab3 <Game> [<Deck>] <Players>
+Game should be either Pinochle, HoldEm, or GoFish.
+Pinochle needs 4 players.
+HoldEm needs 2-9 players.
+GoFish needs 2-5 players.
+$ echo $?
+2
 ```
 
 ### Trial 2
 
 ``` bash
-
+$ ./lab3 GoFish myDeck A1 B2
+Must provide valid Deck for GoFish: HoldEm, Pinochle or Uno
+$ echo $?
+5
 ```
 
 ### Trial 3
 
 ``` bash
+$ ./lab3 GoFish Uno A1 
+Usage: lab3 <Game> [<Deck>] <Players>
+Game should be either Pinochle, HoldEm, or GoFish.
+Pinochle needs 4 players.
+HoldEm needs 2-9 players.
+GoFish needs 2-5 players.
+$ echo $?
+2
+```
 
+### Trial 4
+
+``` bash
+$ ./lab3 GoFish Uno A1 B2 C3 D4 E5 F6
+Usage: lab3 <Game> [<Deck>] <Players>
+Game should be either Pinochle, HoldEm, or GoFish.
+Pinochle needs 4 players.
+HoldEm needs 2-9 players.
+GoFish needs 2-5 players.
+$ echo $?
+2
 ```
 
 
 ## Output (Success: GoFish)
 
-### Trial 1
-
 ``` bash
+$ ./lab3 GoFish Pinochle A1 B2 C3 D4 E5
+Player A1, ID: 1
+Current hand:
+QH 10H AS 9D AD
 
-```
+Current book:
+No book collected.
 
-### Trial 2
+Player B2, ID: 2
+Current hand:
+AS KS 9D 10H AH
 
-``` bash
+Current book:
+No book collected.
 
-```
+Player C3, ID: 3
+Current hand:
+AC JC 10D QS JD
 
-### Trial 3
+Current book:
+No book collected.
 
-``` bash
+Player D4, ID: 4
+Current hand:
+AH KH 9C 9H JC
 
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 1
+Enter player ID to ask from: 2
+Invalid Rank Number!
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 6
+Invalid Player ID!
+Enter card rank number to ask for: 1
+Enter player ID to ask from: 6
+Invalid Rank Number!
+Invalid Player ID!
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 2
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H AS 9D AD 9D
+
+Current book:
+No book collected.
+
+Player B2, ID: 2
+Current hand:
+AS KS 10H AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+AC JC 10D QS JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+AH KH 9C 9H JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 4
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H AS 9D AD 9D 9C
+
+Current book:
+No book collected.
+
+Player B2, ID: 2
+Current hand:
+AS KS 10H AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+AC JC 10D QS JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+AH KH 9H JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 4
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H AS AD
+
+Current book:
+9D 9D 9C 9H
+
+Player B2, ID: 2
+Current hand:
+AS KS 10H AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+AC JC 10D QS JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+AH KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 4
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H AS AD AH
+
+Current book:
+9D 9D 9C 9H
+
+Player B2, ID: 2
+Current hand:
+AS KS 10H AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+AC JC 10D QS JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+
+Player B2, ID: 2
+Current hand:
+AS KS 10H AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC 10D QS JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 2
+Invalid Rank Number!
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 2
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H 10H
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+
+Player B2, ID: 2
+Current hand:
+AS KS AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC 10D QS JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H 10H 10D
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+
+Player B2, ID: 2
+Current hand:
+AS KS AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC QS JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 2
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H 10H 10D QS
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+
+Player B2, ID: 2
+Current hand:
+AS KS AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+QH JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 2
+Enter player ID to ask from: 5
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+QH 10H 10H 10D QS QH
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+
+Player B2, ID: 2
+Current hand:
+AS KS AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QS QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 2
+Enter player ID to ask from: 5
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 2
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+KH JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC
+
+Current book:
+No book collected.
+
+
+Player B2's turn. ID: 2
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 3
+Enter player ID to ask from: 4
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC
+
+Current book:
+No book collected.
+
+
+Player B2's turn. ID: 2
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 3
+Enter player ID to ask from: 5
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH JD
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC
+
+Current book:
+No book collected.
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 1
+Enter player ID to ask from: 2
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+JC JD JD
+
+Current book:
+No book collected.
+
+Player D4, ID: 4
+Current hand:
+JC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC
+
+Current book:
+No book collected.
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 1
+Enter player ID to ask from: 4
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC
+
+Current book:
+No book collected.
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 5
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+KC
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC
+
+Current book:
+No book collected.
+
+
+Player D4's turn. ID: 4
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 2
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+KC
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+KC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC
+
+Current book:
+No book collected.
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 1
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+End of Round 1
+Player A1, ID: 1
+Number of books collected: 3
+Player B2, ID: 2
+Number of books collected: 0
+Player C3, ID: 3
+Number of books collected: 1
+Player D4, ID: 4
+Number of books collected: 0
+Player E5, ID: 5
+Number of books collected: 0
+
+Player A1, ID: 1
+Current hand:
+10H 10H 10D 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+KC
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+KC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 2
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+KC
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+KC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 2
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+KC
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+KC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player B2's turn. ID: 2
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 3
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+AS KS AH KH KC
+
+Current book:
+No book collected.
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+KC
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player B2's turn. ID: 2
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for:
+3
+Enter player ID to ask from: 4
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+AS AH
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player B2's turn. ID: 2
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 3
+Enter player ID to ask from: 5
+Invalid Rank Number!
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+AS AH QD
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+AS AH QD
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 2
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+AH QD
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 2
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QD
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 5
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QD
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH 9S
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player D4's turn. ID: 4
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 2
+Enter player ID to ask from: 5
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C QD
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QD
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH 9S
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH
+
+Current book:
+No book collected.
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 2
+Enter player ID to ask from: 1
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QD
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH 9S
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD
+
+Current book:
+No book collected.
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 2
+Enter player ID to ask from: 2
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH 9S
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD QD
+
+Current book:
+No book collected.
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 2
+Enter player ID to ask from: 2
+Go Fish! Draw a card from the deck.
+
+End of Round 2
+Player A1, ID: 1
+Number of books collected: 4
+Player B2, ID: 2
+Number of books collected: 1
+Player C3, ID: 3
+Number of books collected: 1
+Player D4, ID: 4
+Number of books collected: 0
+Player E5, ID: 5
+Number of books collected: 0
+
+Player A1, ID: 1
+Current hand:
+9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH 9S
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD QD KD
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C 9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD QD KD
+
+Current book:
+No book collected.
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 3
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C 9S JS
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD QD KD
+
+Current book:
+No book collected.
+
+
+Player B2's turn. ID: 2
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C 9S JS
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QC
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD QD KD
+
+Current book:
+No book collected.
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 5
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C 9S JS
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QC
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH KD
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD QD KD
+
+Current book:
+No book collected.
+
+
+Player D4's turn. ID: 4
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C 9S JS
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QC
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH KD
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S KS
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD QD KD
+
+Current book:
+No book collected.
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 3
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C 9S JS
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QC
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S KS
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC KH QD QD KD KD
+
+Current book:
+No book collected.
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 3
+Enter player ID to ask from: 4
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C 9S JS
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+QC
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH QC QD QD
+
+Current book:
+KH KD KD KS
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 2
+Enter player ID to ask from: 2
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C 9S JS
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 1
+Enter player ID to ask from: 1
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C 9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+JH JH JS
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 1
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C 9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C 9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AD AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+AC
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C 9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AS AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+AC AD
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C 9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+AH
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+AC AD AS
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 5
+Enter player ID to ask from: 3
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9C 9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9C 9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+9H
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 1
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+9H 9C
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 1
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+9H 9C 9S
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player E5's turn. ID: 5
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 1
+Go Fish! Draw a card from the deck.
+
+End of Round 3
+Player A1, ID: 1
+Number of books collected: 4
+Player B2, ID: 2
+Number of books collected: 1
+Player C3, ID: 3
+Number of books collected: 1
+Player D4, ID: 4
+Number of books collected: 0
+Player E5, ID: 5
+Number of books collected: 4
+
+Player A1, ID: 1
+Current hand:
+
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+9H 9C 9S 10S
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 5
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+9S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+9H 9C 9S 10S
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 5
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9S 9H
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+9C 9S 10S
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 5
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+9S 9H 9C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+9S 10S
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 0
+Enter player ID to ask from: 5
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+9S 9H 9C 9S
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+10S
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 4
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+10C
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+9S 9H 9C 9S
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+10S
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+10S
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 4
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+10C 10S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+9S 9H 9C 9S
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+10S
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 5
+Successfully Collected!
+
+Player A1, ID: 1
+Current hand:
+10C 10S 10S
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+9S 9H 9C 9S
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 4
+Go Fish! Draw a card from the deck.
+
+Player A1, ID: 1
+Current hand:
+
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+9S 9H 9C 9S
+10C 10S 10S 10C
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player A1's turn. ID: 1
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 4
+Go Fish and deck is empty! You're out.
+
+Player A1, ID: 1
+Current hand:
+
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+9S 9H 9C 9S
+10C 10S 10S 10C
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player B2's turn. ID: 2
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 4
+Go Fish and deck is empty! You're out.
+
+Player A1, ID: 1
+Current hand:
+
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+9S 9H 9C 9S
+10C 10S 10S 10C
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player C3's turn. ID: 3
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 2
+Invalid Player ID!
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 1
+Invalid Player ID!
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 3
+Invalid Player ID!
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 4
+Go Fish and deck is empty! You're out.
+
+Player A1, ID: 1
+Current hand:
+
+
+Current book:
+9D 9D 9C 9H
+AS AD AH AC
+QH QS QH QS
+10H 10H 10D 10D
+9S 9H 9C 9S
+10C 10S 10S 10C
+
+Player B2, ID: 2
+Current hand:
+
+
+Current book:
+KS KH KC KC
+
+Player C3, ID: 3
+Current hand:
+
+
+Current book:
+JC JD JD JC
+
+Player D4, ID: 4
+Current hand:
+
+
+Current book:
+No book collected.
+
+Player E5, ID: 5
+Current hand:
+
+
+Current book:
+KH KD KD KS
+QC QD QD QC
+JH JH JS JS
+AC AD AS AH
+
+
+Player D4's turn. ID: 4
+
+For Pinochle Deck, rank is 9, J, Q, K,
+10, A; corresponding rank number is 0-5.
+
+Enter card rank number to ask for: 4
+Enter player ID to ask from: 5
+Go Fish and deck is empty! You're out.
+
+End of Round 4
+Player A1, ID: 1
+Number of books collected: 6
+Player B2, ID: 2
+Number of books collected: 1
+Player C3, ID: 3
+Number of books collected: 1
+Player D4, ID: 4
+Number of books collected: 0
+Player E5, ID: 5
+Number of books collected: 4
+
+Game End! Players: A1 collected the most books!
+$ echo $?
+0
 ```
