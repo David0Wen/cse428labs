@@ -1,5 +1,6 @@
 
 # CSE 428S Labs
+<b>This repository is only for our team members to collaborate and realize version control. Inspection outside our group members violates Academic Integrity.</b>
 ## Group members 
 - Ruoyao Wen (ruoyao@wustl.edu)
 - Wanzhou Liu (l.wanzhou@wustl.edu)
